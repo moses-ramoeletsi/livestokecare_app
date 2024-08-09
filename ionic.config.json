@@ -1,0 +1,7 @@
+{
+  "name": "livestokecare",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
