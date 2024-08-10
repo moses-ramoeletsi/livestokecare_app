@@ -1,0 +1,52 @@
+<ion-content>
+  <div style="display: flex; align-items: center; margin: 16px;">
+   
+  <ion-title style="margin-left: 16px;">userVet123</ion-title>
+</div>
+<ion-grid>
+  <ion-row>
+    <ion-col size="12" size-md="6">
+      <ion-card color="white" [routerLink]="['/view-consulatation-schedule']">
+        <ion-card-header>
+          <ion-img src="../../../assets/images/feeback.png"></ion-img>
+        </ion-card-header>
+        <ion-card-content>Schedule</ion-card-content>
+      </ion-card>
+    </ion-col>
+    <ion-col size="12" size-md="6">
+          <ion-card color="white" [routerLink]="['/post-basic-knowladge']">
+            <ion-card-header>
+              <ion-img src="../../../assets/images/search.png"></ion-img>
+            </ion-card-header>
+            <ion-card-content>Knowledge Base</ion-card-content>
+          </ion-card>
+        </ion-col>
+        <ion-col size="12" size-md="6">
+          <ion-card color="white" [routerLink]="['/post-videos']">
+            <ion-card-header>
+              <ion-img
+                src="../../../assets/images/blood-drop.png"
+              ></ion-img>
+            </ion-card-header>
+            <ion-card-content>Videos</ion-card-content>
+          </ion-card>
+        </ion-col>
+        <!-- <ion-col size="12" size-md="6">
+          <ion-card color="white" [routerLink]="['/upcoming-events']">
+            <ion-card-header>
+              <ion-img
+                src="../../../assets/images/events.png"
+              ></ion-img>
+            </ion-card-header>
+            <ion-card-content>Events</ion-card-content>
+          </ion-card>
+        </ion-col> -->
+      </ion-row>
+    </ion-grid>
+    
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="openChat()">
+      <ion-icon name="chatbubbles"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

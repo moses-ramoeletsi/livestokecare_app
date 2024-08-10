@@ -1,0 +1,80 @@
+<ion-content *ngIf="isDetailsView">
+  
+  <div style="display: flex; align-items: center; margin: 16px;">
+    <ion-buttons slot="start">
+      <ion-icon name="arrow-back" routerLink="/farmers-profile"></ion-icon>
+    </ion-buttons>
+    <ion-title style="margin-left: 16px;">Your Animals</ion-title>
+  </div>
+  <ion-card >
+    <ion-card-header>
+      <ion-card-title>Species: Cattle</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      <p><strong>Age:</strong> 3 years</p>
+      <p><strong>Last Vaccine:</strong> Bovine TB</p>
+      <p><strong>Past Illness:</strong> Foot Rot</p>
+      <p><strong>Current Medications:</strong> None</p>
+    </ion-card-content>
+
+    <ion-item lines="none">
+      <ion-button fill="outline" slot="start" color="tertiary">Edit</ion-button>
+      <ion-button fill="outline" slot="end" color="danger">Delete</ion-button>
+    </ion-item>
+  </ion-card>
+
+  <ion-button expand="block" color="primary" (click)="toggleView()">
+    Add Animal Details
+  </ion-button>
+
+</ion-content>
+<ion-content *ngIf="!isDetailsView">
+  <ion-list >
+    <div style="display: flex; align-items: center; margin: 16px;">
+      <ion-buttons slot="start">
+        <ion-icon name="arrow-back" (click)="toggleView()" ></ion-icon>
+      </ion-buttons>
+      <ion-title style="margin-left: 16px;">Add Animal Details</ion-title>
+    </div>
+
+    <ion-item>
+      <ion-label position="floating">Species</ion-label>
+      <ion-input placeholder="e.g., cattle, sheep, goat"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Age</ion-label>
+      <ion-input placeholder="Enter the age"></ion-input>
+    </ion-item>
+
+    <ion-row>
+      <ion-col>
+        <ion-item>
+          <ion-label position="floating">Last Vaccine</ion-label>
+          <ion-input placeholder="Enter the last vaccine"></ion-input>
+        </ion-item>
+      </ion-col>
+      <ion-col>
+        <ion-item>
+          <ion-label position="floating">Past Illness and Treatment</ion-label>
+          <ion-input placeholder="Enter past illness and treatment"></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        <ion-item>
+          <ion-label position="floating">Current Medications</ion-label>
+          <ion-input placeholder="Enter current medications"></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+
+    <ion-button expand="block" shape="round" color="primary" class="ion-margin-top">
+      Save Details
+    </ion-button>
+  </ion-list>
+
+</ion-content>

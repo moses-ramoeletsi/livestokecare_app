@@ -1,0 +1,25 @@
+<ion-content [fullscreen]="true">
+  <ion-card>
+    <ion-card-content class="ion-text-center">
+      <ion-avatar class="profile-avatar">
+        <img src="../../../../assets/icon/favicon.png">
+      </ion-avatar>
+      <h2>User123</h2>
+      <p>username123gmial.com</p>
+    </ion-card-content>
+  </ion-card>
+  <ion-list>
+    <ion-item routerLink="/add-animal">
+      <ion-icon slot="start" name="person-circle-outline"></ion-icon>
+      <ion-label>Add Animal</ion-label>
+    </ion-item>
+    <ion-item routerLink="/notifications">
+      <ion-icon slot="start" name="notifications-outline"></ion-icon>
+      <ion-label>Notification Settings</ion-label>
+    </ion-item>
+    <ion-item routerLink="/login">
+      <ion-icon slot="start" name="log-out-outline"></ion-icon>
+      <ion-label>Log out</ion-label>
+    </ion-item>
+  </ion-list>
+ </ion-content>

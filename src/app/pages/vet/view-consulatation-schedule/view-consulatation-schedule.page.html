@@ -1,0 +1,33 @@
+<ion-content [fullscreen]="true">
+  <div style="display: flex; align-items: center; margin: 16px;">
+    <ion-buttons slot="start">
+     <ion-icon name="arrow-back" routerLink="/vet-dashboard" ></ion-icon>   
+   </ion-buttons>
+  <ion-title style="margin-left: 16px;">View Consulatation Schedule</ion-title>
+  </div>
+
+  <ion-title style="margin-left: 16px;">Incoming Requests</ion-title>
+  <ion-card >
+    <div>
+      <ion-badge color="success" slot="end">Pending</ion-badge>
+    </div>
+    <ion-card-header>
+      <ion-card-title>Farmer's Name: Mr Rose</ion-card-title>
+      <ion-card-subtitle>Vet Doctor: Dr Dean</ion-card-subtitle>
+    </ion-card-header>
+    
+    <ion-card-content>
+      <p><strong>Consultation Date:</strong> 10 Aug 2024</p>
+      <p><strong>Animal Type:</strong> Cattle</p>
+      <p><strong>Age:</strong> 3 years</p>
+      <p><strong>Purpose:</strong> Check up</p>
+      <p><strong>Contacts:</strong> 266 58411896</p>
+      <p><strong>Farmer's  Address</strong> Qoaling</p>
+    </ion-card-content>
+    
+    <ion-item lines="none">
+      <ion-button fill="outline" slot="start" color="tertiary">Approve</ion-button>
+      <ion-button fill="outline" slot="end" color="danger">Completed</ion-button>
+    </ion-item>
+  </ion-card>
+</ion-content>

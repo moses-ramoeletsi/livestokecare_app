@@ -1,0 +1,96 @@
+<ion-content [fullscreen]="true" class="ion-padding">
+  <div style="display: flex; align-items: center; margin: 16px;">
+    <ion-buttons slot="start">
+      <ion-icon name="arrow-back" routerLink="/vet-dashboard" ></ion-icon>   
+    </ion-buttons>
+    <ion-title style="margin-left: 16px;">Basic Knowledge</ion-title>
+  </div>
+    <ion-fab
+      slot="fixed"
+      vertical="bottom"
+      horizontal="end"
+      class="ion-center-sm-down"
+    >
+      <ion-fab-button id="open-knowladge-modal">
+        <ion-icon name="add"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
+
+    <ion-modal
+      [keepContentsMounted]="true"
+      trigger="open-knowladge-modal"
+      #modal
+    >
+      <ng-template>
+        <ion-header>
+          <ion-toolbar>
+            <ion-title class="ion-text-center">Post Knowledge</ion-title>
+            <ion-buttons slot="end">
+              <ion-button (click)="modal.dismiss()">Cancel</ion-button>
+            </ion-buttons>
+          </ion-toolbar>
+        </ion-header>
+        <ion-content class="ion-padding">
+          <form class="requestBlood-form">
+            <ion-item>
+              <ion-input
+            
+                name="article_title"
+                label="Title"
+                labelPlacement="stacked"
+                type="text"
+                placeholder="When to Donation"
+                style="color: black"
+              ></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-textarea
+                name="short-description"
+                label="Description"
+                labelPlacement="stacked"
+                style="color: black"
+                placeholder="Type..."
+              ></ion-textarea>
+            </ion-item>
+
+            <ion-item>
+              <ion-input
+                name="article-url"
+                label="Link"
+                labelPlacement="stacked"
+                type="text"
+                placeholder="Link"
+                style="color: black"
+              ></ion-input>
+            </ion-item>
+            <ion-button class="mycolor" type="submit" expand="block"
+              >Post Knowledge</ion-button
+            >
+          </form>
+        </ion-content>
+      </ng-template>
+    </ion-modal>
+    <div
+    
+      class="upcoming-events"
+      style="background-color: transparent"
+    >
+      <ion-card  style="margin: 10px">
+        <ion-card-header class="ion-text-center">
+          <ion-card-title>Article title</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <p></p>
+          <p><a href="">Read More</a></p>
+        </ion-card-content>
+        <ion-item lines="none">
+          <ion-button fill="outline" slot="start" color="tertiary">Edit</ion-button>
+          <ion-button fill="outline" slot="end" color="danger">Delete</ion-button>
+        </ion-item>
+      </ion-card>
+    </div>
+    <ng-template #noEvents>
+      <p style="color: brown">No events available</p>
+    </ng-template>
+  </ion-content>
+

@@ -1,0 +1,75 @@
+<ion-content [fullscreen]="true">
+  <h1 class="myHeader">SC Attendence</h1>
+  <img alt="car" src="../../../assets/images/bloodConnect.png" />
+  <h2 class="login">LOGIN</h2>
+  <form class="ion-padding">
+    <ion-input
+      class="ion-text-center"
+      fill="outline"
+      type="email"
+      placeholder="Enter Email"
+    
+    ></ion-input>
+    <br />
+    <div
+      
+    >
+      <span
+        class="error-message"
+        
+        >Email is required.</span
+      >
+      <span
+        class="error-message"
+       
+        >Invalid email format.</span
+      >
+    </div>
+
+    <br />
+    <ion-input
+      class="ion-text-center"
+      type="password"
+      fill="outline"
+      placeholder="Enter password"
+     
+    ></ion-input>
+    <br />
+    <div
+      
+    >
+      <span
+        class="error-message"
+       
+        >Password is required.</span
+      >
+      <span
+        class="error-message"
+      
+        >Password must be at least 6 characters long.</span
+      >
+      <span
+        class="error-message"
+       
+        >Password must contain characters(- _ ! $).</span
+      >
+    </div>
+    <br />
+    <ion-button
+      class="ion-padding ion-xxl mycolor"
+      expand="full"
+      type="submit"
+      routerLink="/farmers-dashboard"
+      (click)="login()"
+      >
+      Login
+    </ion-button>
+  </form>
+  <div class="ion-text-center">
+    <p>
+      Not registered yet? <br /><a routerLink="/register-farmers" class="page-link"
+        >Create account here</a
+      >
+    </p>
+  </div>
+</ion-content>

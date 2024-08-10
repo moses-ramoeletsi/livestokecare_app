@@ -1,0 +1,149 @@
+
+<ion-content *ngIf="showSchedule">
+  <div style="display: flex; align-items: center; margin: 16px;">
+    <ion-title>Consultation Requests</ion-title>
+  </div>
+  <ion-title style="margin-left: 16px;">Pendind Requests</ion-title>
+  <ion-card >
+    <ion-card-header>
+      <ion-card-title>Farmer's Name: Mr Rose</ion-card-title>
+      <ion-card-subtitle>Vet Doctor: Dr Dean</ion-card-subtitle>
+    </ion-card-header>
+    
+    <ion-card-content>
+      <p><strong>Consultation Date:</strong> 10 Aug 2024</p>
+      <p><strong>Animal Type:</strong> Cattle</p>
+      <p><strong>Age:</strong> 3 years</p>
+      <p><strong>Purpose:</strong> Check up</p>
+      <p><strong>Contacts:</strong> 266 58411896</p>
+      <p><strong>Farmer's  Address</strong> Qoaling</p>
+    </ion-card-content>
+  </ion-card>
+  
+  <ion-title style="margin-left: 16px;">Approved Requests</ion-title>
+  <ion-card >
+    <ion-card-header>
+      <ion-card-title>Farmer's Name: Mr Rose</ion-card-title>
+      <ion-card-subtitle>Vet Doctor: Dr Dean</ion-card-subtitle>
+    </ion-card-header>
+    
+    <ion-card-content>
+      <p><strong>Consultation Date:</strong> 10 Aug 2024</p>
+      <p><strong>Animal Type:</strong> Cattle</p>
+      <p><strong>Age:</strong> 3 years</p>
+      <p><strong>Purpose:</strong> Check up</p>
+      <p><strong>Contacts:</strong> 266 58411896</p>
+      <p><strong>Farmer's  Address</strong> Qoaling</p>
+    </ion-card-content>
+  </ion-card> 
+  <ion-title style="margin-left: 16px;">Completed Requests</ion-title>
+  <ion-card >
+    <ion-card-header>
+      <ion-card-title>Farmer's Name: Mr Rose</ion-card-title>
+      <ion-card-subtitle>Vet Doctor: Dr Dean</ion-card-subtitle>
+    </ion-card-header>
+    
+    <ion-card-content>
+      <p><strong>Consultation Date:</strong> 10 Aug 2024</p>
+      <p><strong>Animal Type:</strong> Cattle</p>
+      <p><strong>Age:</strong> 3 years</p>
+      <p><strong>Purpose:</strong> Check up</p>
+      <p><strong>Contacts:</strong> 266 58411896</p>
+      <p><strong>Farmer's  Address</strong> Qoaling</p>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-button expand="block" color="primary" (click)="toggleShowSchedule()">
+    Add Consultation Schedule
+  </ion-button>
+
+</ion-content>
+<ion-content *ngIf="!showSchedule">
+  <div style="display: flex; align-items: center; margin: 16px;">
+     <ion-buttons slot="start">
+      <ion-icon name="arrow-back" (click)="toggleShowSchedule()" ></ion-icon>   
+    </ion-buttons>
+   <ion-title style="margin-left: 16px;">Add Schedule Consultation</ion-title>
+ </div>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-item>
+          <ion-label position="floating">Farmer's Name</ion-label>
+          <ion-input  required></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-item>
+          <ion-label position="floating">Vet-Doctor's Name</ion-label>
+          <ion-input  required></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-item>
+          <ion-label position="floating">Consultation Date</ion-label>
+          <ion-datetime 
+            displayFormat="MMM DD, YYYY HH:mm"           
+            required>
+          </ion-datetime>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-item>
+          <ion-label position="floating">Animal Age</ion-label>
+          <ion-textarea  required></ion-textarea>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-item>
+          <ion-label position="floating">Purpose</ion-label>
+          <ion-textarea  required></ion-textarea>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-item>
+          <ion-label position="floating">Animal Type</ion-label>
+          <ion-select required>
+            <ion-select-option value="Cattle">Cattle</ion-select-option>
+            <ion-select-option value="Sheep">Sheep</ion-select-option>
+            <ion-select-option value="Goat">Goat</ion-select-option>
+            <ion-select-option value="Poultry">Poultry</ion-select-option>
+            <ion-select-option value="Other">Other</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-item>
+          <ion-label position="floating">Contact Number</ion-label>
+          <ion-input type="tel" required></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-item>
+          <ion-label position="floating">Farm Address</ion-label>
+          <ion-textarea  required></ion-textarea>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-button expand="block">Submit</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+</ion-content>

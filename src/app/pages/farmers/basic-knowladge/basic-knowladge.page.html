@@ -1,0 +1,21 @@
+
+<ion-content >
+  <div style="display: flex; align-items: center; margin: 16px;">
+    <ion-buttons slot="start">
+     <ion-icon name="arrow-back" routerLink="/farmers-dashboard" ></ion-icon>   
+   </ion-buttons>
+  <ion-title style="margin-left: 16px;">Knowledge Base</ion-title>
+</div>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title></ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list>
+        <ion-item *ngFor="let article of knowledgeBaseArticles" [routerLink]="['/article', article.id]">
+          <ion-label>{{ article.title }}</ion-label>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
