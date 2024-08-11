@@ -2,26 +2,26 @@
   <h1 class="myHeader">SC Attendence</h1>
   <img alt="car" src="../../../assets/images/bloodConnect.png" />
   <h2 class="login">LOGIN</h2>
-  <form class="ion-padding">
+  <form [formGroup]="loginForm" class="ion-padding">
     <ion-input
       class="ion-text-center"
       fill="outline"
       type="email"
       placeholder="Enter Email"
-    
+      formControlName="email"
     ></ion-input>
     <br />
     <div
-      
+      *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched"
     >
       <span
         class="error-message"
-        
+        *ngIf="loginForm.get('email')?.errors?.['required']"
         >Email is required.</span
       >
       <span
         class="error-message"
-       
+        *ngIf="loginForm.get('email')?.errors?.['email']"
         >Invalid email format.</span
       >
     </div>
@@ -32,25 +32,25 @@
       type="password"
       fill="outline"
       placeholder="Enter password"
-     
+      formControlName="password"
     ></ion-input>
     <br />
     <div
-      
+      *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched"
     >
       <span
         class="error-message"
-       
+        *ngIf="loginForm.get('password')?.errors?.['required']"
         >Password is required.</span
       >
       <span
         class="error-message"
-      
+        *ngIf="loginForm.get('password')?.errors?.['minlength']"
         >Password must be at least 6 characters long.</span
       >
       <span
         class="error-message"
-       
+        *ngIf="loginForm.get('password')?.errors?.['pattern']"
         >Password must contain characters(- _ ! $).</span
       >
     </div>
@@ -59,9 +59,9 @@
       class="ion-padding ion-xxl mycolor"
       expand="full"
       type="submit"
-      routerLink="/farmers-dashboard"
       (click)="login()"
-      >
+      [disabled]="loginForm.invalid"
+    >
       Login
     </ion-button>
   </form>

@@ -29,43 +29,58 @@
           </ion-toolbar>
         </ion-header>
         <ion-content class="ion-padding">
-          <form class="requestBlood-form">
+          <form class="requestBlood-form" (ngSubmit)="addEvent()">
             <ion-item>
               <ion-input
-            
-                name="event_title"
-                label="Title"
-                labelPlacement="stacked"
-                type="text"
-                placeholder="When to Donation"
-                style="color: black"
+              [(ngModel)]="event.event_title"
+              name="event_title"
+              label="Title"
+              labelPlacement="stacked"
+              type="text"
+              placeholder="When to Donation"
+              style="color: black"
+              ></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-input
+              
+              [(ngModel)]="event.host"
+              name="host"
+              label="Host"
+              labelPlacement="stacked"
+              type="text"
+              placeholder="Event host by.."
+              style="color: black"
               ></ion-input>
             </ion-item>
             <ion-item>
               <ion-textarea
-                name="description"
-                label="Description"
-                labelPlacement="stacked"
-                style="color: black"
-                placeholder="Type..."
+              [(ngModel)]="event.description"
+              name="description"
+              label="Description"
+              labelPlacement="stacked"
+              style="color: black"
+              placeholder="Type..."
               ></ion-textarea>
             </ion-item>
-
+            
             <ion-item>
               <ion-input
-                name="location"
-                label="Location"
-                labelPlacement="stacked"
-                type="text"
-                placeholder="Maseru, Thoteng"
-                style="color: black"
+              [(ngModel)]="event.location"
+              name="location"
+              label="Location"
+              labelPlacement="stacked"
+              type="text"
+              placeholder="Maseru, Thoteng"
+              style="color: black"
               ></ion-input>
             </ion-item>
-
+            
             <ion-item>
               <ion-datetime
-               
-                name="date_and_time"
+              
+              [(ngModel)]="event.date_and_time"
+              name="date_and_time"
                 displayFormat="MMM DD, YYYY HH:mm"
                 placeholder="Select Date & Time"
                 style="color: black"
@@ -80,20 +95,20 @@
       </ng-template>
     </ion-modal>
     <div
-    
+    *ngIf="events.length > 0; else noEvents"
       class="upcoming-events"
       style="background-color: transparent"
     >
-      <ion-card  style="margin: 10px">
+      <ion-card *ngFor="let event of events" style="margin: 10px">
         <ion-card-header class="ion-text-center">
-          <ion-card-title>title</ion-card-title>
-          <ion-card-subtitle>host</ion-card-subtitle>
+          <ion-card-title>{{ event.event_title }}</ion-card-title>
+          <ion-card-subtitle>{{event.host}}</ion-card-subtitle>
         </ion-card-header>
         <ion-card-content>
-          <p>Date: </p>
-          <p>Time:</p>
-          <p>Location: </p>
-          <p></p>
+          <p>Date: {{ getFormattedDateTime(event.date_and_time).date }}</p>
+          <p>Time: {{ getFormattedDateTime(event.date_and_time).time }}</p>
+          <p>Location: {{ event.location }}</p>
+          <p>{{ event.description }}</p>
         </ion-card-content>
       </ion-card>
     </div>
