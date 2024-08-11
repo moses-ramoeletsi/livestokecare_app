@@ -5,13 +5,23 @@
    </ion-buttons>
   <ion-title style="margin-left: 16px;">Videos</ion-title>
 </div>
-  <ion-card>
-    <ion-card-content>
-      <ion-list>
-        <ion-item *ngFor="let video of videos" (click)="playVideo(video.url)">
-          <ion-label>{{ video.title }}</ion-label>
-        </ion-item>
-      </ion-list>
-    </ion-card-content>
-  </ion-card>
+<div
+*ngIf="videos.length > 0; else noVideos"
+  class="upcoming-events"
+  style="background-color: transparent"
+>
+<ion-card *ngFor="let video of videos" style="margin: 10px">
+  <ion-card-header class="ion-text-center">
+    <ion-card-title>{{ video.video_title }}</ion-card-title>
+    <ion-card-subtitle>Posted by: {{video.authorName}}</ion-card-subtitle> 
+  </ion-card-header>
+  <ion-card-content>
+    <p>{{ video.description }}</p>
+    <p><a (click)="openLink(video.videoUrl)">Visit</a></p>
+  </ion-card-content>
+</ion-card>
+</div>
+<ng-template #noVideos>
+  <p style="color: brown">No events available</p>
+</ng-template>
 </ion-content>

@@ -31,32 +31,34 @@
           </ion-toolbar>
         </ion-header>
         <ion-content class="ion-padding">
-          <form class="requestBlood-form">
+          <form class="requestBlood-form" (ngSubmit)="addVideo()">
             <ion-item>
               <ion-input
-            
-                name="video-title"
-                label="Title"
-                labelPlacement="stacked"
-                type="text"
-                placeholder="When to Donation"
-                style="color: black"
+              [(ngModel)]="video.video_title"
+              name="video_title"
+              label="Title"
+              labelPlacement="stacked"
+              type="text"
+              placeholder="When to Donation"
+              style="color: black"
               ></ion-input>
             </ion-item>
             <ion-item>
               <ion-textarea
-                name="video-description"
-                label="Description"
-                labelPlacement="stacked"
-                style="color: black"
-                placeholder="Type..."
+              [(ngModel)]="video.description"
+              name="description"
+              label="Description"
+              labelPlacement="stacked"
+              style="color: black"
+              placeholder="Type..."
               ></ion-textarea>
             </ion-item>
-
+            
             <ion-item>
               <ion-input
-                name="video-url"
-                label="Link"
+              [(ngModel)]="video.videoUrl"
+              name="videoUrl"
+              label="Link"
                 labelPlacement="stacked"
                 type="text"
                 placeholder="Link"
@@ -71,25 +73,26 @@
       </ng-template>
     </ion-modal>
     <div
-    
+    *ngIf="videos.length > 0; else noVideos"
       class="upcoming-events"
       style="background-color: transparent"
     >
-      <ion-card  style="margin: 10px">
-        <ion-card-header class="ion-text-center">
-          <ion-card-title>Video title</ion-card-title>
-        </ion-card-header>
-        <ion-card-content>
-          <p></p>
-          <p><a href="">Visit</a></p>
-        </ion-card-content>
-        <ion-item lines="none">
-          <ion-button fill="outline" slot="start" color="tertiary">Edit</ion-button>
-          <ion-button fill="outline" slot="end" color="danger">Delete</ion-button>
-        </ion-item>
-      </ion-card>
+    <ion-card *ngFor="let video of videos" style="margin: 10px">
+      <ion-card-header class="ion-text-center">
+        <ion-card-title>{{ video.video_title }}</ion-card-title>
+        <ion-card-subtitle>Posted by: {{video.authorName}}</ion-card-subtitle> 
+      </ion-card-header>
+      <ion-card-content>
+        <p>{{ video.description }}</p>
+        <p><a (click)="openLink(video.videoUrl)">Visit</a></p>
+      </ion-card-content>
+      <ion-item lines="none">
+        <ion-button fill="outline" slot="start" color="tertiary">Edit</ion-button>
+        <ion-button fill="outline" slot="end" color="danger">Delete</ion-button>
+      </ion-item>
+    </ion-card>
     </div>
-    <ng-template #noEvents>
+    <ng-template #noVideos>
       <p style="color: brown">No events available</p>
     </ng-template>
   </ion-content>

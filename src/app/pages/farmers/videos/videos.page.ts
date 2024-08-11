@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { PostingVideosService } from 'src/app/services/posting-videos.service';
 
 @Component({
   selector: 'app-videos',
@@ -6,18 +7,26 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./videos.page.scss'],
 })
 export class VideosPage implements OnInit {
-
-  constructor() { }
+  video= {
+    video_title: '',
+    description: '',
+    videoUrl: '',
+    authorId: '',
+    authorName: '', 
+  };
+  videos: any[] = [];
+  constructor(private fireStore: PostingVideosService) { }
 
   ngOnInit() {
+    this.getVideo();
+  }
+  getVideo() {
+   this.fireStore.fetchPostedVideo().subscribe((videos)=>{
+    this.videos =videos;
+   })
   }
 
-  videos = [
-    { title: 'Video 1', url: 'https://www.example.com/video1' },
-    { title: 'Video 2', url: 'https://www.example.com/video2' },
-  ];
-
-  playVideo(url: string) {
+  openLink(url: string) {
     window.open(url, '_blank');
   }
 }
