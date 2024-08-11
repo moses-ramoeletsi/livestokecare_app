@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { BasicKnowladgeService } from 'src/app/services/basic-knowladge.service';
 
 @Component({
   selector: 'app-basic-knowladge',
@@ -7,13 +8,31 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BasicKnowladgePage implements OnInit {
 
-  constructor() { }
+  
+  article= {
+    article_title: '',
+    description: '',
+    articleUrl: '',
+    authorId: '',
+    authorName: '', 
+  };
+  userId: string | null = null;
+  name: any;
+  articles: any[] = [];
+  constructor(private fireStore: BasicKnowladgeService,) { }
 
   ngOnInit() {
+    this.getArticles();
   }
-  knowledgeBaseArticles = [
-    { id: 1, title: 'Article 1' },
-    { id: 2, title: 'Article 2' },
-  ];
+  getArticles() {
+    this.fireStore.fetchPostedArticle().subscribe((articles) => {
+      this.articles = articles;
+    });
+  }
 
+  openLink(url: string) {
+    window.open(url, '_blank');
+  }
+  
+    
 }

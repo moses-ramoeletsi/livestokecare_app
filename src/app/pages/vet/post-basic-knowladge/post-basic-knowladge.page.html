@@ -31,32 +31,34 @@
           </ion-toolbar>
         </ion-header>
         <ion-content class="ion-padding">
-          <form class="requestBlood-form">
+          <form class="requestBlood-form" (ngSubmit)="addArticle()">
             <ion-item>
               <ion-input
-            
-                name="article_title"
-                label="Title"
-                labelPlacement="stacked"
-                type="text"
-                placeholder="When to Donation"
-                style="color: black"
+              [(ngModel)]="article.article_title"
+              name="article_title"
+              label="Title"
+              labelPlacement="stacked"
+              type="text"
+              placeholder="When to Donation"
+              style="color: black"
               ></ion-input>
             </ion-item>
             <ion-item>
               <ion-textarea
-                name="short-description"
-                label="Description"
-                labelPlacement="stacked"
-                style="color: black"
-                placeholder="Type..."
+              [(ngModel)]="article.description"
+              name="description"
+              label="Description"
+              labelPlacement="stacked"
+              style="color: black"
+              placeholder="Type..."
               ></ion-textarea>
             </ion-item>
-
+            
             <ion-item>
               <ion-input
-                name="article-url"
-                label="Link"
+              [(ngModel)]="article.articleUrl"
+              name="articleUrl"
+              label="Link"
                 labelPlacement="stacked"
                 type="text"
                 placeholder="Link"
@@ -71,25 +73,26 @@
       </ng-template>
     </ion-modal>
     <div
-    
+    *ngIf="articles.length > 0; else noArticles"
       class="upcoming-events"
       style="background-color: transparent"
     >
-      <ion-card  style="margin: 10px">
-        <ion-card-header class="ion-text-center">
-          <ion-card-title>Article title</ion-card-title>
-        </ion-card-header>
-        <ion-card-content>
-          <p></p>
-          <p><a href="">Read More</a></p>
-        </ion-card-content>
-        <ion-item lines="none">
-          <ion-button fill="outline" slot="start" color="tertiary">Edit</ion-button>
-          <ion-button fill="outline" slot="end" color="danger">Delete</ion-button>
-        </ion-item>
-      </ion-card>
+    <ion-card *ngFor="let article of articles" style="margin: 10px">
+      <ion-card-header class="ion-text-center">
+        <ion-card-title>{{ article.article_title }}</ion-card-title>
+        <ion-card-subtitle>Posted by: {{article.authorName}}</ion-card-subtitle> 
+      </ion-card-header>
+      <ion-card-content>
+        <p>{{ article.description }}</p>
+        <p><a (click)="openLink(article.articleUrl)">Read More</a></p>
+      </ion-card-content>
+      <ion-item lines="none">
+        <ion-button fill="outline" slot="start" color="tertiary">Edit</ion-button>
+        <ion-button fill="outline" slot="end" color="danger">Delete</ion-button>
+      </ion-item>
+    </ion-card>
     </div>
-    <ng-template #noEvents>
+    <ng-template #noArticles>
       <p style="color: brown">No events available</p>
     </ng-template>
   </ion-content>

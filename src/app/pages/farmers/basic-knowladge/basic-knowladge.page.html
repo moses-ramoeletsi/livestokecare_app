@@ -6,16 +6,23 @@
    </ion-buttons>
   <ion-title style="margin-left: 16px;">Knowledge Base</ion-title>
 </div>
-  <ion-card>
-    <ion-card-header>
-      <ion-card-title></ion-card-title>
-    </ion-card-header>
-    <ion-card-content>
-      <ion-list>
-        <ion-item *ngFor="let article of knowledgeBaseArticles" [routerLink]="['/article', article.id]">
-          <ion-label>{{ article.title }}</ion-label>
-        </ion-item>
-      </ion-list>
-    </ion-card-content>
-  </ion-card>
+<div
+*ngIf="articles.length > 0; else noArticles"
+  class="upcoming-events"
+  style="background-color: transparent"
+>
+<ion-card *ngFor="let article of articles" style="margin: 10px">
+  <ion-card-header class="ion-text-center">
+    <ion-card-title>{{ article.article_title }}</ion-card-title>
+    <ion-card-subtitle>Posted by: {{article.authorName}}</ion-card-subtitle> 
+  </ion-card-header>
+  <ion-card-content>
+    <p>{{ article.description }}</p>
+    <p><a (click)="openLink(article.articleUrl)">Read More</a></p>
+  </ion-card-content>
+</ion-card>
+</div>
+<ng-template #noArticles>
+  <p style="color: brown">No events available</p>
+</ng-template>
 </ion-content>

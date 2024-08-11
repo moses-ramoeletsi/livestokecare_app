@@ -2,18 +2,14 @@ import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Observable } from 'rxjs';
+
 @Injectable({
   providedIn: 'root'
 })
-export class EventsService {
-  
- 
+export class BasicKnowladgeService {
+
   constructor(private afAuth:  AngularFireAuth, private fireStore: AngularFirestore) { }
-
-  postEvent(event: any){
-    return this.fireStore.collection('events').add(event);
-  }
-
+  
   async getCurrentUserById(userId: string) :Promise<any>{
     try{
       const doc = await this.fireStore.collection('users').doc(userId).get().toPromise();
@@ -27,15 +23,11 @@ export class EventsService {
     }
   }
   
-  fetchPostedEvents() : Observable<any[]>{
-    return this.fireStore.collection('events').valueChanges();
+  postArticle(event: any){
+    return this.fireStore.collection('articles').add(event);
   }
-deleteEvent(eventId: string): Promise<void> {
-  return this.fireStore.collection('events').doc(eventId).delete();
-}
 
-editEvent(eventId: string, updatedEventData: any): Promise<void> {
-  return this.fireStore.collection('events').doc(eventId).update(updatedEventData);
-}
-
+  fetchPostedArticle() : Observable<any[]>{
+    return this.fireStore.collection('articles').valueChanges();
+  }
 }
