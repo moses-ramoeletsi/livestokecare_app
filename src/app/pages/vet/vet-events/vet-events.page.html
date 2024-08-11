@@ -99,18 +99,26 @@
       class="upcoming-events"
       style="background-color: transparent"
     >
-      <ion-card *ngFor="let event of events" style="margin: 10px">
-        <ion-card-header class="ion-text-center">
-          <ion-card-title>{{ event.event_title }}</ion-card-title>
-          <ion-card-subtitle>{{event.host}}</ion-card-subtitle>
-        </ion-card-header>
-        <ion-card-content>
-          <p>Date: {{ getFormattedDateTime(event.date_and_time).date }}</p>
-          <p>Time: {{ getFormattedDateTime(event.date_and_time).time }}</p>
-          <p>Location: {{ event.location }}</p>
-          <p>{{ event.description }}</p>
-        </ion-card-content>
-      </ion-card>
+  
+    <ion-card *ngFor="let event of events" style="margin: 10px">
+      <ion-card-header class="ion-text-center">
+        <ion-card-title>{{ event.event_title }}</ion-card-title>
+        <ion-card-subtitle>Host: {{event.host}}</ion-card-subtitle>
+        <ion-card-subtitle>Posted by: {{event.authorName}}</ion-card-subtitle>
+      </ion-card-header>
+      <ion-card-content>
+        <p>Date: {{ getFormattedDateTime(event.date_and_time).date }}</p>
+        <p>Time: {{ getFormattedDateTime(event.date_and_time).time }}</p>
+        <p>Location: {{ event.location }}</p>
+        <p>{{ event.description }}</p>
+    
+        <!-- Edit and Delete Buttons -->
+        <ion-button fill="outline" color="primary" (click)="editEvent(event)">Edit</ion-button>
+        <ion-button fill="outline" color="danger" (click)="deleteEvent(event)">Delete</ion-button>
+      </ion-card-content>
+    </ion-card>
+    
+   
     </div>
     <ng-template #noEvents>
       <p style="color: brown">No events available</p>

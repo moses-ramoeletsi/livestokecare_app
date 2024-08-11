@@ -30,4 +30,14 @@ export class EventsService {
   fetchPostedEvents() : Observable<any[]>{
     return this.fireStore.collection('events').valueChanges();
   }
+  // Example of deleteEvent method in EventsService
+deleteEvent(eventId: string): Promise<void> {
+  return this.fireStore.collection('events').doc(eventId).delete();
+}
+
+// Example of editEvent method in EventsService (if needed)
+editEvent(eventId: string, updatedEventData: any): Promise<void> {
+  return this.fireStore.collection('events').doc(eventId).update(updatedEventData);
+}
+
 }
