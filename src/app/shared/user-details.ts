@@ -5,9 +5,17 @@ export interface UserDetails {
     address: string;
     phoneNumber: number;
     password:string;
+    uid:string;
   }
   
-  export interface VerUser {
-    name: string,
+  export interface VeterinarianDetails {
+    name:string,
+    email: string,
+    vetLicenseNumber: string,
+    consultationHours: '',
+    phoneNumber: number,
+    password: string,
+    uid: string,
+    userType: string,
     
   }
