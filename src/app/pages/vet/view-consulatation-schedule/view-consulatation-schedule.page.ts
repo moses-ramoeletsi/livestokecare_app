@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ConsultationService } from 'src/app/services/consultation.service';
 
 @Component({
   selector: 'app-view-consulatation-schedule',
@@ -7,9 +8,27 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ViewConsulatationSchedulePage implements OnInit {
 
-  constructor() { }
+  consultations: any[] = [];
+
+  constructor(private consultationService: ConsultationService) { }
 
   ngOnInit() {
+    this.loadConsultations();
   }
 
+  loadConsultations() {
+    this.consultationService.getAllConsultations().subscribe(data => {
+      this.consultations = data;
+    });
+  }
+
+  updateStatus(consultationId: string, newStatus: string) {
+    this.consultationService.updateConsultationStatus(consultationId, newStatus).then(() => {
+      this.loadConsultations();
+    }).catch(error => {
+      console.error('Error updating consultation status:', error);
+    });
+  }
 }
+
+

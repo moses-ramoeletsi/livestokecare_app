@@ -1,33 +1,39 @@
 <ion-content [fullscreen]="true">
   <div style="display: flex; align-items: center; margin: 16px;">
     <ion-buttons slot="start">
-     <ion-icon name="arrow-back" routerLink="/vet-dashboard" ></ion-icon>   
-   </ion-buttons>
-  <ion-title style="margin-left: 16px;">View Consulatation Schedule</ion-title>
+      <ion-icon name="arrow-back" routerLink="/vet-dashboard"></ion-icon>   
+    </ion-buttons>
+    <ion-title style="margin-left: 16px;">View Consultation Schedule</ion-title>
   </div>
 
   <ion-title style="margin-left: 16px;">Incoming Requests</ion-title>
-  <ion-card >
-    <div>
-      <ion-badge color="success" slot="end">Pending</ion-badge>
-    </div>
-    <ion-card-header>
-      <ion-card-title>Farmer's Name: Mr Rose</ion-card-title>
-      <ion-card-subtitle>Vet Doctor: Dr Dean</ion-card-subtitle>
-    </ion-card-header>
-    
-    <ion-card-content>
-      <p><strong>Consultation Date:</strong> 10 Aug 2024</p>
-      <p><strong>Animal Type:</strong> Cattle</p>
-      <p><strong>Age:</strong> 3 years</p>
-      <p><strong>Purpose:</strong> Check up</p>
-      <p><strong>Contacts:</strong> 266 58411896</p>
-      <p><strong>Farmer's  Address</strong> Qoaling</p>
-    </ion-card-content>
-    
-    <ion-item lines="none">
-      <ion-button fill="outline" slot="start" color="tertiary">Approve</ion-button>
-      <ion-button fill="outline" slot="end" color="danger">Completed</ion-button>
-    </ion-item>
-  </ion-card>
+
+  <ng-container *ngFor="let consultation of consultations">
+    <ion-card>
+      <div>
+        <ion-badge [color]="consultation.status === 'Pending' ? 'warning' : consultation.status === 'Approved' ? 'success' : 'tertiary'" slot="end">
+          {{ consultation.status }}
+        </ion-badge>
+      </div>
+      <ion-card-header>
+        <ion-card-title>Farmer's Name: {{ consultation.farmerName }}</ion-card-title>
+        <ion-card-subtitle>Vet Doctor: {{ consultation.vetDoctor }}</ion-card-subtitle>
+      </ion-card-header>
+      
+      <ion-card-content>
+        <p><strong>Consultation Date:</strong> {{ consultation.consultationDate }}</p>
+        <p><strong>Animal Type:</strong> {{ consultation.animalType }}</p>
+        <p><strong>Age:</strong> {{ consultation.age }}</p>
+        <p><strong>Purpose:</strong> {{ consultation.purpose }}</p>
+        <p><strong>Contacts:</strong> {{ consultation.contacts }}</p>
+        <p><strong>Farmer's Address:</strong> {{ consultation.address }}</p>
+      </ion-card-content>
+      
+      <ion-item lines="none">
+        <ion-button *ngIf="consultation.status === 'Pending'" fill="outline" slot="start" color="success" (click)="updateStatus(consultation.id, 'Approved')">Approve</ion-button>
+        <ion-button *ngIf="consultation.status === 'Approved'" fill="outline" slot="end" color="danger" (click)="updateStatus(consultation.id, 'Completed')">Completed</ion-button>
+      </ion-item>
+    </ion-card>
+  </ng-container>
 </ion-content>
+
