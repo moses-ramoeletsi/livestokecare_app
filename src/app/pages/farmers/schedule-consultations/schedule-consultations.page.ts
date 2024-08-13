@@ -79,17 +79,14 @@ export class ScheduleConsultationsPage implements OnInit {
   
     this.consultationService.getConsultationsByStatus(this.consultation.farmerUid, 'Pending').subscribe(data => {
       this.pendingConsultations = data;
-      console.log('Pending Consultations:', this.pendingConsultations);
     });
   
     this.consultationService.getConsultationsByStatus(this.consultation.farmerUid, 'Approved').subscribe(data => {
       this.approvedConsultations = data;
-      console.log('Approved Consultations:', this.approvedConsultations);
     });
   
     this.consultationService.getConsultationsByStatus(this.consultation.farmerUid, 'Completed').subscribe(data => {
       this.completedConsultations = data;
-      console.log('Completed Consultations:', this.completedConsultations);
     });
   }
   
