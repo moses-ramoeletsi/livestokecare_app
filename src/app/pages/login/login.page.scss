@@ -1,0 +1,62 @@
+ion-content {
+  --ion-background-color: #fffffffd;
+}
+.primaryColor {
+    --background: var(--ion-color-btn);
+  }
+
+  ion-input {
+    color: "black";
+  }
+
+  img {
+    height: 240px;
+    width: auto;
+    margin: auto;
+    display: block;
+  }
+
+  .page-link {
+    color: #3e8156;
+  }
+
+  .myHeader {
+    text-align: center;
+    color: #3e8156;
+    font-weight: 800;
+  }
+
+  ion-button {
+    font-size: 1.2rem;
+  }
+
+  .login {
+    color: #3e8156;
+   text-align: center;
+  }
+  
+  p {
+    color: #000;
+  }
+  
+  form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  form ion-input {
+    color: black;
+  }
+  
+  ion-input,
+  ion-button {
+    width: 100%;
+    max-width: 300px;
+  }
+  
+  .error-message {
+    color: #87986A;
+  }
+  
+  

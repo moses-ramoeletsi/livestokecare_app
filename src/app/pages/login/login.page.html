@@ -1,6 +1,6 @@
 <ion-content [fullscreen]="true">
-  <h1 class="myHeader">SC Attendence</h1>
-  <img alt="car" src="../../../assets/images/bloodConnect.png" />
+  <h1 class="myHeader">LiveStock Care</h1>
+  <img alt="car" src="../../../assets/images/logo.png" />
   <h2 class="login">LOGIN</h2>
   <form [formGroup]="loginForm" class="ion-padding">
     <ion-input
@@ -56,19 +56,19 @@
     </div>
     <br />
     <ion-button
-      class="ion-padding ion-xxl mycolor"
+      class="ion-padding ion-xxl primaryColor"
       expand="full"
       type="submit"
       (click)="login()"
-      [disabled]="loginForm.invalid"
-    >
+      >
       Login
     </ion-button>
+    <!-- [disabled]="loginForm.invalid" -->
   </form>
   <div class="ion-text-center">
     <p>
       Not registered yet? <br /><a routerLink="/register-farmers" class="page-link"
-        >Create account here</a
+      >Create account here</a
       >
     </p>
   </div>
