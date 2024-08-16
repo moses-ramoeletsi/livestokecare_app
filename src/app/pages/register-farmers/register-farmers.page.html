@@ -1,7 +1,7 @@
 <ion-content [fullscreen]="true">
-  <h1 class="myHeader">Farmer Livestoke App</h1>
-  <img alt="car" src="../../../assets/images/bloodConnect.png" />
-  <h2 class="register">Register</h2>
+  <h1 class="myHeader"> Livestoke Care</h1>
+  <img alt="car" src="../../../assets/images/logo.png" />
+  <h2 class="register">Farmers Registeration</h2>
 
   <form [formGroup]="registerForm" class="ion-padding-top">
     <ion-input
@@ -79,15 +79,15 @@
       expand="full"
       type="submit"
       (click)="signup()"
-      [disabled]="registerForm.invalid"
-    >
+      >
       Register
     </ion-button>
   </form>
-  <h3 class="facility-vet" routerLink="/register-vet">Vet Assistant</h3>
+  <h3 class="register-veterinarian" routerLink="/register-vet">Register Veterinaria</h3>
   <div class="ion-text-center">
     <p>
       Already have an account? <br /><a routerLink="/login" class="page-link">Login here</a>
     </p>
   </div>
 </ion-content>
+<!-- [disabled]="registerForm.invalid" -->
