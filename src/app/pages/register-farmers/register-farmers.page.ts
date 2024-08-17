@@ -20,6 +20,7 @@ export class RegisterFarmersPage implements OnInit {
     phoneNumber: '',
     password: '',
     uid: '',
+    userType:'farmer'
   };
 
   constructor(
@@ -49,7 +50,7 @@ export class RegisterFarmersPage implements OnInit {
 
   signup() {
     if (this.registerForm.valid) {
-      const userData = this.registerForm.value;
+      const userData = { ...this.userData, ...this.registerForm.value };
       this.fireserviceStore
         .signupWithEmail(userData)
         .then((userDetails) => {

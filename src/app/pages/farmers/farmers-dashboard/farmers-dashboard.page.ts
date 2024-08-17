@@ -41,7 +41,7 @@ export class FarmersDashboardPage implements OnInit {
   }
 
   openChat() {
-    this.navCtrl.navigateForward('/chat');
+    this.navCtrl.navigateForward('/chatlist');
   }
 
 
