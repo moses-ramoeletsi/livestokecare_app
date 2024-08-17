@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { map, Observable } from 'rxjs';
+import { map, Observable, of, switchMap } from 'rxjs';
 import { VeterinarianDetails } from '../shared/user-details';
 
 
@@ -10,6 +10,7 @@ import { VeterinarianDetails } from '../shared/user-details';
 })
 export class UserDetailsService {
 
+  currentUser!: '';
   constructor(  public firebaseStore: AngularFirestore,
     public userAuth: AngularFireAuth) { }
 
@@ -38,12 +39,30 @@ export class UserDetailsService {
       ) as Observable<VeterinarianDetails | null>;
   }
   
+  getUsers(): Observable<any[]> {
+    return this.firebaseStore.collection('users').snapshotChanges().pipe(
+      map(actions => actions.map(a => {
+        const data = a.payload.doc.data() as Record<string, any>;
+        const id = a.payload.doc.id;
+        return { id, ...data };
+      }))
+    );
+  }
+  getCurrentUser(): Observable<any> {
+    return this.userAuth.authState.pipe(
+      switchMap(user => {
+        if (user) {
+          return this.firebaseStore.collection('users').doc(user.uid).valueChanges();
+        } else {
+          return of(null);
+        }
+      })
+    );
+  }
   
-
-  // saveUserDetails(uid: string, userDetails: any): Promise<void> {
-  //   const userDocRef = this.firebaseStore.collection('users').doc(uid);
-  //   return userDocRef.set(userDetails);
-  // }
+  getAuth() {
+    return this.userAuth;
+  }
   
 }
 
