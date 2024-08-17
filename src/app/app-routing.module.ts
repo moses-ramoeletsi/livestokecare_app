@@ -84,7 +84,7 @@ const routes: Routes = [
     loadChildren: () => import('./pages/farmers/notifications/notifications.module').then( m => m.NotificationsPageModule)
   },
   {
-    path: 'chat',
+    path: 'chat/:userId',
     loadChildren: () => import('./chat/chat.module').then( m => m.ChatPageModule)
   },
   {
@@ -106,6 +106,10 @@ const routes: Routes = [
   {
     path: 'view-consulatation-schedule',
     loadChildren: () => import('./pages/vet/view-consulatation-schedule/view-consulatation-schedule.module').then( m => m.ViewConsulatationSchedulePageModule)
+  },
+  {
+    path: 'chatlist',
+    loadChildren: () => import('./chatlist/chatlist.module').then(m => m.ChatlistPageModule)
   },
 ];
 
