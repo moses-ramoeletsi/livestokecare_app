@@ -29,6 +29,7 @@ export class ViewConsulatationSchedulePage implements OnInit {
       console.error('Error updating consultation status:', error);
     });
   }
+  
 }
 
 
