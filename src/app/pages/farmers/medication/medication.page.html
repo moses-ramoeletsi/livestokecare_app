@@ -1,0 +1,55 @@
+<ion-content [fullscreen]="true">
+  <div style="display: flex; align-items: center; margin: 16px;">
+    <ion-buttons slot="start">
+     <ion-icon name="arrow-back" routerLink="/farmers-dashboard" ></ion-icon>   
+   </ion-buttons>
+  <ion-title style="margin-left: 16px;">Medication</ion-title>
+</div>
+
+  <div
+    *ngIf="medication.length > 0; else noMedicine"
+      class="upcoming-events"
+      style="background-color: transparent"
+    >
+    <ion-card *ngFor="let medicine of medication" style="margin: 10px">
+      <img [src]="medicine.imageUrl" alt="Medication Image" />
+        <ion-card-header class="ion-text-center">
+        <ion-card-title>{{ medicine.medicine_name }}</ion-card-title>
+        <ion-card-subtitle>{{medicine.animal_type}}</ion-card-subtitle> 
+      </ion-card-header>
+      <ion-card-content>
+        <ion-label>M{{medicine.price}}</ion-label> <br />
+        {{ medicine.description }}
+      </ion-card-content>
+      <ion-item lines="none">
+        <ion-button fill="outline" slot="start" color="tertiary" (click)="addToCart(medicine)">Add to Cart</ion-button>
+      </ion-item>
+    </ion-card>
+    </div>
+    <ng-template #noMedicine>
+      <p style="color: brown">No events available</p>
+    </ng-template>
+
+    <ion-card *ngIf="cart.length > 0">
+      <ion-card-header>
+        <ion-card-title>Shopping Cart</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-list>
+          <ion-item *ngFor="let item of cart">
+            <ion-label>{{ item.medicine_name }}</ion-label>
+            <ion-button fill="clear" (click)="decreaseQuantity(item)">-</ion-button>
+            <ion-label>{{ item.quantity }}</ion-label>
+            <ion-button fill="clear" (click)="increaseQuantity(item)">+</ion-button>
+            <ion-button fill="clear" (click)="removeFromCart(item)">Remove</ion-button>
+            <ion-label slot="end">M{{ parseFloat(item.price) * item.quantity | number:'1.2-2' }}</ion-label>
+          </ion-item>
+        </ion-list>
+        <ion-item>
+          <ion-label>Total:</ion-label>
+          <ion-label slot="end">M{{ total | number:'1.2-2' }}</ion-label>
+        </ion-item>
+        <ion-button expand="block" (click)="checkout()">Proceed to Checkout</ion-button>
+      </ion-card-content>
+    </ion-card>
+</ion-content>

@@ -1,0 +1,38 @@
+
+<ion-content [fullscreen]="true">
+  <div style="display: flex; align-items: center; margin: 16px;">
+    <ion-buttons slot="start">
+     <ion-icon name="arrow-back" routerLink="/farmers-profile" ></ion-icon>   
+   </ion-buttons>
+  <ion-title style="margin-left: 16px;">view-orders</ion-title>
+</div>
+
+<ion-content>
+  <div *ngIf="orders.length > 0; else noOrders">
+    <h2>Your Orders</h2>
+    <ion-card *ngFor="let order of orders" class="order-card">
+      <ion-card-header>
+        <ion-card-title>Order ID: {{ order.id }}</ion-card-title>
+        <ion-card-subtitle>
+          Date: {{ order.timestamp.toDate() | date: 'medium' }}
+        </ion-card-subtitle>
+      </ion-card-header>
+      <ion-card-content>
+        <p>Total: {{ order.total | currency }}</p>
+        <ion-list>
+          <ion-item *ngFor="let item of order.items">
+            <ion-label>
+              <h3>{{ item.medicineName }}</h3>
+              <p>Quantity: {{ item.quantity }} - Price: {{ item.price | currency }}</p>
+            </ion-label>
+          </ion-item>
+        </ion-list>
+      </ion-card-content>
+    </ion-card>
+  </div>
+  <ng-template #noOrders>
+    <p>No orders found.</p>
+  </ng-template>
+</ion-content>
+
+</ion-content>

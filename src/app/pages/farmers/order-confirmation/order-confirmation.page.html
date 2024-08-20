@@ -1,0 +1,19 @@
+<ion-content class="ion-padding">
+  <div style="display: flex; align-items: center; margin: 16px;">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/medication"></ion-back-button>
+   </ion-buttons>
+  <ion-title style="margin-left: 16px;">Order Confirmation</ion-title>
+</div>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Thank You for Your Order!</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <p>Your order has been successfully placed.</p>
+      <p>Order ID: {{ orderId }}</p>
+      <p>Total Amount: M{{ total | number:'1.2-2' }}</p>
+    </ion-card-content>
+  </ion-card>
+  <ion-button expand="block" routerLink="/farmers-dashboard">Return to Dashboard</ion-button>
+</ion-content>
