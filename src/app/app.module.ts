@@ -12,6 +12,7 @@ import { FarmersNavBarComponent } from './components/farmers-nav-bar/farmers-nav
 import { VetNavBarComponent } from './components/vet-nav-bar/vet-nav-bar.component';
 import { environment } from 'src/environments/environment';
 import { AngularFireStorageModule } from '@angular/fire/compat/storage';
+import { AngularFireMessagingModule } from '@angular/fire/compat/messaging';
 
 
 @NgModule({
@@ -19,6 +20,7 @@ import { AngularFireStorageModule } from '@angular/fire/compat/storage';
   imports: [
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireStorageModule,
+    AngularFireMessagingModule,
     FormsModule,
     ReactiveFormsModule,
     BrowserModule, IonicModule.forRoot(), AppRoutingModule],
