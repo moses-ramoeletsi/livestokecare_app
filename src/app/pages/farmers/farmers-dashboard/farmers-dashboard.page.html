@@ -3,35 +3,39 @@
    
   <ion-title style="margin-left: 16px;">{{userName}}</ion-title>
 </div>
-    <ion-grid>
+    
       <ion-row>
         <ion-col size="12" size-md="6">
           <ion-card color="white" [routerLink]="['/basic-knowladge']">
             <ion-card-header>
-              <ion-img src="../../../assets/images/search.png"></ion-img>
+              <ion-img src="../../../../assets/images/knoladge.png"></ion-img>
             </ion-card-header>
             <ion-card-content>Knowledge Base</ion-card-content>
           </ion-card>
         </ion-col>
-        <ion-col size="12" size-md="6">
-          <ion-card color="white" [routerLink]="['/videos']">
+      </ion-row>
+    <ion-row>
+      <ion-col size="12" size-md="6">
+        <ion-card color="white" [routerLink]="['/videos']">
+          <ion-card-header>
+            <ion-img
+              src="../../../../assets/images/video.png"
+            ></ion-img>
+          </ion-card-header>
+          <ion-card-content>Videos</ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+       <ion-col size="12" size-md="6">
+          <ion-card color="white" [routerLink]="['/medication']">
             <ion-card-header>
-              <ion-img
-                src="../../../assets/images/blood-drop.png"
-              ></ion-img>
+              <ion-img src="../../../../assets/images/medicine.png"></ion-img>
             </ion-card-header>
-            <ion-card-content>Videos</ion-card-content>
+            <ion-card-content>Medication</ion-card-content>
           </ion-card>
         </ion-col>
-        <!-- <ion-col size="12" size-md="6">
-          <ion-card color="white" [routerLink]="['/feedback']">
-            <ion-card-header>
-              <ion-img src="../../../assets/images/feeback.png"></ion-img>
-            </ion-card-header>
-            <ion-card-content>FeedBack</ion-card-content>
-          </ion-card>
-        </ion-col>
-        <ion-col size="12" size-md="6">
+         <!-- <ion-col size="12" size-md="6">
           <ion-card color="white" [routerLink]="['/upcoming-events']">
             <ion-card-header>
               <ion-img
@@ -42,7 +46,7 @@
           </ion-card>
         </ion-col> -->
       </ion-row>
-    </ion-grid>
+    
     
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
     <ion-fab-button (click)="openChat()">

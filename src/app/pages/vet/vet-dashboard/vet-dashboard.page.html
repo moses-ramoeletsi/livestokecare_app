@@ -6,32 +6,42 @@
 <ion-grid>
   <ion-row>
     <ion-col size="12" size-md="6">
-      <ion-card color="white" [routerLink]="['/view-consulatation-schedule']">
+      <ion-card color="white" [routerLink]="['/post-basic-knowladge']">
         <ion-card-header>
-          <ion-img src="../../../assets/images/feeback.png"></ion-img>
+          <ion-img src="../../../../assets/images/knoladge.png"></ion-img>
         </ion-card-header>
-        <ion-card-content>Schedule</ion-card-content>
+        <ion-card-content> Basic Knowledge</ion-card-content>
       </ion-card>
     </ion-col>
     <ion-col size="12" size-md="6">
-          <ion-card color="white" [routerLink]="['/post-basic-knowladge']">
-            <ion-card-header>
-              <ion-img src="../../../assets/images/search.png"></ion-img>
-            </ion-card-header>
-            <ion-card-content>Knowledge Base</ion-card-content>
-          </ion-card>
-        </ion-col>
-        <ion-col size="12" size-md="6">
-          <ion-card color="white" [routerLink]="['/post-videos']">
-            <ion-card-header>
-              <ion-img
-                src="../../../assets/images/blood-drop.png"
-              ></ion-img>
-            </ion-card-header>
-            <ion-card-content>Videos</ion-card-content>
-          </ion-card>
-        </ion-col>
-      </ion-row>
+      <ion-card color="white" [routerLink]="['/post-videos']">
+        <ion-card-header>
+          <ion-img
+          src="../../../../assets/images/addVideo.png"
+          ></ion-img>
+        </ion-card-header>
+        <ion-card-content>Videos</ion-card-content>
+      </ion-card>
+    </ion-col>
+    <ion-col size="12" size-md="6">
+      <ion-card color="white" [routerLink]="['/add-medication']">
+        <ion-card-header>
+          <ion-img
+          src="../../../../assets/images/medicine.png"
+          ></ion-img>
+        </ion-card-header>
+        <ion-card-content>Add Medication</ion-card-content>
+      </ion-card>
+    </ion-col>
+    <ion-col size="12" size-md="6">
+      <ion-card color="white" [routerLink]="['/view-all-orders']">
+        <ion-card-header>
+          <ion-img src="../../../../assets/images/orders.png"></ion-img>
+        </ion-card-header>
+        <ion-card-content>Orders</ion-card-content>
+      </ion-card>
+    </ion-col>
+  </ion-row>
     </ion-grid>
     
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
