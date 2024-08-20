@@ -59,7 +59,9 @@ export class UserDetailsService {
       })
     );
   }
-  
+  getCurrentUserDetails(uid: string): Observable<any> {
+    return this.firebaseStore.collection('users').doc(uid).valueChanges();
+  }
   getAuth() {
     return this.userAuth;
   }
