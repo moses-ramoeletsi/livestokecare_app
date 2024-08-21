@@ -123,7 +123,7 @@ async deleteArticle(article: any) {
             await this.fireStore.deletearticle(article);
             this.showAlert('Success', 'article profile deleted successfully!');
           } catch (error) {
-            this.showAlert('Error', 'Error deleting article profile!');
+            this.showAlert('Error', 'Error deleting article!');
           }
         }
       }

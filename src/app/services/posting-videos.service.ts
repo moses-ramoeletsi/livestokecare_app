@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Observable } from 'rxjs';
 
@@ -7,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class PostingVideosService {
-  constructor(private afAuth:  AngularFireAuth, private fireStore: AngularFirestore) { }
+  constructor(private fireStore: AngularFirestore) { }
   
   async getCurrentUserById(userId: string) :Promise<any>{
     try{
@@ -22,10 +21,20 @@ export class PostingVideosService {
     }
   }
   
-  postVideo(event: any){
-    return this.fireStore.collection('videos').add(event);
+  postVideo(video: any){
+    const docRef = this.fireStore.collection('videos').doc();
+    const id = docRef.ref.id;
+    video.id = id;
+    return docRef.set(video)
   }
 
+  updateVideoPost(video: any) {
+    return this.fireStore.collection('videos').doc(video.id).update(video);
+  }
+
+  deleteVideoPost(video: any) {
+    return this.fireStore.collection('videos').doc(video.id).delete();
+  }
   fetchPostedVideo() : Observable<any[]>{
     return this.fireStore.collection('videos').valueChanges();
   }
