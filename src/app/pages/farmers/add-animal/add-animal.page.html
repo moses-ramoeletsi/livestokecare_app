@@ -10,19 +10,18 @@
     <ion-card-header>
       <ion-card-title>Species: {{ animal.animal_species }}</ion-card-title>
     </ion-card-header>
-
     <ion-card-content>
       <p><strong>Age:</strong> {{ animal.animal_age }} years</p>
       <p><strong>Last Vaccine:</strong> {{ animal.last_vaccine }}</p>
       <p><strong>Past Illness:</strong> {{ animal.past_illness }}</p>
       <p><strong>Current Medications:</strong> {{ animal.current_medication }}</p>
     </ion-card-content>
-
     <ion-item lines="none">
-      <ion-button fill="outline" slot="start" color="tertiary">Edit</ion-button>
-      <ion-button fill="outline" slot="end" color="danger">Delete</ion-button>
+      <ion-button fill="outline" slot="start" color="tertiary" (click)="editAnimal(animal)">Edit</ion-button>
+      <ion-button fill="outline" slot="end" color="danger" (click)="deleteAnimal(animal)">Delete</ion-button>
     </ion-item>
   </ion-card>
+  
 
   <ion-button expand="block" color="primary" (click)="toggleView()">
     Add Animal Details

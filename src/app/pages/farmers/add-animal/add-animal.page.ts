@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { AlertController } from '@ionic/angular';
 import { filter, map, Observable, switchMap } from 'rxjs';
 import { AnimalProfileService } from 'src/app/services/animal-profile.service';
@@ -17,14 +16,16 @@ export class AddAnimalPage implements OnInit {
 
   isDetailsView: boolean = true; 
   animalProfile = {
-    farmerUid:'',
-    farmerName:'',
+    id: '', 
+    farmerUid: '',
+    farmerName: '',
     animal_species: '',
-    animal_age:  '',
+    animal_age: '',
     last_vaccine: '',
-    past_illness:'',
-    current_medication:'' 
-  }
+    past_illness: '',
+    current_medication: ''
+  };
+  
   userName: string ='';
   user: Observable<UserDetails | null>;
   animals: any[] = [];
@@ -71,6 +72,7 @@ export class AddAnimalPage implements OnInit {
     this.isDetailsView = !this.isDetailsView; 
   }
 
+
   async submitAnimalProfile() {
     try {
       const user = await this.userAuth.currentUser;
@@ -78,14 +80,23 @@ export class AddAnimalPage implements OnInit {
         this.animalProfile.farmerUid = user.uid;
         this.animalProfile.farmerName = this.userName;
       }
-      await this.animalProfileServices.addAnimalProfile(this.animalProfile);
-      this.showAlert('Success', 'Animal profile submitted successfully!');
-      this.loadAnimalProfiles(user!.uid); // Reload animal profiles after submission
-      this.toggleView(); // Toggle back to the animal profiles view
+  
+      if (this.animalProfile.id) {
+        await this.animalProfileServices.updateAnimalProfile(this.animalProfile);
+        this.showAlert('Success', 'Animal profile updated successfully!');
+      } else {
+        const docRef = await this.animalProfileServices.addAnimalProfile(this.animalProfile);
+        this.showAlert('Success', 'Animal profile submitted successfully!');
+      }
+  
+      this.loadAnimalProfiles(user!.uid);
+      this.toggleView();
     } catch (error) {
       this.showAlert('Error', 'Error submitting animal profile!');
     }
-  }  
+  }
+  
+  
   showAlert(title: string, message: string) {
     this.alertController
       .create({
@@ -95,6 +106,49 @@ export class AddAnimalPage implements OnInit {
       })
       .then((alert) => alert.present());
   }
+  async editAnimal(animal: any) {
+    this.animalProfile = {
+      id: animal.id, 
+      farmerUid: animal.farmerUid,
+      farmerName: animal.farmerName,
+      animal_species: animal.animal_species,
+      animal_age: animal.animal_age,
+      last_vaccine: animal.last_vaccine,
+      past_illness: animal.past_illness,
+      current_medication: animal.current_medication
+    };
+  
+    this.isDetailsView = false;
+  }
+  
+  
+  async deleteAnimal(animal: any) {
+    const alert = await this.alertController.create({
+      header: 'Confirm Delete',
+      message: `Are you sure you want to delete the profile for ${animal.animal_species}?`,
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel'
+        },
+        {
+          text: 'Delete',
+          handler: async () => {
+            try {
+              await this.animalProfileServices.deleteAnimalProfile(animal);
+              this.showAlert('Success', 'Animal profile deleted successfully!');
+              this.loadAnimalProfiles(this.animalProfile.farmerUid);
+            } catch (error) {
+              this.showAlert('Error', 'Error deleting animal profile!');
+            }
+          }
+        }
+      ]
+    });
+  
+    await alert.present();
+  }
+  
 
 
 }
