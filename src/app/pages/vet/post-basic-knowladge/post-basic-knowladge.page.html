@@ -26,12 +26,12 @@
           <ion-toolbar>
             <ion-title class="ion-text-center">Post Knowledge</ion-title>
             <ion-buttons slot="end">
-              <ion-button (click)="modal.dismiss()">Cancel</ion-button>
+              <ion-button (click)="resetArticle(modal)">Cancel</ion-button>
             </ion-buttons>
           </ion-toolbar>
         </ion-header>
         <ion-content class="ion-padding">
-          <form class="requestBlood-form" (ngSubmit)="addArticle()">
+          <form class="requestBlood-form" (ngSubmit)="addArticle(modal)">
             <ion-item>
               <ion-input
               [(ngModel)]="article.article_title"
@@ -87,8 +87,8 @@
         <p><a (click)="openLink(article.articleUrl)">Read More</a></p>
       </ion-card-content>
       <ion-item lines="none">
-        <ion-button fill="outline" slot="start" color="tertiary">Edit</ion-button>
-        <ion-button fill="outline" slot="end" color="danger">Delete</ion-button>
+        <ion-button fill="outline" slot="start" color="tertiary" (click)="editArticle(article, modal)">Edit</ion-button>
+        <ion-button fill="outline" slot="end" color="danger" (click)="deleteArticle(article)">Delete</ion-button>
       </ion-item>
     </ion-card>
     </div>

@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Observable } from 'rxjs';
 
@@ -8,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class BasicKnowladgeService {
 
-  constructor(private afAuth:  AngularFireAuth, private fireStore: AngularFirestore) { }
+  constructor(private fireStore: AngularFirestore) { }
   
   async getCurrentUserById(userId: string) :Promise<any>{
     try{
@@ -23,11 +22,22 @@ export class BasicKnowladgeService {
     }
   }
   
-  postArticle(event: any){
-    return this.fireStore.collection('articles').add(event);
+  postArticle(article: any){
+    const docRef = this.fireStore.collection('articles').doc();
+    const id = docRef.ref.id;
+    article.id = id;
+    return docRef.set(article)
+
   }
 
   fetchPostedArticle() : Observable<any[]>{
     return this.fireStore.collection('articles').valueChanges();
+  }
+  updatePost(article: any) {
+    return this.fireStore.collection('articles').doc(article.id).update(article);
+  }
+
+  deletearticle(article: any) {
+    return this.fireStore.collection('articles').doc(article.id).delete();
   }
 }
