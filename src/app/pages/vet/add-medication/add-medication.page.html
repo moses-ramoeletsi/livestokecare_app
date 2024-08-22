@@ -26,12 +26,12 @@
           <ion-toolbar>
             <ion-title class="ion-text-center">Post Medication</ion-title>
             <ion-buttons slot="end">
-              <ion-button (click)="modal.dismiss()">Cancel</ion-button>
+              <ion-button (click)="resetForm(modal)">Cancel</ion-button>
             </ion-buttons>
           </ion-toolbar>
         </ion-header>
         <ion-content class="ion-padding">
-          <form class="requestBlood-form" (ngSubmit)="addMedication()">
+          <form class="requestBlood-form" (ngSubmit)="addMedication(modal)">
             <ion-item>
               <ion-input
               [(ngModel)]="medicine.medicine_name"
@@ -115,8 +115,8 @@
 
   
       <ion-item lines="none">
-        <ion-button fill="outline" slot="start" color="tertiary">Edit</ion-button>
-        <ion-button fill="outline" slot="end" color="danger">Delete</ion-button>
+        <ion-button fill="outline" slot="start" color="tertiary" (click)="editMedicine(medicine, modal)">Edit</ion-button>
+        <ion-button fill="outline" slot="end" color="danger" (click)="deleteMedicine(medicine)">Delete</ion-button>
       </ion-item>
     </ion-card>
     </div>

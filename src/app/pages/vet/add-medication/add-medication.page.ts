@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, model, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { AlertController } from '@ionic/angular';
+import { AlertController, IonModal } from '@ionic/angular';
 import { MedicationService } from 'src/app/services/medication.service';
 
 @Component({
@@ -16,7 +16,7 @@ export class AddMedicationPage implements OnInit {
     animal_type:'',
     description: '',
     imageUrl: '',
-    uid:''
+    id:''
   };
   userId: string | null = null;
   medication: any[] = [];
@@ -55,32 +55,80 @@ export class AddMedicationPage implements OnInit {
   }
 
 
-async addMedication() {
+async addMedication(modal: IonModal) {
   try {
     if (this.imageFile) {
       const imageUrl = await this.fireStore.uploadImage(this.imageFile);
       this.medicine.imageUrl = imageUrl;
     }
 
-    await this.fireStore.postMedication(this.medicine);
-    this.showAlert('Success', 'Medication posted successfully!');
-    this.resetForm();
+    if (this.medicine.id) {
+      await this.fireStore.updateMedicine(this.medicine);
+      this.showAlert('Success', 'Medication updated successfully!');
+    } else {
+      await this.fireStore.postMedication(this.medicine);
+      this.showAlert('Success', 'Medication posted successfully!');
+    }
+    this.resetForm(modal);
+    await modal.dismiss();
   } catch (error) {
     this.showAlert('Error', 'Error posting medication!');
   }
 }
-
-resetForm() {
+resetForm(modal: IonModal) {
   this.medicine = {
     medicine_name: '',
     price: '',
     animal_type: '',
     description: '',
-    uid: '',
+    id: '',
     imageUrl: ''
   };
   this.selectedImage = null;
   this.imageFile = null;
+  modal.dismiss();
+}
+
+async editMedicine(medicine: any, modal: IonModal) {
+  this.resetForm(modal);
+  this.medicine = {
+    id: medicine.id, 
+    medicine_name: medicine.medicine_name,
+    price: medicine.price,
+    description: medicine.description,
+    animal_type:medicine.animal_type,
+    imageUrl: medicine.imageUrl,
+  };
+
+  await modal.present();
+}
+
+
+
+async deleteMedicine(medicine: any) {
+  const alert = await this.alertController.create({
+    header: 'Confirm Delete',
+    message: `Are you sure you want to delete the medicine for ${medicine.medicine_title}?`,
+    buttons: [
+      {
+        text: 'Cancel',
+        role: 'cancel'
+      },
+      {
+        text: 'Delete',
+        handler: async () => {
+          try {
+            await this.fireStore.deleteMedicine(medicine);
+            this.showAlert('Success', 'medicine profile deleted successfully!');
+          } catch (error) {
+            this.showAlert('Error', 'Error deleting medicine!');
+          }
+        }
+      }
+    ]
+  });
+
+  await alert.present();
 }
 
 getMedication() {

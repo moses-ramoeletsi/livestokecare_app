@@ -13,8 +13,19 @@ export class MedicationService {
   constructor(private fireStore: AngularFirestore, private storage: AngularFireStorage) { }
   
   
-  postMedication(event: any){
-    return this.fireStore.collection('medication').add(event);
+  postMedication(medicine: any){
+    const docRef = this.fireStore.collection('medication').doc();
+    const id = docRef.ref.id;
+    medicine.id = id;
+    return docRef.set(medicine)
+
+  }
+  updateMedicine(medicine: any) {
+    return this.fireStore.collection('medication').doc(medicine.id).update(medicine);
+  }
+
+  deleteMedicine(medicine: any) {
+    return this.fireStore.collection('medication').doc(medicine.id).delete();
   }
 
   fetchPostedMedication() : Observable<any[]>{
