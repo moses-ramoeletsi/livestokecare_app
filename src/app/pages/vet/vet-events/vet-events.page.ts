@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Router } from '@angular/router';
-import { AlertController } from '@ionic/angular';
+import { AlertController, IonModal } from '@ionic/angular';
 import { EventsService } from 'src/app/services/events.service';
 
 @Component({
@@ -12,6 +12,7 @@ import { EventsService } from 'src/app/services/events.service';
 export class VetEventsPage implements OnInit {
 
   event= {
+    id:'',
     event_title: '',
     description: '',
     date_and_time: '',
@@ -50,7 +51,7 @@ export class VetEventsPage implements OnInit {
 }
 
 
-async addEvent() {
+async addEvent(modal: IonModal) {
   try {
     const authorData = await this.fireStore.getCurrentUserById(this.userId || '');
     const authorName = authorData.name || 'Unknown'; 
@@ -59,14 +60,34 @@ async addEvent() {
     this.event.authorName = authorName;      
 
 
-    await this.fireStore.postEvent(this.event);
+    if (this.event.id) {
+      await this.fireStore.updateEvent(this.event);
+      this.showAlert('Success', 'Event updated successfully!');
+    } else {
+      await this.fireStore.postEvent(this.event);
+      this.showAlert('Success', 'Event posted successfully!');    
+    }
 
-    this.showAlert('Success', 'Event posted successfully!');
-  
+    this.resetEventForm(modal);
+
+    await modal.dismiss();
+
   } catch (error) {
-    this.showAlert('Error', 'Error posting event!');
-   
+    this.showAlert('Error', 'Error posting Event!');
   }
+}
+resetEventForm(modal: IonModal) {
+  this.event = {
+    id: '',
+    event_title: '',
+    description: '',
+    date_and_time: '',
+    location: '',
+    host: '',
+    authorId: '',
+    authorName: '',
+  };
+  modal.dismiss();
 }
 
 
@@ -88,42 +109,47 @@ getFormattedDateTime(dateTimeStr: string): { date: string; time: string } {
 
   return { date: formattedDate, time: formattedTime };
 }
-async editEvent(event: any) {
-  // Implement edit functionality
-  // You can open a modal or navigate to an edit page with event details
-  console.log('Editing event:', event);
-  // Example: this.router.navigate(['/edit-event', event.id]);
+async editEvent(event: any, modal: IonModal) {
+  this.resetEventForm(modal);
+  this.event = {
+    id: event.id,
+    event_title: event.event_title,
+    description: event.description,
+    date_and_time: event.data_and_time,
+    location: event.location,
+    host: event.host,
+    authorId: event.authorId,
+    authorName: event.authorName,
+  };
+  
+  await modal.present();
 }
-async deleteEvent(event: any) {
+async deletePostedEvent(event: any) {
   const alert = await this.alertController.create({
     header: 'Confirm Delete',
-    message: `Are you sure you want to delete the event "${event.event_title}"?`,
+    message: `Are you sure you want to delete the event for ${event.event_title}?`,
     buttons: [
       {
         text: 'Cancel',
-        role: 'cancel',
+        role: 'cancel'
       },
       {
         text: 'Delete',
-        role: 'destructive',
         handler: async () => {
           try {
-            await this.fireStore.deleteEvent(event.id); // Make sure 'event.id' is correct
+            await this.fireStore.deleteEvent(event);
             this.showAlert('Success', 'Event deleted successfully!');
-            this.getEvents(); // Refresh the list of events after deletion
           } catch (error) {
-            this.showAlert('Error', 'Error deleting event.');
-            console.error('Error deleting event:', error);
+            this.showAlert('Error', 'Error deleting event!');
           }
-        },
-      },
-    ],
+        }
+      }
+    ]
   });
 
   await alert.present();
 }
 
-// Helper method to show alerts
 showAlert(title: string, message: string) {
   this.alertController
     .create({

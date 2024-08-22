@@ -11,7 +11,10 @@ export class EventsService {
   constructor(private afAuth:  AngularFireAuth, private fireStore: AngularFirestore) { }
 
   postEvent(event: any){
-    return this.fireStore.collection('events').add(event);
+    const docRef = this.fireStore.collection('events').doc();
+    const id = docRef.ref.id;
+    event.id = id;
+    return docRef.set(event)
   }
 
   async getCurrentUserById(userId: string) :Promise<any>{
@@ -30,12 +33,12 @@ export class EventsService {
   fetchPostedEvents() : Observable<any[]>{
     return this.fireStore.collection('events').valueChanges();
   }
-deleteEvent(eventId: string): Promise<void> {
-  return this.fireStore.collection('events').doc(eventId).delete();
+deleteEvent(event: any){
+  return this.fireStore.collection('events').doc(event.id).delete();
 }
 
-editEvent(eventId: string, updatedEventData: any): Promise<void> {
-  return this.fireStore.collection('events').doc(eventId).update(updatedEventData);
+updateEvent(event: any){
+  return this.fireStore.collection('events').doc(event.id).update(event);
 }
 
 }

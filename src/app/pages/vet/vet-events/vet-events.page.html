@@ -24,12 +24,12 @@
           <ion-toolbar>
             <ion-title class="ion-text-center">Post Event</ion-title>
             <ion-buttons slot="end">
-              <ion-button (click)="modal.dismiss()">Cancel</ion-button>
+              <ion-button (click)="resetEventForm(modal)">Cancel</ion-button>
             </ion-buttons>
           </ion-toolbar>
         </ion-header>
         <ion-content class="ion-padding">
-          <form class="requestBlood-form" (ngSubmit)="addEvent()">
+          <form class="requestBlood-form" (ngSubmit)="addEvent(modal)">
             <ion-item>
               <ion-input
               [(ngModel)]="event.event_title"
@@ -111,11 +111,11 @@
         <p>Time: {{ getFormattedDateTime(event.date_and_time).time }}</p>
         <p>Location: {{ event.location }}</p>
         <p>{{ event.description }}</p>
-    
-        <!-- Edit and Delete Buttons -->
-        <ion-button fill="outline" color="primary" (click)="editEvent(event)">Edit</ion-button>
-        <ion-button fill="outline" color="danger" (click)="deleteEvent(event)">Delete</ion-button>
       </ion-card-content>
+      <ion-item lines="none">
+        <ion-button fill="outline" slot="start" color="primary" (click)="editEvent(event, modal)">Edit</ion-button>
+        <ion-button fill="outline" slot="end" color="danger" (click)="deletePostedEvent(event)">Delete</ion-button>
+      </ion-item>
     </ion-card>
     
    
