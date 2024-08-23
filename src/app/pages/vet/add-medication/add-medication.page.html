@@ -1,5 +1,5 @@
 <ion-content [fullscreen]="true" class="ion-padding">
-  <div style="display: flex; align-items: center; margin: 16px;">
+  <div  class="pageName" style="display: flex; align-items: center; margin: 16px;">
     <ion-buttons slot="start">
       <ion-icon name="arrow-back" routerLink="/vet-dashboard" ></ion-icon>   
     </ion-buttons>
@@ -24,43 +24,49 @@
       <ng-template>
         <ion-header>
           <ion-toolbar>
-            <ion-title class="ion-text-center">Post Medication</ion-title>
+            <ion-title class="ion-text-center">ADD MEDICATION</ion-title>
             <ion-buttons slot="end">
               <ion-button (click)="resetForm(modal)">Cancel</ion-button>
             </ion-buttons>
           </ion-toolbar>
         </ion-header>
         <ion-content class="ion-padding">
-          <form class="requestBlood-form" (ngSubmit)="addMedication(modal)">
-            <ion-item>
+          <form  (ngSubmit)="addMedication(modal)">
+
               <ion-input
               [(ngModel)]="medicine.medicine_name"
               name="medicine_name"
               label="Medicine Name"
-              labelPlacement="stacked"
+              labelPlacement="floating"
               type="text"
-              placeholder="When to Donation"
+              fill="outline"
+              class="top-margin"
+              placeholder="Enter medicine name"
               style="color: black"
               ></ion-input>
-            </ion-item>
-            <ion-item>
+
+
               <ion-textarea
               [(ngModel)]="medicine.price"
               name="price"
               label="Price"
-              labelPlacement="stacked"
+              fill="outline"
+              class="top-margin"
+              labelPlacement="floating"
               style="color: black"
-              placeholder="Type..."
+              placeholder="Enter medicine price"
               ></ion-textarea>
-            </ion-item>
-            <ion-item>
+              
               <ion-select
-                [(ngModel)]="medicine.animal_type"
-                name="animal_type"
-                label="Animal Type"
-                labelPlacement="stacked"
-                multiple="true"
-                placeholder="Select all animals that apply"
+              [(ngModel)]="medicine.animal_type"
+              name="animal_type"
+              label="Animal Type"
+              fill="outline"
+              class="top-margin"
+              labelPlacement="floating"
+              multiple="true"
+              style="color: black"
+              placeholder="Select all animals that apply"
               >
                 <ion-select-option value="Chickens">Chickens</ion-select-option>
                 <ion-select-option value="Goats">Goats</ion-select-option>
@@ -71,27 +77,32 @@
                 <ion-select-option value="Donkeys">Donkeys</ion-select-option>
                 <ion-select-option value="Rabbits">Rabbits</ion-select-option>
               </ion-select>
-            </ion-item>
-            <ion-item>
+  
               <ion-textarea
               [(ngModel)]="medicine.description"
               name="description"
               label="Description"
-              labelPlacement="stacked"
+              fill="outline"
+              class="top-margin"
+              labelPlacement="floating"
               style="color: black"
-              placeholder="Type..."
+              
+              placeholder="Enter medicine description"
               ></ion-textarea>
-            </ion-item>
-
-            <ion-item>
-              <ion-label position="stacked">Medication Image</ion-label>
-              <input type="file" (change)="onFileSelected($event)" accept="image/*">
-            </ion-item>
-            <ion-item *ngIf="selectedImage">
+              
+              
+              <br />
+              <ion-label  label="Description"
+              fill="outline"
+              style="color: black"
+              class="top-margin" labelPlacement="floating">Medication Image</ion-label>
+              <input type="file"   style="color: black" (change)="onFileSelected($event)" accept="image/*">
+        
+            <div class="top-margin"  *ngIf="selectedImage">
               <img [src]="selectedImage" alt="Selected medication image" style="max-width: 100%; height: auto;">
-            </ion-item>
+            </div>
             <ion-button class="mycolor" type="submit" expand="block"
-              >Add Medication</ion-button
+              >Submit</ion-button
             >
           </form>
         </ion-content>
@@ -99,7 +110,7 @@
     </ion-modal>
     <div
     *ngIf="medication.length > 0; else noMedicine"
-      class="upcoming-events"
+      class="post-medicine"
       style="background-color: transparent"
     >
     <ion-card *ngFor="let medicine of medication" style="margin: 10px">
@@ -111,13 +122,16 @@
       <ion-card-content>
         <ion-label>M{{medicine.price}}</ion-label> <br />
         {{ medicine.description }}
+
+        <div style="display: flex; justify-content: space-between">
+          <ion-button fill="outline" slot="start" color="custom" (click)="editMedicine(medicine, modal)">Edit</ion-button>
+          <ion-button fill="outline" slot="end" color="danger" (click)="deleteMedicine(medicine)">Delete</ion-button>
+        </div>
+
       </ion-card-content>
 
   
-      <ion-item lines="none">
-        <ion-button fill="outline" slot="start" color="tertiary" (click)="editMedicine(medicine, modal)">Edit</ion-button>
-        <ion-button fill="outline" slot="end" color="danger" (click)="deleteMedicine(medicine)">Delete</ion-button>
-      </ion-item>
+      
     </ion-card>
     </div>
     <ng-template #noMedicine>

@@ -1,16 +1,17 @@
 
 <ion-content [fullscreen]="true">
-  <div style="display: flex; align-items: center; margin: 16px;">
+  <div class="pageName" style="display: flex; align-items: center; margin: 16px;">
     <ion-buttons slot="start">
      <ion-icon name="arrow-back" routerLink="/vet-dashboard" ></ion-icon>   
    </ion-buttons>
   <ion-title style="margin-left: 16px;">All Orders</ion-title>
 </div>
 
-<ion-content>
-  <div *ngIf="orders.length > 0; else noOrders">
-    <h2>Your Orders</h2>
-    <ion-card *ngFor="let order of orders" class="order-card">
+  <div *ngIf="orders.length > 0; else noOrders"
+    clas="view-orders"
+    style="background-color: transparent"
+  >
+      <ion-card *ngFor="let order of orders">
       <ion-card-header>
         <ion-card-title>Order ID: {{ order.id }}</ion-card-title>
         <ion-card-subtitle>
@@ -21,8 +22,8 @@
         <p>Client's Name:{{ order.clientName }}</p>
         <p>Client's Address: {{ order.clientAddress }}</p>
         <p>Total:M {{ order.total }}</p>
-        <ion-list>
-          <ion-item *ngFor="let item of order.items">
+        <ion-list style="background-color: transparent">
+          <ion-item *ngFor="let item of order.items" style="background-color: transparent">
             <ion-label>
               <h3>{{ item.medicineName }}</h3>
               <p>Quantity: {{ item.quantity }} - Price: {{ item.price | currency }}</p>
@@ -35,6 +36,4 @@
   <ng-template #noOrders>
     <p>No orders found.</p>
   </ng-template>
-</ion-content>
-
 </ion-content>

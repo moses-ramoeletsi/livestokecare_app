@@ -1,99 +1,111 @@
 <ion-content [fullscreen]="true" class="ion-padding">
-  <div style="display: flex; align-items: center; margin: 16px;">
+  <div
+    class="pageName"
+    style="display: flex; align-items: center; margin: 16px"
+  >
     <ion-buttons slot="start">
-      <ion-icon name="arrow-back" routerLink="/vet-dashboard" ></ion-icon>   
+      <ion-icon name="arrow-back" routerLink="/vet-dashboard"></ion-icon>
     </ion-buttons>
-    <ion-title style="margin-left: 16px;">Vedio Guide</ion-title>
+    <ion-title style="margin-left: 16px">Vedio Guide</ion-title>
   </div>
-    <ion-fab
-      slot="fixed"
-      vertical="bottom"
-      horizontal="end"
-      class="ion-center-sm-down"
-    >
-      <ion-fab-button id="open-video-modal">
-        <ion-icon name="add"></ion-icon>
-      </ion-fab-button>
-    </ion-fab>
+  <ion-fab
+    slot="fixed"
+    vertical="bottom"
+    horizontal="end"
+    class="ion-center-sm-down"
+  >
+    <ion-fab-button id="open-video-modal">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 
-    <ion-modal
-      [keepContentsMounted]="true"
-      trigger="open-video-modal"
-      #modal
-    >
-      <ng-template>
-        <ion-header>
-          <ion-toolbar>
-            <ion-title class="ion-text-center">Post Video Guide</ion-title>
-            <ion-buttons slot="end">
-              <ion-button (click)="restForm(modal)">Cancel</ion-button>
-            </ion-buttons>
-          </ion-toolbar>
-        </ion-header>
-        <ion-content class="ion-padding">
-          <form class="requestBlood-form" (ngSubmit)="addVideo(modal)">
-            <ion-item>
-              <ion-input
-              [(ngModel)]="video.video_title"
-              name="video_title"
-              label="Title"
-              labelPlacement="stacked"
-              type="text"
-              placeholder="When to Donation"
-              style="color: black"
-              ></ion-input>
-            </ion-item>
-            <ion-item>
-              <ion-textarea
-              [(ngModel)]="video.description"
-              name="description"
-              label="Description"
-              labelPlacement="stacked"
-              style="color: black"
-              placeholder="Type..."
-              ></ion-textarea>
-            </ion-item>
-            
-            <ion-item>
-              <ion-input
-              [(ngModel)]="video.videoUrl"
-              name="videoUrl"
-              label="Link"
-                labelPlacement="stacked"
-                type="text"
-                placeholder="Link"
-                style="color: black"
-              ></ion-input>
-            </ion-item>
-            <ion-button class="mycolor" type="submit" expand="block"
-              >Post</ion-button
-            >
-          </form>
-        </ion-content>
-      </ng-template>
-    </ion-modal>
-    <div
+  <ion-modal [keepContentsMounted]="true" trigger="open-video-modal" #modal>
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-title class="ion-text-center">POST VIDEO</ion-title>
+          <ion-buttons slot="end">
+            <ion-button (click)="restForm(modal)">Cancel</ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content class="ion-padding">
+        <form (ngSubmit)="addVideo(modal)">
+          <ion-input
+            [(ngModel)]="video.video_title"
+            name="video_title"
+            label="Title"
+            labelPlacement="floating"
+            type="text"
+            fill="outline"
+            class="top-margin"
+            placeholder="Enter video title"
+            style="color: black"
+          ></ion-input>
+
+          <ion-textarea
+            [(ngModel)]="video.description"
+            name="description"
+            label="Description"
+            fill="outline"
+            class="top-margin"
+            labelPlacement="floating"
+            style="color: black"
+            placeholder="Enter video description"
+          ></ion-textarea>
+
+          <ion-input
+            [(ngModel)]="video.videoUrl"
+            name="videoUrl"
+            label="Link"
+            labelPlacement="floating"
+            type="text"
+            fill="outline"
+            class="top-margin"
+            placeholder="Enter video Link"
+            style="color: black"
+          ></ion-input>
+
+          <ion-button class="mycolor" type="submit" expand="block"
+            >Submit</ion-button
+          >
+        </form>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+  <div
     *ngIf="videos.length > 0; else noVideos"
-      class="upcoming-events"
-      style="background-color: transparent"
-    >
+    class="post-video"
+    style="background-color: transparent"
+  >
     <ion-card *ngFor="let video of videos" style="margin: 10px">
       <ion-card-header class="ion-text-center">
         <ion-card-title>{{ video.video_title }}</ion-card-title>
-        <ion-card-subtitle>Posted by: {{video.authorName}}</ion-card-subtitle> 
+        <ion-card-subtitle>Posted by: {{video.authorName}}</ion-card-subtitle>
       </ion-card-header>
       <ion-card-content>
         <p>{{ video.description }}</p>
         <p><a (click)="openLink(video.videoUrl)">Visit</a></p>
+        <div style="display: flex; justify-content: space-between">
+          <ion-button
+            fill="outline"
+            slot="start"
+            color="custom"
+            (click)="editPost(video, modal)"
+            >Edit</ion-button
+          >
+          <ion-button
+            fill="outline"
+            slot="end"
+            color="danger"
+            (click)="deletePost(video)"
+            >Delete</ion-button
+          >
+        </div>
       </ion-card-content>
-      <ion-item lines="none">
-        <ion-button fill="outline" slot="start" color="tertiary" (click)="editPost(video, modal)">Edit</ion-button>
-        <ion-button fill="outline" slot="end" color="danger" (click)="deletePost(video)">Delete</ion-button>
-      </ion-item>
     </ion-card>
-    </div>
-    <ng-template #noVideos>
-      <p style="color: brown">No events available</p>
-    </ng-template>
-  </ion-content>
-
+  </div>
+  <ng-template #noVideos>
+    <p style="color: brown">No events available</p>
+  </ng-template>
+</ion-content>
