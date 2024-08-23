@@ -1,106 +1,113 @@
 <ion-content [fullscreen]="true" class="ion-padding">
-  <div style="display: flex; align-items: center; margin: 16px;">
-
-    <ion-title style="margin-left: 16px;">Recent Events</ion-title>
+  <div style="display: flex; align-items: center; margin: 16px">
+    <ion-title style="margin-left: 16px">Recent Events</ion-title>
   </div>
-    <ion-fab
-      slot="fixed"
-      vertical="bottom"
-      horizontal="end"
-      class="ion-center-sm-down"
-    >
-      <ion-fab-button id="open-events-modal">
-        <ion-icon name="add"></ion-icon>
-      </ion-fab-button>
-    </ion-fab>
+  <ion-fab
+    slot="fixed"
+    vertical="bottom"
+    horizontal="end"
+    class="ion-center-sm-down"
+  >
+    <ion-fab-button id="open-events-modal">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 
-    <ion-modal
-      [keepContentsMounted]="true"
-      trigger="open-events-modal"
-      #modal
-    >
-      <ng-template>
-        <ion-header>
-          <ion-toolbar>
-            <ion-title class="ion-text-center">Post Event</ion-title>
-            <ion-buttons slot="end">
-              <ion-button (click)="resetEventForm(modal)">Cancel</ion-button>
-            </ion-buttons>
-          </ion-toolbar>
-        </ion-header>
-        <ion-content class="ion-padding">
-          <form class="requestBlood-form" (ngSubmit)="addEvent(modal)">
-            <ion-item>
-              <ion-input
-              [(ngModel)]="event.event_title"
-              name="event_title"
-              label="Title"
-              labelPlacement="stacked"
-              type="text"
-              placeholder="When to Donation"
-              style="color: black"
-              ></ion-input>
-            </ion-item>
-            <ion-item>
-              <ion-input
-              
-              [(ngModel)]="event.host"
-              name="host"
-              label="Host"
-              labelPlacement="stacked"
-              type="text"
-              placeholder="Event host by.."
-              style="color: black"
-              ></ion-input>
-            </ion-item>
-            <ion-item>
-              <ion-textarea
-              [(ngModel)]="event.description"
-              name="description"
-              label="Description"
-              labelPlacement="stacked"
-              style="color: black"
-              placeholder="Type..."
-              ></ion-textarea>
-            </ion-item>
-            
-            <ion-item>
-              <ion-input
-              [(ngModel)]="event.location"
-              name="location"
-              label="Location"
-              labelPlacement="stacked"
-              type="text"
-              placeholder="Maseru, Thoteng"
-              style="color: black"
-              ></ion-input>
-            </ion-item>
-            
-            <ion-item>
-              <ion-datetime
-              
-              [(ngModel)]="event.date_and_time"
-              name="date_and_time"
-                displayFormat="MMM DD, YYYY HH:mm"
-                placeholder="Select Date & Time"
-                style="color: black"
-              ></ion-datetime>
-            </ion-item>
+  <ion-modal [keepContentsMounted]="true" trigger="open-events-modal" #modal>
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-title class="ion-text-center">POST EVENT</ion-title>
+          <ion-buttons slot="end">
+            <ion-button (click)="resetEventForm(modal)">Cancel</ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content class="ion-padding">
+        <form (ngSubmit)="addEvent(modal)">
+          <ion-input
+            [(ngModel)]="event.event_title"
+            name="event_title"
+            label="Title"
+            label-placement="floating"
+            fill="outline"
+            type="text"
+            placeholder="Enter event title"
+            class="top-margin"
+            style="color: black"
+          ></ion-input>
 
-            <ion-button class="mycolor" type="submit" expand="block"
-              >Post Event</ion-button
-            >
-          </form>
-        </ion-content>
-      </ng-template>
-    </ion-modal>
-    <div
+          <ion-input
+            [(ngModel)]="event.host"
+            name="host"
+            label="Host"
+            labelPlacement="floating"
+            type="text"
+            fill="outline"
+            placeholder="Enter host name"
+            class="top-margin"
+            style="color: black"
+          ></ion-input>
+
+          <ion-textarea
+            [(ngModel)]="event.description"
+            name="description"
+            label="Description"
+            fill="outline"
+            labelPlacement="floating"
+            placeholder="Enter event description"
+            class="top-margin"
+            style="color: black"
+          ></ion-textarea>
+
+          <ion-input
+            [(ngModel)]="event.location"
+            name="location"
+            label="Location"
+            labelPlacement="floating"
+            type="text"
+            fill="outline"
+            placeholder="Enter event location"
+            class="top-margin"
+            style="color: black"
+          ></ion-input>
+
+          <ion-datetime
+            [(ngModel)]="event.date_and_time"
+            name="date_and_time"
+            fill="outline"
+            displayFormat="MMM DD, YYYY HH:mm"
+            placeholder="Select Date & Time"
+            class="top-margin"
+            style="color: rgb(204, 204, 204)"
+          ></ion-datetime>
+
+          <br />
+          <ion-button class="mycolor" type="submit" expand="block"
+            >SUBMIT</ion-button
+          >
+        </form>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+  <div
     *ngIf="events.length > 0; else noEvents"
-      class="upcoming-events"
-      style="background-color: transparent"
+    class="upcoming-events"
+    style="background-color: transparent"
+  >
+    <ion-card
+      *ngFor="let event of events"
+      class="white-card"
+      style="margin: 10px; position: relative"
     >
-  
-    <ion-card *ngFor="let event of events" style="margin: 10px">
+      <ion-button
+        fill="clear"
+        color="danger"
+        (click)="deletePostedEvent(event)"
+        style="position: absolute; top: 5px; right: -5px; z-index: 10"
+      >
+        <ion-img src="../../../../assets/images/delete.png" />
+      </ion-button>
       <ion-card-header class="ion-text-center">
         <ion-card-title>{{ event.event_title }}</ion-card-title>
         <ion-card-subtitle>Host: {{event.host}}</ion-card-subtitle>
@@ -111,17 +118,19 @@
         <p>Time: {{ getFormattedDateTime(event.date_and_time).time }}</p>
         <p>Location: {{ event.location }}</p>
         <p>{{ event.description }}</p>
-      </ion-card-content>
-      <ion-item lines="none">
-        <ion-button fill="outline" slot="start" color="primary" (click)="editEvent(event, modal)">Edit</ion-button>
-        <ion-button fill="outline" slot="end" color="danger" (click)="deletePostedEvent(event)">Delete</ion-button>
-      </ion-item>
-    </ion-card>
-    
-   
-    </div>
-    <ng-template #noEvents>
-      <p style="color: brown">No events available</p>
-    </ng-template>
-  </ion-content>
 
+        <ion-button
+          fill="outline"
+          color="primary"
+          (click)="editEvent(event, modal)"
+          style="left: 10px"
+        >
+          Edit
+        </ion-button>
+      </ion-card-content>
+    </ion-card>
+  </div>
+  <ng-template #noEvents>
+    <p style="color: brown">No events available</p>
+  </ng-template>
+</ion-content>
