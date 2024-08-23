@@ -1,9 +1,9 @@
 <ion-content [fullscreen]="true" class="ion-padding">
-  <div style="display: flex; align-items: center; margin: 16px;">
+  <div class="pageName" style="display: flex; align-items: center; margin: 16px;">
     <ion-buttons slot="start">
-      <ion-icon name="arrow-back" routerLink="/vet-dashboard" ></ion-icon>   
+      <ion-icon   name="arrow-back" routerLink="/vet-dashboard" ></ion-icon>   
     </ion-buttons>
-    <ion-title style="margin-left: 16px;">Basic Knowledge</ion-title>
+    <ion-title  style="margin-left: 16px;">Basic Knowledge</ion-title>
   </div>
     <ion-fab
       slot="fixed"
@@ -24,49 +24,55 @@
       <ng-template>
         <ion-header>
           <ion-toolbar>
-            <ion-title class="ion-text-center">Post Knowledge</ion-title>
+            <ion-title class="ion-text-center">POST KNOWLEDGE</ion-title>
             <ion-buttons slot="end">
               <ion-button (click)="resetArticle(modal)">Cancel</ion-button>
             </ion-buttons>
           </ion-toolbar>
         </ion-header>
         <ion-content class="ion-padding">
-          <form class="requestBlood-form" (ngSubmit)="addArticle(modal)">
-            <ion-item>
+          <form (ngSubmit)="addArticle(modal)">
+           
               <ion-input
               [(ngModel)]="article.article_title"
               name="article_title"
               label="Title"
-              labelPlacement="stacked"
+              labelPlacement="floating"
+              fill="outline"
               type="text"
+                class="top-margin"
               placeholder="When to Donation"
               style="color: black"
               ></ion-input>
-            </ion-item>
-            <ion-item>
+            
+           
               <ion-textarea
               [(ngModel)]="article.description"
               name="description"
               label="Description"
-              labelPlacement="stacked"
+              labelPlacement="floating"
+              fill="outline"
+              class="top-margin"
               style="color: black"
               placeholder="Type..."
               ></ion-textarea>
-            </ion-item>
             
-            <ion-item>
+            
+           
               <ion-input
               [(ngModel)]="article.articleUrl"
               name="articleUrl"
               label="Link"
-                labelPlacement="stacked"
+                labelPlacement="floating"
+                fill="outline"
                 type="text"
+                  class="top-margin"
                 placeholder="Link"
                 style="color: black"
               ></ion-input>
-            </ion-item>
+            
             <ion-button class="mycolor" type="submit" expand="block"
-              >Post Knowledge</ion-button
+              >SUBMIT</ion-button
             >
           </form>
         </ion-content>
@@ -74,7 +80,7 @@
     </ion-modal>
     <div
     *ngIf="articles.length > 0; else noArticles"
-      class="upcoming-events"
+      class="post-knowledge"
       style="background-color: transparent"
     >
     <ion-card *ngFor="let article of articles" style="margin: 10px">
@@ -85,11 +91,12 @@
       <ion-card-content>
         <p>{{ article.description }}</p>
         <p><a (click)="openLink(article.articleUrl)">Read More</a></p>
+        <div style="display: flex; justify-content: space-between;">
+          <ion-button fill="outline" slot="start" color="custom" (click)="editArticle(article, modal)">Edit</ion-button>
+                    <ion-button fill="outline" slot="end" color="danger" (click)="deleteArticle(article)">Delete</ion-button>
+        </div>
       </ion-card-content>
-      <ion-item lines="none">
-        <ion-button fill="outline" slot="start" color="tertiary" (click)="editArticle(article, modal)">Edit</ion-button>
-        <ion-button fill="outline" slot="end" color="danger" (click)="deleteArticle(article)">Delete</ion-button>
-      </ion-item>
+    
     </ion-card>
     </div>
     <ng-template #noArticles>
