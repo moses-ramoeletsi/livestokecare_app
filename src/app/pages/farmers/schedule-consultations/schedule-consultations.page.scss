@@ -1,6 +1,143 @@
 ion-content {
   --ion-background-color: #ffff;
 }
+ion-item {
+  --background:white;
+  color:black;
+}
 .pageName {
   color: #2c5434;
+}
+.custom-color{
+    --background: var(--ion-color-btn);
+
+}
+
+.pending-requests {
+  margin-top: 10px;
+}
+
+.pending-requests ion-card {
+  border-radius: 15px;
+  background-color: #fff;
+  border: 1px solid #2c5434;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+
+.pending-requests ion-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.pending-requests ion-card-header {
+  padding-bottom: 0;
+}
+
+.pending-requests ion-card-content {
+  padding-top: 0;
+}
+
+.pending-requests ion-card-title {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: black;
+}
+
+.pending-requests ion-card-subtitle {
+  font-size: 1rem;
+  color: #666;
+}
+
+.pending-requests ion-card:hover {
+  transform: translateY(-5px);
+  transition: transform 0.3s ease;
+}
+
+.approved-requests {
+  margin-top: 10px;
+}
+
+.approved-requests ion-card {
+  border-radius: 15px;
+  background-color: #fff;
+  border: 1px solid #2c5434;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+
+.approved-requests ion-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.approved-requests ion-card-header {
+  padding-bottom: 0;
+}
+
+.approved-requests ion-card-content {
+  padding-top: 0;
+}
+
+.approved-requests ion-card-title {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: black;
+}
+
+.approved-requests ion-card-subtitle {
+  font-size: 1rem;
+  color: #666;
+}
+
+.approved-requests ion-card:hover {
+  transform: translateY(-5px);
+  transition: transform 0.3s ease;
+}
+
+.completed-requests {
+  margin-top: 10px;
+}
+
+.completed-requests ion-card {
+  border-radius: 15px;
+  background-color: #fff;
+  border: 1px solid #2c5434;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+
+.completed-requests ion-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.completed-requests ion-card-header {
+  padding-bottom: 0;
+}
+
+.completed-requests ion-card-content {
+  padding-top: 0;
+}
+
+.completed-requests ion-card-title {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: black;
+}
+
+.completed-requests ion-card-subtitle {
+  font-size: 1rem;
+  color: #666;
+}
+
+.completed-requests ion-card:hover {
+  transform: translateY(-5px);
+  transition: transform 0.3s ease;
 }
