@@ -12,4 +12,6 @@ export class FarmersProfilePage implements OnInit {
   ngOnInit() {
   }
 
+  
+  
 }

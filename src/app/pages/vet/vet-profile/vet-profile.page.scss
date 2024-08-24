@@ -7,27 +7,17 @@ ion-content {
     width: 20px;
   }
   
-  ion-list{
-      --background: white;
+  ion-list {
+    background-color: white;
   }
-  .custom-list {
-    padding: 0;
+  ion-item {
+    --background: white;
+    color: black;
   }
-  
-  .custom-item {
-    display: flex;
-    align-items: center;
-    padding: 20px;
-    margin: 0 15px;
-    background: transparent;
-    cursor: pointer;
-    border-radius:14px;
-    border: 1px solid #2c5434;
+  ion-item ion-icon {
+    color: black;
   }
-  
-  .custom-item ion-icon {
-    margin-right: 10px;
-  }
+ 
   
 .vet-profile ion-card {
     border-radius: 15px;

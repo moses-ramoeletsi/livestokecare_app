@@ -1,5 +1,5 @@
 <ion-content>
-  <div style="display: flex; align-items: center; margin: 16px;">
+  <div class="pageName" style="display: flex; align-items: center; margin: 16px;">
     <ion-buttons slot="start">
      <ion-icon name="arrow-back" routerLink="/farmers-dashboard" ></ion-icon>   
    </ion-buttons>
@@ -7,7 +7,7 @@
 </div>
 <div
 *ngIf="videos.length > 0; else noVideos"
-  class="upcoming-events"
+  class="post-video"
   style="background-color: transparent"
 >
 <ion-card *ngFor="let video of videos" style="margin: 10px">

@@ -1,6 +1,6 @@
 
 <ion-content >
-  <div style="display: flex; align-items: center; margin: 16px;">
+  <div class="pageName" style="display: flex; align-items: center; margin: 16px;">
     <ion-buttons slot="start">
      <ion-icon name="arrow-back" routerLink="/farmers-dashboard" ></ion-icon>   
    </ion-buttons>
@@ -8,7 +8,7 @@
 </div>
 <div
 *ngIf="articles.length > 0; else noArticles"
-  class="upcoming-events"
+  class=".post-knowledge "
   style="background-color: transparent"
 >
 <ion-card *ngFor="let article of articles" style="margin: 10px">
