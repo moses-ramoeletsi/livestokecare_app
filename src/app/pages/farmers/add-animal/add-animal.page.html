@@ -1,4 +1,4 @@
-<ion-content *ngIf="isDetailsView">
+<ion-content [fullscreen]="true" class="ion-padding">
   
   <div class="pageName" style="display: flex; align-items: center; margin: 16px;">
     <ion-buttons slot="start">
@@ -6,84 +6,122 @@
     </ion-buttons>
     <ion-title style="margin-left: 16px;">Your Animals</ion-title>
   </div>
-  <ion-card *ngFor="let animal of animals">
-    <ion-card-header>
-      <ion-card-title>Species: {{ animal.animal_species }}</ion-card-title>
-    </ion-card-header>
-    <ion-card-content>
-      <p><strong>Age:</strong> {{ animal.animal_age }} years</p>
-      <p><strong>Last Vaccine:</strong> {{ animal.last_vaccine }}</p>
-      <p><strong>Past Illness:</strong> {{ animal.past_illness }}</p>
-      <p><strong>Current Medications:</strong> {{ animal.current_medication }}</p>
-    </ion-card-content>
-    <ion-item lines="none">
-      <ion-button fill="outline" slot="start" color="tertiary" (click)="editAnimal(animal)">Edit</ion-button>
-      <ion-button fill="outline" slot="end" color="danger" (click)="deleteAnimal(animal)">Delete</ion-button>
-    </ion-item>
-  </ion-card>
-  
+  <div  *ngIf="animals.length > 0; else noAnimals" class="animal-profile">
+    <ion-card  *ngFor="let animal of animals">
+      <ion-card-header>
+        <ion-card-title>Species: {{ animal.animal_species }}</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <p><strong>Age:</strong> {{ animal.animal_age }} years</p>
+        <p><strong>Last Vaccine:</strong> {{ animal.last_vaccine }}</p>
+        <p><strong>Past Illness:</strong> {{ animal.past_illness }}</p>
+        <p><strong>Current Medications:</strong> {{ animal.current_medication }}</p>
+        <div style="display: flex; justify-content: space-between">
+          <ion-button fill="outline" slot="start" color="tertiary" (click)="editAnimal(animal, modal)">Edit</ion-button>
+          <ion-button fill="outline" slot="end" color="danger" (click)="deleteAnimal(animal)">Delete</ion-button>
+        </div>
+      </ion-card-content>
+    </ion-card>
+  </div>
+  <ng-template #noAnimals>
+    <p style="color: brown">No profile available</p>
+  </ng-template>
 
-  <ion-button expand="block" color="primary" (click)="toggleView()">
-    Add Animal Details
-  </ion-button>
-
-</ion-content>
-<ion-content *ngIf="!isDetailsView">
-  <ion-list >
-    <div style="display: flex; align-items: center; margin: 16px;">
-      <ion-buttons slot="start">
-        <ion-icon name="arrow-back" (click)="toggleView()" ></ion-icon>
-      </ion-buttons>
-      <ion-title style="margin-left: 16px;">Add Animal Details</ion-title>
-    </div>
-    <ion-grid>
-      <ion-row>
-        <ion-col>
-          <ion-item>
-            <ion-label position="floating">Species</ion-label>
-            <ion-input [(ngModel)]="animalProfile.animal_species"  placeholder="e.g., cattle, sheep, goat"></ion-input>
-          </ion-item>
-        </ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col>
-          <ion-item>
-            <ion-label position="floating">Age</ion-label>
-            <ion-input [(ngModel)]="animalProfile.animal_age"  placeholder="Enter the age"></ion-input>
-          </ion-item>
-        </ion-col>
-  </ion-row>
-      <ion-row>
-        <ion-col>
-          <ion-item>
-            <ion-label position="floating">Last Vaccine</ion-label>
-            <ion-input [(ngModel)]="animalProfile.last_vaccine"  placeholder="Enter the last vaccine"></ion-input>
-          </ion-item>
-        </ion-col>
-        </ion-row>
-        <ion-row>
-        <ion-col>
-          <ion-item>
-            <ion-label position="floating">Past Illness and Treatment</ion-label>
-            <ion-input [(ngModel)]="animalProfile.past_illness" placeholder="Enter past illness and treatment"></ion-input>
-          </ion-item>
-        </ion-col>
-      </ion-row>
-
-      <ion-row>
-        <ion-col>
-          <ion-item>
-            <ion-label position="floating">Current Medications</ion-label>
-            <ion-input [(ngModel)]="animalProfile.current_medication" placeholder="Enter current medications"></ion-input>
-          </ion-item>
-        </ion-col>
-      </ion-row>
- </ion-grid>
+  <ion-fab
+    slot="fixed"
+    vertical="bottom"
+    horizontal="end"
+    class="ion-center-sm-down"
+  >
+    <ion-fab-button id="open-add-animal-modal">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 
 
-    <ion-button expand="block" shape="round" color="primary" (click)="submitAnimalProfile()" class="ion-margin-top">
-      Submit Animal Profile
-    </ion-button>
-  </ion-list>
+  <ion-modal [keepContentsMounted]="true" trigger="open-add-animal-modal" #modal>
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-title class="ion-text-center">ADD ANIMAL</ion-title>
+          <ion-buttons slot="end">
+            <ion-button (click)="resetForm(modal)">Cancel</ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content class="ion-padding">
+        <form (ngSubmit)="submitAnimalProfile(modal)">
+          <ion-select
+          [(ngModel)]="animalProfile.animal_species"
+          required
+          label="Animal Species"
+          name="animal_species"
+          fill="outline"
+          class="top-margin"
+          labelPlacement="floating"
+          style="color: black"
+          placeholder="Select all animals that apply"
+        >
+          <ion-select-option value="Chickens">Chickens</ion-select-option>
+          <ion-select-option value="Goats">Goats</ion-select-option>
+          <ion-select-option value="Sheep">Sheep</ion-select-option>
+          <ion-select-option value="Pigs">Pigs</ion-select-option>
+          <ion-select-option value="Cows">Cows</ion-select-option>
+          <ion-select-option value="Horses">Horses</ion-select-option>
+          <ion-select-option value="Donkeys">Donkeys</ion-select-option>
+          <ion-select-option value="Rabbits">Rabbits</ion-select-option>
+        </ion-select>
 
+          <ion-textarea
+          [(ngModel)]="animalProfile.animal_age" 
+            name="animal_age"
+            label="Animal Age"
+            fill="outline"
+            class="top-margin"
+            labelPlacement="floating"
+            style="color: black"
+            placeholder="Enter animal age"
+          ></ion-textarea>
+
+          <ion-input
+          [(ngModel)]="animalProfile.last_vaccine" 
+            name="last_vaccine"
+            label="Last Vaccine"
+            labelPlacement="floating"
+            type="text"
+            fill="outline"
+            class="top-margin"
+            placeholder="Enter last vaccine"
+            style="color: black"
+          ></ion-input>
+          <ion-input
+          [(ngModel)]="animalProfile.past_illness"
+            name="past_illness"
+            label="Past Illness"
+            labelPlacement="floating"
+            type="text"
+            fill="outline"
+            class="top-margin"
+            placeholder="Enter past Illness"
+            style="color: black"
+          ></ion-input>
+          <ion-input
+          [(ngModel)]="animalProfile.current_medication"
+            name="current_medication"
+            label="Curren Medication"
+            labelPlacement="floating"
+            type="text"
+            fill="outline"
+            class="top-margin"
+            placeholder="Enter current medication"
+            style="color: black"
+          ></ion-input>
+
+          <ion-button class="mycolor" type="submit" expand="block"
+            >Submit</ion-button
+          >
+        </form>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
 </ion-content>

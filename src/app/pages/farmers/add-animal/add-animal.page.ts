@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { AlertController } from '@ionic/angular';
+import { AlertController, IonModal } from '@ionic/angular';
 import { filter, map, Observable, switchMap } from 'rxjs';
 import { AnimalProfileService } from 'src/app/services/animal-profile.service';
 import { UserDetailsService } from 'src/app/services/user-details.service';
@@ -73,7 +73,7 @@ export class AddAnimalPage implements OnInit {
   }
 
 
-  async submitAnimalProfile() {
+  async submitAnimalProfile(modal: IonModal) {
     try {
       const user = await this.userAuth.currentUser;
       if (user) {
@@ -90,10 +90,24 @@ export class AddAnimalPage implements OnInit {
       }
   
       this.loadAnimalProfiles(user!.uid);
-      this.toggleView();
+      this.resetForm(modal);
+      
     } catch (error) {
       this.showAlert('Error', 'Error submitting animal profile!');
     }
+  }
+  resetForm(modal: IonModal) {
+    this.animalProfile = {
+      id: '', 
+      farmerUid: '',
+      farmerName: '',
+      animal_species: '',
+      animal_age: '',
+      last_vaccine: '',
+      past_illness: '',
+      current_medication: ''
+    };
+    modal.dismiss();
   }
   
   
@@ -106,7 +120,8 @@ export class AddAnimalPage implements OnInit {
       })
       .then((alert) => alert.present());
   }
-  async editAnimal(animal: any) {
+  async editAnimal(animal: any, modal: IonModal) {
+    this.resetForm(modal);
     this.animalProfile = {
       id: animal.id, 
       farmerUid: animal.farmerUid,
@@ -118,7 +133,7 @@ export class AddAnimalPage implements OnInit {
       current_medication: animal.current_medication
     };
   
-    this.isDetailsView = false;
+    await modal.present();
   }
   
   
