@@ -1,7 +1,96 @@
 ion-content {
-    --ion-background-color: #ffff;
-  }
-  .pageName {
-    color: #2c5434;
-  }
-  
+  --ion-background-color: #ffff;
+}
+ion-list {
+  background: white;
+}
+ion-item {
+  --background: white;
+}
+.pageName {
+  color: #2c5434;
+}
+.custom-color-button {
+  color: #2c5434;
+  border-color: #2c5434;
+}
+
+.custom-button {
+  --background: var(--ion-color-btn);
+}
+
+.medication {
+  margin-top: 10px;
+}
+
+.medication ion-card {
+  border-radius: 15px;
+  background-color: #fff;
+  border: 1px solid #2c5434;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.medication ion-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.medication ion-card-header {
+  padding-bottom: 0;
+}
+
+.medication ion-card-content {
+  padding-top: 0;
+}
+
+.medication ion-card-title {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: black;
+}
+
+.medication ion-card-subtitle {
+  font-size: 1rem;
+  color: #666;
+}
+
+.medication ion-card:hover {
+  transform: translateY(-5px);
+  transition: transform 0.3s ease;
+}
+.top-margin {
+  margin-top: 16px;
+}
+
+.add-to-cart ion-card {
+  border-radius: 15px;
+  background-color: #fff;
+  border: 1px solid #2c5434;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.add-to-cart ion-card-header {
+  padding-bottom: 0;
+}
+
+.add-to-cart ion-card-content {
+  padding-top: 0;
+}
+
+.add-to-cart ion-card-title {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: black;
+}
+
+.add-to-cart ion-card-subtitle {
+  font-size: 1rem;
+  color: #666;
+}
+.remove {
+  height: 18px;
+  width: 14px;
+}

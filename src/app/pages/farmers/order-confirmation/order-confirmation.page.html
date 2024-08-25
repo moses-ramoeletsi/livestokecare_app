@@ -1,19 +1,17 @@
 <ion-content class="ion-padding">
-  <div class="pageName" style="display: flex; align-items: center; margin: 16px;">
-    <ion-buttons slot="start">
-      <ion-back-button defaultHref="/medication"></ion-back-button>
-   </ion-buttons>
-  <ion-title style="margin-left: 16px;">Order Confirmation</ion-title>
-</div>
+<div class="order-confirmation">
   <ion-card>
+    <ion-img src="../../../../assets/images/check.png">
+    </ion-img>
     <ion-card-header>
-      <ion-card-title>Thank You for Your Order!</ion-card-title>
+      <ion-card-title>Thank You!!</ion-card-title>
     </ion-card-header>
     <ion-card-content>
       <p>Your order has been successfully placed.</p>
       <p>Order ID: {{ orderId }}</p>
       <p>Total Amount: M{{ total | number:'1.2-2' }}</p>
     </ion-card-content>
-  </ion-card>
-  <ion-button expand="block" routerLink="/farmers-dashboard">Return to Dashboard</ion-button>
+  </ion-card>  
+</div>
+<ion-button expand="block" class="custom-button" routerLink="/medication">Done</ion-button>
 </ion-content>

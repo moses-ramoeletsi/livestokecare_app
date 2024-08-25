@@ -17,7 +17,7 @@ export class MedicationPage implements OnInit {
     animal_type:'',
     description: '',
     imageUrl: '',
-    uid:''
+    id:''
   };
   userId: string | null = null;
   medication: any[] = [];
@@ -93,7 +93,6 @@ export class MedicationPage implements OnInit {
       this.calculateTotal();
     }
   }
-
   checkout() {
     if (!this.userId) {
       console.error('User not logged in');
@@ -107,16 +106,23 @@ export class MedicationPage implements OnInit {
         return;
       }
   
-      const order = {
-        userId: this.userId,
-        clientName: userDetails.name,     
-        clientAddress: userDetails.address, 
-        items: this.cart.map(item => ({
-          medicineId: item.uid,
+      const orderItems = this.cart.map(item => {
+        if (!item.id || !item.medicine_name || !item.price || !item.quantity) {
+          throw new Error(`Invalid item data: ${JSON.stringify(item)}`);
+        }
+        return {
+          medicineId: item.id, 
           medicineName: item.medicine_name,
           quantity: item.quantity,
           price: item.price
-        })),
+        };
+      });
+  
+      const order = {
+        userId: this.userId,
+        clientName: userDetails.name,
+        clientAddress: userDetails.address,
+        items: orderItems,
         total: this.total,
         timestamp: new Date()
       };
@@ -138,5 +144,51 @@ export class MedicationPage implements OnInit {
       });
     });
   }
+  
+
+  // checkout() {
+  //   if (!this.userId) {
+  //     console.error('User not logged in');
+  //     this.router.navigate(['/login']);
+  //     return;
+  //   }
+  
+  //   this.fireService.getCurrentUserDetails(this.userId).subscribe(userDetails => {
+  //     if (!userDetails) {
+  //       console.error('User details not found');
+  //       return;
+  //     }
+  
+  //     const order = {
+  //       userId: this.userId,
+  //       clientName: userDetails.name,     
+  //       clientAddress: userDetails.address, 
+  //       items: this.cart.map(item => ({
+  //         medicineId: item.uid,
+  //         medicineName: item.medicine_name,
+  //         quantity: item.quantity,
+  //         price: item.price
+  //       })),
+  //       total: this.total,
+  //       timestamp: new Date()
+  //     };
+  
+  //     this.fireStore.createOrder(order).then((docRef) => {
+  //       this.presentToast('Order successfully placed');  
+  //       const orderId = docRef.id;
+  //       this.router.navigate(['/order-confirmation'], {
+  //         state: {
+  //           orderId: orderId,
+  //           total: this.total
+  //         }
+  //       });
+  //       this.cart = [];
+  //       this.total = 0;
+  //     }).catch(error => {
+  //       this.presentToast('Error placing order: ' + error.message); 
+  //       console.error('Error placing order:', error);
+  //     });
+  //   });
+  // }
   
 }
