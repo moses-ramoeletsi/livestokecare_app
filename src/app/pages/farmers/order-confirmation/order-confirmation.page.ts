@@ -20,7 +20,6 @@ export class OrderConfirmationPage implements OnInit {
   }
 
   ngOnInit() {
-    // If the state is not available, you might want to redirect back to the medication page
     if (!this.orderId || !this.total) {
       this.router.navigate(['/medication']);
     }
