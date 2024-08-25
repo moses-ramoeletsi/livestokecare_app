@@ -8,7 +8,7 @@
 </div>
 
   <div *ngIf="orders.length > 0; else noOrders"
-    clas="view-orders"
+    class="view-orders"
     style="background-color: transparent"
   >
       <ion-card *ngFor="let order of orders">
@@ -22,11 +22,11 @@
         <p>Client's Name:{{ order.clientName }}</p>
         <p>Client's Address: {{ order.clientAddress }}</p>
         <p>Total:M {{ order.total }}</p>
-        <ion-list style="background-color: transparent">
-          <ion-item *ngFor="let item of order.items" style="background-color: transparent">
+        <ion-list >
+          <ion-item lines="none" *ngFor="let item of order.items">
             <ion-label>
               <h3>{{ item.medicineName }}</h3>
-              <p>Quantity: {{ item.quantity }} - Price: {{ item.price | currency }}</p>
+              <p>Quantity: {{ item.quantity }} - Price:M {{ item.price  }}</p>
             </ion-label>
           </ion-item>
         </ion-list>
@@ -34,6 +34,6 @@
     </ion-card>
   </div>
   <ng-template #noOrders>
-    <p>No orders found.</p>
+    <p style="color: brown">No orders found.</p>
   </ng-template>
 </ion-content>

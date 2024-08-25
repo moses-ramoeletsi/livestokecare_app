@@ -1,6 +1,15 @@
 ion-content {
     --ion-background-color: #ffff;
   }
+  ion-list{
+    background: white;
+  }
+  ion-item{
+    --background: white;
+  }
+  h3 {
+    color: black;
+  }
   
   .pageName {
     color: #2c5434;
