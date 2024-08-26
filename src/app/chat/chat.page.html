@@ -1,9 +1,9 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>Chat</ion-title>
-    <ion-buttons slot="end">
-      <!-- <ion-button (click)="authService.signOut(); router.navigateByUrl('/login');">Logout</ion-button> -->
+  <ion-toolbar class="chats-toolbar">
+    <ion-buttons slot="start">
+      <ion-icon name="arrow-back" (click)="onBackButtonClick()"></ion-icon>
     </ion-buttons>
+        <ion-title>Chats</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -32,17 +32,29 @@
 
 <ion-footer>
   <ion-toolbar>
-    <ion-item>
-      <ion-input [(ngModel)]="newMessage" placeholder="Type a message..." *ngIf="!selectedFile"></ion-input>
+    <div class="message-input-container">
+      <div class="textarea-wrapper" *ngIf="!selectedFile">
+        <ion-textarea 
+          [(ngModel)]="newMessage" 
+          placeholder="Type a message..." 
+          autoGrow="true"
+          rows="1"
+          maxRows="4"
+        ></ion-textarea>
+      </div>
       
       <div *ngIf="selectedFile" class="image-preview-container">
         <img [src]="selectedFilePreview" class="image-preview" />
-        <ion-button color="danger" (click)="clearSelectedFile()">Cancel</ion-button>
+        <ion-button fill="clear" color="danger" (click)="clearSelectedFile()">
+          <ion-icon name="close-circle"></ion-icon>
+        </ion-button>
       </div>
-
-      <ion-icon (click)="sendMessage()" name="send"></ion-icon>
-      <input type="file" (change)="onFileSelected($event)" accept="image/*" hidden #fileInput>
-      <ion-icon  (click)="fileInput.click()" name="image"></ion-icon>
-    </ion-item>
+    
+      <div class="action-buttons">
+        <ion-icon (click)="sendMessage()" name="send"></ion-icon>
+        <input type="file" (change)="onFileSelected($event)" accept="image/*" hidden #fileInput>
+        <ion-icon (click)="fileInput.click()" name="image"></ion-icon>
+      </div>
+    </div>
   </ion-toolbar>
 </ion-footer>
