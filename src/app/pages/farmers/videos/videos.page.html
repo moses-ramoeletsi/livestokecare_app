@@ -1,10 +1,12 @@
-<ion-content>
-  <div class="pageName" style="display: flex; align-items: center; margin: 16px;">
+<ion-header>
+  <ion-toolbar class="videoPage">
     <ion-buttons slot="start">
-     <ion-icon name="arrow-back" routerLink="/farmers-dashboard" ></ion-icon>   
-   </ion-buttons>
-  <ion-title style="margin-left: 16px;">Videos</ion-title>
-</div>
+      <ion-icon class="back" name="arrow-back"  routerLink="/farmers-dashboard"></ion-icon>
+    </ion-buttons>
+    <ion-title>Videos</ion-title>
+  </ion-toolbar>
+  </ion-header>
+<ion-content>
 <div
 *ngIf="videos.length > 0; else noVideos"
   class="post-video"

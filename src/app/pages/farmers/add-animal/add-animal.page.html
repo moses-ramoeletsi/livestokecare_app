@@ -1,11 +1,12 @@
-<ion-content [fullscreen]="true" class="ion-padding">
-  
-  <div class="pageName" style="display: flex; align-items: center; margin: 16px;">
+<ion-header>
+  <ion-toolbar class="addAnimalPage">
     <ion-buttons slot="start">
-      <ion-icon name="arrow-back" routerLink="/farmers-profile"></ion-icon>
+      <ion-icon class="back" name="arrow-back"  routerLink="/farmers-profile"></ion-icon>
     </ion-buttons>
-    <ion-title style="margin-left: 16px;">Your Animals</ion-title>
-  </div>
+    <ion-title >Your Animals</ion-title>
+  </ion-toolbar>
+  </ion-header>
+<ion-content [fullscreen]="true" class="ion-padding">
   <div  *ngIf="animals.length > 0; else noAnimals" class="animal-profile">
     <ion-card  *ngFor="let animal of animals">
       <ion-card-header>
