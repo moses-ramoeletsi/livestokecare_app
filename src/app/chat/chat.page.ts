@@ -1,7 +1,7 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { UserDetailsService } from '../services/user-details.service';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import firebase from 'firebase/compat/app';
 import { finalize } from 'rxjs/operators';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
@@ -19,6 +19,7 @@ export class ChatPage implements OnInit {
   newMessage = '';
   currentUserId?: string;
   chatPartnerId?: string;
+  currentUserType?: string;
   chatId?: string;
   selectedFile?: File;
   selectedFilePreview?: string;
@@ -28,7 +29,8 @@ export class ChatPage implements OnInit {
     private authService: UserDetailsService,
     private route: ActivatedRoute,
     private storage: AngularFireStorage,
-    private changeDetectorRef: ChangeDetectorRef  
+    private changeDetectorRef: ChangeDetectorRef,
+    private router: Router 
   ) {}
 
  
@@ -38,7 +40,13 @@ export class ChatPage implements OnInit {
       this.currentUserId = user.uid;
       this.chatPartnerId = this.route.snapshot.paramMap.get('userId')!;
       this.chatId = this.createChatId(this.currentUserId, this.chatPartnerId);
+      this.currentUserId = user.uid;
       
+      this.afs.collection('users').doc(user.uid).get().subscribe(doc => {
+        const data = doc.data() as { userType: string };
+        this.currentUserType = data.userType;
+      });
+
       this.afs.collection('users').doc(this.chatPartnerId).valueChanges()
         .subscribe((user: any) => {
           this.chatPartnerName = user.name;
@@ -126,4 +134,11 @@ export class ChatPage implements OnInit {
     ).subscribe();
   }
 
+  onBackButtonClick() {
+    if (this.currentUserType === 'veterinarian') {
+      this.router.navigate(['/vet-dashboard']);
+    } else if (this.currentUserType === 'farmer') {
+      this.router.navigate(['/farmers-dashboard']);
+    }
+  }
 }
