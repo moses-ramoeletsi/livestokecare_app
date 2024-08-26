@@ -1,12 +1,12 @@
-
-<ion-content [fullscreen]="true">
-  <div class="pageName" style="display: flex; align-items: center; margin: 16px;">
+<ion-header>
+  <ion-toolbar class="allOrders">
     <ion-buttons slot="start">
-     <ion-icon name="arrow-back" routerLink="/vet-dashboard" ></ion-icon>   
-   </ion-buttons>
-  <ion-title style="margin-left: 16px;">All Orders</ion-title>
-</div>
-
+      <ion-icon class="back" name="arrow-back"  routerLink="/vet-dashboard"></ion-icon>
+    </ion-buttons>
+    <ion-title>All Orders</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content [fullscreen]="true">
   <div *ngIf="orders.length > 0; else noOrders"
     class="view-orders"
     style="background-color: transparent"

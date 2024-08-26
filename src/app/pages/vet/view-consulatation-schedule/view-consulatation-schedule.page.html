@@ -1,9 +1,13 @@
+<ion-header>
+  <ion-toolbar class="viewConsultationsPage">
+    <ion-title>View Consultation Schedule</ion-title>
+  </ion-toolbar>
+</ion-header>
 <ion-content [fullscreen]="true">
   <div
     class="pageName"
     style="display: flex; align-items: center; margin: 16px"
   >
-    <ion-title style="margin-left: 16px">View Consultation Schedule</ion-title>
   </div>
   <div *ngFor="let consultation of consultations" class="view-consultations">
     <ion-card>

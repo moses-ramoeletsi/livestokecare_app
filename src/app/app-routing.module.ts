@@ -104,8 +104,8 @@ const routes: Routes = [
     loadChildren: () => import('./pages/vet/post-videos/post-videos.module').then( m => m.PostVideosPageModule)
   },
   {
-    path: 'post-basic-knowladge',
-    loadChildren: () => import('./pages/vet/post-basic-knowladge/post-basic-knowladge.module').then( m => m.PostBasicKnowladgePageModule)
+    path: 'post-basic-knowledge',
+    loadChildren: () => import('./pages/vet/post-basic-knowledge/post-basic-knowledge.module').then( m => m.PostBasicKnowladgePageModule)
   },
   {
     path: 'chatlist',

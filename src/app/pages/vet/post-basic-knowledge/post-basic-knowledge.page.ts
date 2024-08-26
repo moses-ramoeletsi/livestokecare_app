@@ -4,11 +4,11 @@ import { AlertController, IonModal } from '@ionic/angular';
 import { BasicKnowladgeService } from 'src/app/services/basic-knowladge.service';
 
 @Component({
-  selector: 'app-post-basic-knowladge',
-  templateUrl: './post-basic-knowladge.page.html',
-  styleUrls: ['./post-basic-knowladge.page.scss'],
+  selector: 'app-post-basic-knowledge',
+  templateUrl: './post-basic-knowledge.page.html',
+  styleUrls: ['./post-basic-knowledge.page.scss'],
 })
-export class PostBasicKnowladgePage implements OnInit {
+export class PostBasicKnowledgePage implements OnInit {
 
   article= {
     id:'',

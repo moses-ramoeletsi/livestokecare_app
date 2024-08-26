@@ -1,13 +1,13 @@
-<ion-content [fullscreen]="true" class="ion-padding">
-  <div
-    class="pageName"
-    style="display: flex; align-items: center; margin: 16px"
-  >
+<ion-header>
+  <ion-toolbar class="basic-knoledge">
     <ion-buttons slot="start">
-      <ion-icon name="arrow-back" routerLink="/vet-dashboard"></ion-icon>
+      <ion-icon class="back" name="arrow-back"  routerLink="/vet-dashboard"></ion-icon>
     </ion-buttons>
-    <ion-title style="margin-left: 16px">Basic Knowledge</ion-title>
-  </div>
+    <ion-title>Basic Knowledge</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content [fullscreen]="true" class="ion-padding">
+  
   <ion-fab
     slot="fixed"
     vertical="bottom"

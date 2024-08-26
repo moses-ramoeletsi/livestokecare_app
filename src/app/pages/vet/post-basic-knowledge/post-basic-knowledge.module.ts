@@ -4,9 +4,9 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { PostBasicKnowladgePageRoutingModule } from './post-basic-knowladge-routing.module';
+import { PostBasicKnowladgePageRoutingModule } from './post-basic-knowledge-routing.module';
 
-import { PostBasicKnowladgePage } from './post-basic-knowladge.page';
+import { PostBasicKnowledgePage } from './post-basic-knowledge.page';
 
 @NgModule({
   imports: [
@@ -15,6 +15,6 @@ import { PostBasicKnowladgePage } from './post-basic-knowladge.page';
     IonicModule,
     PostBasicKnowladgePageRoutingModule
   ],
-  declarations: [PostBasicKnowladgePage]
+  declarations: [PostBasicKnowledgePage]
 })
 export class PostBasicKnowladgePageModule {}

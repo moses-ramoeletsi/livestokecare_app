@@ -6,7 +6,27 @@ ion-content {
     height: 24px;
     width: 20px;
   }
+  ion-toolbar {
+    --background: transparent;
+    --border-width: 0;
+    --padding-top: 0;
+    --padding-bottom: 0;
+  }
   
+  .back {
+    font-size: 24px;
+    padding: 8px;
+    border-radius: 50%;
+    background-color: #3e8156;
+    color: #ffffff;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-right: 8px;
+  }
+  .medicationPage{
+    background: white;
+    color: black;
+  }
   ion-modal {
     --background: transparent;
   }
