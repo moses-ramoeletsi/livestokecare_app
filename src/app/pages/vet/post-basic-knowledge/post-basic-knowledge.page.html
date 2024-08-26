@@ -6,45 +6,159 @@
     <ion-title>Basic Knowledge</ion-title>
   </ion-toolbar>
 </ion-header>
-<ion-content [fullscreen]="true" class="ion-padding">
+<ion-content [fullscreen]="true" >
+  <ion-content class="ion-padding" *ngIf="!showDiseases">
+    <div style="display: flex; justify-content: center; margin-top: 20px;">
+      <ion-button (click)="toggleToDiseasesPage()">View Common Diseases</ion-button>
+    </div>
+    <ion-fab
+      slot="fixed"
+      vertical="bottom"
+      horizontal="end"
+      class="ion-center-sm-down"
+      >
+      <ion-fab-button id="open-knowladge-modal">
+        <ion-icon name="add"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
   
-  <ion-fab
+    <ion-modal [keepContentsMounted]="true" trigger="open-knowladge-modal" #modal>
+      <ng-template>
+        <ion-header>
+          <ion-toolbar>
+            <ion-title class="ion-text-center">POST KNOWLEDGE</ion-title>
+            <ion-buttons slot="end">
+              <ion-button (click)="resetArticle(modal)">Cancel</ion-button>
+            </ion-buttons>
+          </ion-toolbar>
+        </ion-header>
+        <ion-content class="ion-padding">
+          <form (ngSubmit)="addArticle(modal)">
+            <ion-input
+              [(ngModel)]="article.article_title"
+              name="article_title"
+              label="Title"
+              labelPlacement="floating"
+              fill="outline"
+              type="text"
+              class="top-margin"
+              placeholder="Enter post title"
+              style="color: black"
+              ></ion-input>
+              
+              <ion-textarea
+              [(ngModel)]="article.description"
+              name="description"
+              label="Description"
+              labelPlacement="floating"
+              fill="outline"
+              class="top-margin"
+              style="color: black"
+              placeholder="Enter description"
+              ></ion-textarea>
+              
+            <ion-input
+            [(ngModel)]="article.articleUrl"
+              name="articleUrl"
+              label="Link"
+              labelPlacement="floating"
+              fill="outline"
+              type="text"
+              class="top-margin"
+              placeholder="Enter post url link"
+              style="color: black"
+              ></ion-input>
+  
+              <ion-button class="mycolor" type="submit" expand="block"
+              >SUBMIT</ion-button
+              >
+          </form>
+        </ion-content>
+      </ng-template>
+    </ion-modal>
+    <div
+      *ngIf="articles.length > 0; else noArticles"
+      class="post-knowledge"
+      style="background-color: transparent"
+      >
+      <ion-card *ngFor="let article of articles" style="margin: 10px">
+        <ion-card-header class="ion-text-center">
+          <ion-card-title>{{ article.article_title }}</ion-card-title>
+          <ion-card-subtitle>Posted by: {{article.authorName}}</ion-card-subtitle>
+        </ion-card-header>
+        <ion-card-content>
+          <p>{{ article.description }}</p>
+          <p><a (click)="openLink(article.articleUrl)">Read More</a></p>
+          <div style="display: flex; justify-content: space-between">
+            <ion-button
+              fill="outline"
+              slot="start"
+              color="custom"
+              (click)="editArticle(article, modal)"
+              >Edit</ion-button
+            >
+            <ion-button
+            fill="outline"
+              slot="end"
+              color="danger"
+              (click)="deleteArticle(article)"
+              >Delete</ion-button
+              >
+            </div>
+        </ion-card-content>
+      </ion-card>
+    </div>
+    <ng-template #noArticles>
+      <p style="color: brown">No knoladge available</p>
+    </ng-template>
+  </ion-content>
+
+  <ion-content class="ion-padding" *ngIf="showDiseases">
+    <ion-buttons
+          class="ion-col ion-text-start"
+          (click)="toggleToDiseasesPage()"
+          style="color: black"
+        >
+          <ion-icon name="chevron-back-outline"></ion-icon>
+          <ion-label>Back</ion-label>
+        </ion-buttons>
+    <ion-fab
     slot="fixed"
     vertical="bottom"
     horizontal="end"
     class="ion-center-sm-down"
-  >
-    <ion-fab-button id="open-knowladge-modal">
+    >
+    <ion-fab-button id="open-diseases-modal">
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>
   </ion-fab>
 
-  <ion-modal [keepContentsMounted]="true" trigger="open-knowladge-modal" #modal>
+  <ion-modal [keepContentsMounted]="true" trigger="open-diseases-modal" #modal>
     <ng-template>
       <ion-header>
         <ion-toolbar>
-          <ion-title class="ion-text-center">POST KNOWLEDGE</ion-title>
+          <ion-title class="ion-text-center">POST DISEASE</ion-title>
           <ion-buttons slot="end">
-            <ion-button (click)="resetArticle(modal)">Cancel</ion-button>
+            <ion-button (click)="resetDisease(modal)">Cancel</ion-button>
           </ion-buttons>
         </ion-toolbar>
       </ion-header>
       <ion-content class="ion-padding">
-        <form (ngSubmit)="addArticle(modal)">
+        <form (ngSubmit)="addDisease(modal)">
           <ion-input
-            [(ngModel)]="article.article_title"
-            name="article_title"
-            label="Title"
+            [(ngModel)]="disease.disease_name"
+            name="disease_name"
+            label="Disease Name"
             labelPlacement="floating"
             fill="outline"
             type="text"
             class="top-margin"
-            placeholder="Enter post title"
+            placeholder="Enter disease name"
             style="color: black"
-          ></ion-input>
-
-          <ion-textarea
-            [(ngModel)]="article.description"
+            ></ion-input>
+            
+            <ion-textarea
+            [(ngModel)]="disease.description"
             name="description"
             label="Description"
             labelPlacement="floating"
@@ -52,60 +166,93 @@
             class="top-margin"
             style="color: black"
             placeholder="Enter description"
+            ></ion-textarea>
+
+            <ion-select
+            [(ngModel)]="disease.animal_type"
+            name="animal_type"
+            label="Animal Type"
+            fill="outline"
+            class="top-margin"
+            labelPlacement="floating"
+            multiple="true"
+            style="color: black"
+            placeholder="Select all animals that apply"
+            >
+            <ion-select-option value="Chickens">Chickens</ion-select-option>
+            <ion-select-option value="Goats">Goats</ion-select-option>
+            <ion-select-option value="Sheep">Sheep</ion-select-option>
+            <ion-select-option value="Pigs">Pigs</ion-select-option>
+            <ion-select-option value="Cows">Cows</ion-select-option>
+            <ion-select-option value="Horses">Horses</ion-select-option>
+            <ion-select-option value="Donkeys">Donkeys</ion-select-option>
+            <ion-select-option value="Rabbits">Rabbits</ion-select-option>
+          </ion-select>
+          
+          <ion-textarea
+          [(ngModel)]="disease.symptoms"
+          name="symptoms"
+          label="Symptoms"
+          labelPlacement="floating"
+          fill="outline"
+          class="top-margin"
+          style="color: black"
+          placeholder="Enter description"
           ></ion-textarea>
 
-          <ion-input
-            [(ngModel)]="article.articleUrl"
-            name="articleUrl"
-            label="Link"
-            labelPlacement="floating"
-            fill="outline"
-            type="text"
-            class="top-margin"
-            placeholder="Enter post url link"
-            style="color: black"
-          ></ion-input>
-
-          <ion-button class="mycolor" type="submit" expand="block"
+          <ion-textarea
+          [(ngModel)]="disease.treatment"
+          name="treatment"
+          label="Treatment"
+          labelPlacement="floating"
+          fill="outline"
+          class="top-margin"
+          style="color: black"
+          placeholder="Enter description"
+          ></ion-textarea>
+          
+            <ion-button class="mycolor" type="submit" expand="block"
             >SUBMIT</ion-button
-          >
+            >
         </form>
       </ion-content>
     </ng-template>
   </ion-modal>
   <div
-    *ngIf="articles.length > 0; else noArticles"
-    class="post-knowledge"
+    *ngIf="diseases.length > 0; else noDiseases" 
+    class="post-diseases"
     style="background-color: transparent"
-  >
-    <ion-card *ngFor="let article of articles" style="margin: 10px">
+    >
+    <ion-card *ngFor="let disease of diseases"  style="margin: 10px">
       <ion-card-header class="ion-text-center">
-        <ion-card-title>{{ article.article_title }}</ion-card-title>
-        <ion-card-subtitle>Posted by: {{article.authorName}}</ion-card-subtitle>
+        <ion-card-title>{{ disease.disease_name }}</ion-card-title>
+        <ion-card-subtitle>{{disease.animal_type}} </ion-card-subtitle>
       </ion-card-header>
       <ion-card-content>
-        <p>{{ article.description }}</p>
-        <p><a (click)="openLink(article.articleUrl)">Read More</a></p>
+        <p>{{ disease.description }}</p>
+        <p>Symptoms: {{disease.symptoms}}</p>
+        <p>Treatment: {{disease.treatment}}</p>
         <div style="display: flex; justify-content: space-between">
           <ion-button
             fill="outline"
             slot="start"
             color="custom"
-            (click)="editArticle(article, modal)"
+            (click)="editDisease(disease, modal)"
             >Edit</ion-button
           >
           <ion-button
-            fill="outline"
+          fill="outline"
             slot="end"
             color="danger"
-            (click)="deleteArticle(article)"
+            (click)="deleteDisease(disease)"
             >Delete</ion-button
-          >
-        </div>
+            >
+          </div>
       </ion-card-content>
     </ion-card>
   </div>
-  <ng-template #noArticles>
-    <p style="color: brown">No events available</p>
+  <ng-template #noDiseases>
+    <p style="color: brown">No Diseases available</p>
   </ng-template>
+  </ion-content>
 </ion-content>

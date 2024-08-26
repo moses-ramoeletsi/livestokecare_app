@@ -1,30 +1,65 @@
-<ion-content>
-  <div
-    class="pageName"
-    style="display: flex; align-items: center; margin: 16px"
-  >
+<ion-header>
+  <ion-toolbar class="basic-knoledge">
     <ion-buttons slot="start">
-      <ion-icon name="arrow-back" routerLink="/farmers-dashboard"></ion-icon>
+      <ion-icon class="back" name="arrow-back"  routerLink="/farmers-dashboard"></ion-icon>
     </ion-buttons>
-    <ion-title style="margin-left: 16px">Knowledge Base</ion-title>
-  </div>
-  <div
+    <ion-title>Basic Knowledge</ion-title>
+  </ion-toolbar>
+  </ion-header>
+<ion-content [fullscreen]="true">
+  <ion-content class="ion-padding" *ngIf="!showCommonDiseases">
+    <div style="display: flex; justify-content: center; margin-top: 20px;">
+      <ion-button (click)="toggleToCommonDiseasesPage()">View Common Diseases</ion-button>
+    </div>
+    <div
     *ngIf="articles.length > 0; else noArticles"
     class="post-knowledge"
     style="background-color: transparent"
-  >
-    <ion-card *ngFor="let article of articles" style="margin: 10px">
-      <ion-card-header class="ion-text-center">
-        <ion-card-title>{{ article.article_title }}</ion-card-title>
-        <ion-card-subtitle>Posted by: {{article.authorName}}</ion-card-subtitle>
-      </ion-card-header>
-      <ion-card-content>
-        <p>{{ article.description }}</p>
-        <p><a (click)="openLink(article.articleUrl)">Read More</a></p>
-      </ion-card-content>
-    </ion-card>
-  </div>
-  <ng-template #noArticles>
-    <p style="color: brown">No events available</p>
-  </ng-template>
+    >
+      <ion-card *ngFor="let article of articles" style="margin: 10px">
+        <ion-card-header class="ion-text-center">
+          <ion-card-title>{{ article.article_title }}</ion-card-title>
+          <ion-card-subtitle>Posted by: {{article.authorName}}</ion-card-subtitle>
+        </ion-card-header>
+        <ion-card-content>
+          <p>{{ article.description }}</p>
+          <p><a (click)="openLink(article.articleUrl)">Read More</a></p>
+        </ion-card-content>
+      </ion-card>
+    </div>
+    <ng-template #noArticles>
+      <p style="color: brown">No knowladge available</p>
+    </ng-template>
+
+  </ion-content>
+  <ion-content class="ion-padding" *ngIf="showCommonDiseases">
+    <ion-buttons
+          class="ion-col ion-text-start"
+          (click)="toggleToCommonDiseasesPage()"
+          style="color: black"
+        >
+          <ion-icon name="chevron-back-outline"></ion-icon>
+          <ion-label>Back</ion-label>
+        </ion-buttons>
+        <div
+        *ngIf="diseases.length > 0; else noDiseases" 
+        class="post-diseases"
+        style="background-color: transparent"
+        >
+        <ion-card *ngFor="let disease of diseases"  style="margin: 10px">
+          <ion-card-header class="ion-text-center">
+            <ion-card-title>{{ disease.disease_name }}</ion-card-title>
+            <ion-card-subtitle>{{disease.animal_type}} </ion-card-subtitle>
+          </ion-card-header>
+          <ion-card-content>
+            <p>{{ disease.description }}</p>
+            <p>Symptoms: {{disease.symptoms}}</p>
+            <p>Treatment: {{disease.treatment}}</p>
+          </ion-card-content>
+        </ion-card>
+      </div>
+    <ng-template #noDiseases>
+      <p style="color: brown">No knowladge available</p>
+    </ng-template>
+  </ion-content>
 </ion-content>

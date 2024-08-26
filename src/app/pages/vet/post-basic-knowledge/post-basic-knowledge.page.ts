@@ -21,6 +21,19 @@ export class PostBasicKnowledgePage implements OnInit {
   userId: string | null = null;
   name: any;
   articles: any[] = [];
+  
+  showDiseases: boolean = false;
+
+  disease = {
+    id: '',
+    disease_name: '',
+    animal_type:'',
+    description: '',
+    symptoms: '',
+    treatment: '',
+  };
+  
+  diseases: any[] = [];
   constructor(
     private userAuth:  AngularFireAuth, 
     private fireStore: BasicKnowladgeService,
@@ -35,14 +48,15 @@ export class PostBasicKnowledgePage implements OnInit {
         console.log ('current user:', this.userId);
         this.fetchVetData(this.userId);
         this.getArticles();
+        this.getDiseases();
       }
     });
   }
   fetchVetData(userId: string) {
     this.fireStore.getCurrentUserById(userId).then((userData) => {
-    this.name = userData.name
-    console.log('Facility Name:', this.name);
-  }).catch(error => {
+      this.name = userData.name
+      console.log('Facility Name:', this.name);
+    }).catch(error => {
     console.error('Error fetching user data:', error);
   });
 }
@@ -65,7 +79,7 @@ async addArticle(modal: IonModal) {
     this.resetArticle(modal);
 
     await modal.dismiss();
-
+    
   } catch (error) {
     this.showAlert('Error', 'Error posting knowledge!');
   }
@@ -129,11 +143,94 @@ async deleteArticle(article: any) {
       }
     ]
   });
-
+  
   await alert.present();
 }
 
+// Diseases Page
+
+async addDisease(modal: IonModal) {
+  try {
+    if (this.disease.id) {
+      await this.fireStore.updateDisease(this.disease);
+      this.showAlert('Success', 'Disease updated successfully!');
+    } else {
+      await this.fireStore.postDisease(this.disease);
+      this.showAlert('Success', 'Disease posted successfully!');    
+    }
+
+    this.resetDisease(modal);
+    await modal.dismiss();
+
+  } catch (error) {
+    this.showAlert('Error', 'Error posting disease!');
+  }
+}
+
+resetDisease(modal: IonModal) {
+  this.disease = {
+    id: '',
+    disease_name: '',
+    animal_type:'',
+    description: '',
+    symptoms: '',
+    treatment: '',
+  };
+  modal.dismiss();
+}
+
+getDiseases() {
+  this.fireStore.fetchPostedDiseases().subscribe((diseases) => {
+    this.diseases = diseases;
+  });
+}
+
+async editDisease(disease: any, modal: IonModal) {
+  this.resetDisease(modal);
+  this.disease = {
+    id: disease.id, 
+    disease_name: disease.disease_name,
+    description: disease.description,
+    animal_type:disease.animal_type,
+    symptoms: disease.symptoms,
+    treatment: disease.meadication,
+  };
+
+  await modal.present();
+}
+
+// Delete disease
+async deleteDisease(disease: any) {
+  const alert = await this.alertController.create({
+    header: 'Confirm Delete',
+    message: `Are you sure you want to delete the disease for ${disease.disease_name}?`,
+    buttons: [
+      {
+        text: 'Cancel',
+        role: 'cancel'
+      },
+      {
+        text: 'Delete',
+        handler: async () => {
+          try {
+            await this.fireStore.deleteDisease(disease);
+            this.showAlert('Success', 'Disease deleted successfully!');
+          } catch (error) {
+            this.showAlert('Error', 'Error deleting disease!');
+          }
+        }
+      }
+    ]
+  });
+
+  await alert.present();
+}
+toggleToDiseasesPage( ){
+  this.showDiseases = !this.showDiseases;
   
+}
+
+
 showAlert(title: string, message: string) {
   this.alertController
     .create({

@@ -40,4 +40,25 @@ export class BasicKnowladgeService {
   deletearticle(article: any) {
     return this.fireStore.collection('articles').doc(article.id).delete();
   }
+
+  //Diseases
+  postDisease(disease: any) {
+    const docRef = this.fireStore.collection('diseases').doc();
+    const id = docRef.ref.id;
+    disease.id = id;
+    return docRef.set(disease)
+  }
+
+  fetchPostedDiseases() {
+    return this.fireStore.collection('diseases').valueChanges({ idField: 'id' });
+  }
+
+  updateDisease(disease: any) {
+    return this.fireStore.collection('diseases').doc(disease.id).update(disease);
+  }
+
+  deleteDisease(disease: any) {
+    return this.fireStore.collection('diseases').doc(disease.id).delete();
+  }
+  
 }

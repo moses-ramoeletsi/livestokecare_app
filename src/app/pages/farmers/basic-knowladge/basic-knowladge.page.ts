@@ -19,20 +19,42 @@ export class BasicKnowladgePage implements OnInit {
   userId: string | null = null;
   name: any;
   articles: any[] = [];
+
+  showCommonDiseases: boolean = false;
+
+  disease = {
+    id: '',
+    disease_name: '',
+    animal_type:'',
+    description: '',
+    symptoms: '',
+    treatment: '',
+  };
+  
+  diseases: any[] = [];
   constructor(private fireStore: BasicKnowladgeService,) { }
 
   ngOnInit() {
     this.getArticles();
+    this.getCommonDiseases();
   }
   getArticles() {
     this.fireStore.fetchPostedArticle().subscribe((articles) => {
       this.articles = articles;
     });
   }
-
+  
   openLink(url: string) {
     window.open(url, '_blank');
   }
-  
+  //Common Diseases 
+  getCommonDiseases() {
+    this.fireStore.fetchPostedDiseases().subscribe((diseases) => {
+      this.diseases = diseases;
+    });
+  }
     
+  toggleToCommonDiseasesPage(){
+    this.showCommonDiseases = !this.showCommonDiseases;
+  }
 }
