@@ -1,5 +1,5 @@
 ion-content {
-  --ion-background-color: #fffffffd;
+  --ion-background-color: #f0f0f0;
 }
 .primaryColor {
     --background: var(--ion-color-btn);
@@ -9,25 +9,25 @@ ion-content {
     color: "black";
   }
 
-  img {
-    height: 240px;
-    width: auto;
-    margin: auto;
-    display: block;
-  }
-
+ 
+img {
+  height: 150px; 
+  width: auto;
+  margin: 10px auto; 
+  display: block;
+}
   .page-link {
     color: #3e8156;
   }
-
   .myHeader {
     text-align: center;
     color: #3e8156;
     font-weight: 800;
+    margin: 10px 0; 
   }
 
   ion-button {
-    font-size: 1.2rem;
+    font-size: 1rem;
   }
 
   .login {
@@ -35,28 +35,37 @@ ion-content {
    text-align: center;
   }
   
+
   p {
     color: #000;
+    margin: 5px 0; 
   }
-  
   form {
+    margin-top: 0; 
     display: flex;
     flex-direction: column;
     align-items: center;
   }
   
-  form ion-input {
+  form ion-input, ion-select {
     color: black;
   }
   
   ion-input,
+  ion-select,
   ion-button {
     width: 100%;
-    max-width: 300px;
+    max-width: 260px;
+    margin-bottom: 6px; 
   }
-  
+
   .error-message {
-    color: #87986A;
+    color: #813e3e;
+    font-size: 0.8rem; 
+    margin-top: -5px; 
+    margin-bottom: 5px;
   }
   
-  
+  .top-margin {
+    margin-top: 6px; 
+  }

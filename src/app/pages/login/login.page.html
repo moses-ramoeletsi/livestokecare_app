@@ -26,7 +26,6 @@
       >
     </div>
 
-    <br />
     <ion-input
       class="ion-text-center"
       type="password"
@@ -34,7 +33,7 @@
       placeholder="Enter password"
       formControlName="password"
     ></ion-input>
-    <br />
+   
     <div
       *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched"
     >
@@ -54,7 +53,6 @@
         >Password must contain characters(- _ ! $).</span
       >
     </div>
-    <br />
     <ion-button
       class="ion-padding ion-xxl primaryColor"
       expand="full"
@@ -63,7 +61,6 @@
       >
       Login
     </ion-button>
-    <!-- [disabled]="loginForm.invalid" -->
   </form>
   <div class="ion-text-center">
     <p>
