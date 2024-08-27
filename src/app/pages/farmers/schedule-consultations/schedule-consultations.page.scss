@@ -1,8 +1,8 @@
 ion-content {
-  --ion-background-color: #ffff;
+  --ion-background-color: #f0f0f0;
 }
 ion-item {
-  --background:white;
+  --background:#f0f0f0;
   color:black;
 }
 ion-toolbar {
@@ -29,7 +29,7 @@ ion-toolbar {
 
 .pending-requests ion-card {
   border-radius: 15px;
-  background-color: #fff;
+  background-color: #f0f0f0;
   border: 1px solid #2c5434;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   overflow: hidden;
@@ -72,7 +72,7 @@ ion-toolbar {
 
 .approved-requests ion-card {
   border-radius: 15px;
-  background-color: #fff;
+  background-color: #f0f0f0;
   border: 1px solid #2c5434;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   overflow: hidden;
@@ -115,7 +115,7 @@ ion-toolbar {
 
 .completed-requests ion-card {
   border-radius: 15px;
-  background-color: #fff;
+  background-color: #f0f0f0;
   border: 1px solid #2c5434;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   overflow: hidden;

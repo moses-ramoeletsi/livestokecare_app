@@ -1,5 +1,5 @@
 ion-content {
-    --ion-background-color: #ffff;
+    --ion-background-color: #f0f0f0;
   }
   ion-toolbar {
     --background: transparent;
@@ -13,7 +13,7 @@ ion-content {
     padding: 8px;
     border-radius: 50%;
     background-color: #3e8156;
-    color: #ffffff;
+    color: #f0f0f0;
     cursor: pointer;
     transition: background-color 0.3s ease;
     margin-right: 8px;
@@ -47,7 +47,7 @@ ion-content {
   }
   
   ion-modal ion-content {
-    --background: #f4f5f8;
+    --background: #f0f0f0;
   }
   
   ion-modal ion-content form {
@@ -61,7 +61,7 @@ ion-content {
   ion-modal ion-content ion-button {
     margin-top: 10px;
     --background: #2c5434;
-    --color: #fff;
+    --color: #f0f0f0;
   }
   
   ion-fab-button {
@@ -87,7 +87,7 @@ ion-content {
   
   .post-video ion-card {
       border-radius: 15px;
-      background-color: #fff;
+      background-color: #f0f0f0;
       border: 1px solid #2c5434;
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
       overflow: hidden;

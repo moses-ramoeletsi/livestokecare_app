@@ -1,5 +1,5 @@
 ion-content {
-  --ion-background-color: #ffff;
+  --ion-background-color: #f0f0f0;
 }
 
 ion-img {
@@ -8,10 +8,10 @@ ion-img {
 }
 
 ion-list {
-  background-color: white;
+  background-color: #f0f0f0;
 }
 ion-item {
-  --background: white;
+  --background: #f0f0f0
   color: black;
 }
 ion-item ion-icon {
@@ -20,7 +20,7 @@ ion-item ion-icon {
 
 .farmer-profile ion-card {
   border-radius: 15px;
-  background-color: #fff;
+  background-color: #f0f0f0;
   border: 1px solid #2c5434;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   overflow: hidden;

@@ -1,11 +1,11 @@
 ion-content {
-    --ion-background-color: #ffff;
+    --ion-background-color: #f0f0f0;
   }
   ion-list{
-    background: white;
+    background: #f0f0f0;
   }
   ion-item{
-    --background: white;
+    --background: #f0f0f0 ;
   }
   ion-toolbar {
     --background: transparent;
@@ -24,26 +24,13 @@ ion-content {
     transition: background-color 0.3s ease;
     margin-right: 8px;
   }
-  .basic-knoledge{
-    background: white;
-    color: black;
-  }ion-toolbar {
+  ion-toolbar {
     --background: transparent;
     --border-width: 0;
     --padding-top: 0;
     --padding-bottom: 0;
   }
   
-  .back {
-    font-size: 24px;
-    padding: 8px;
-    border-radius: 50%;
-    background-color: #3e8156;
-    color: #ffffff;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    margin-right: 8px;
-  }
   .viewOrdersPage{
     background: white;
     color: black;
@@ -60,7 +47,7 @@ ion-content {
 
 .orders ion-card {
     border-radius: 15px;
-    background-color: #fff;
+    background-color: #f0f0f0;
     border: 1px solid #2c5434;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     overflow: hidden;
