@@ -3,7 +3,7 @@
     <ion-buttons slot="start">
       <ion-icon class="back" name="arrow-back"  routerLink="/farmers-profile"></ion-icon>
     </ion-buttons>
-    <ion-title >Your Animals</ion-title>
+    <ion-title class="ion-text-center" >Your Animals</ion-title>
   </ion-toolbar>
   </ion-header>
 <ion-content [fullscreen]="true" class="ion-padding">
@@ -18,7 +18,7 @@
         <p><strong>Past Illness:</strong> {{ animal.past_illness }}</p>
         <p><strong>Current Medications:</strong> {{ animal.current_medication }}</p>
         <div style="display: flex; justify-content: space-between">
-          <ion-button fill="outline" slot="start" color="tertiary" (click)="editAnimal(animal, modal)">Edit</ion-button>
+          <ion-button fill="outline" slot="start" color="custom" (click)="editAnimal(animal, modal)">Edit</ion-button>
           <ion-button fill="outline" slot="end" color="danger" (click)="deleteAnimal(animal)">Delete</ion-button>
         </div>
       </ion-card-content>

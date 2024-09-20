@@ -48,17 +48,18 @@ ion-toolbar {
 
 .pending-requests ion-card-content {
   padding-top: 0;
+  color: #1a1a1acc;
 }
 
 .pending-requests ion-card-title {
   font-size: 1.2rem;
   font-weight: bold;
-  color: black;
+  color:#3e8156;
 }
 
 .pending-requests ion-card-subtitle {
   font-size: 1rem;
-  color: #666;
+  color: #3e8156;
 }
 
 .pending-requests ion-card:hover {
@@ -90,18 +91,19 @@ ion-toolbar {
 }
 
 .approved-requests ion-card-content {
+  color: #1a1a1acc;
   padding-top: 0;
 }
 
 .approved-requests ion-card-title {
   font-size: 1.2rem;
   font-weight: bold;
-  color: black;
+  color: #3e8156;
 }
 
 .approved-requests ion-card-subtitle {
   font-size: 1rem;
-  color: #666;
+  color: #3e8156;
 }
 
 .approved-requests ion-card:hover {
@@ -134,17 +136,18 @@ ion-toolbar {
 
 .completed-requests ion-card-content {
   padding-top: 0;
+  color: #1a1a1acc; 
 }
 
 .completed-requests ion-card-title {
   font-size: 1.2rem;
   font-weight: bold;
-  color: black;
+  color: #3e8156;
 }
 
 .completed-requests ion-card-subtitle {
   font-size: 1rem;
-  color: #666;
+  color: #3e8156;
 }
 
 .completed-requests ion-card:hover {

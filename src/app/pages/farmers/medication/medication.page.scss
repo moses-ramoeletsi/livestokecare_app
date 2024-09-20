@@ -63,18 +63,19 @@ ion-toolbar {
 }
 
 .medication ion-card-content {
+  color: #1a1a1acc;
   padding-top: 0;
 }
 
 .medication ion-card-title {
   font-size: 1.2rem;
   font-weight: bold;
-  color: black;
+  color: #3e8156;
 }
 
 .medication ion-card-subtitle {
   font-size: 1rem;
-  color: #666;
+  color: #1a1a1acc;
 }
 
 .medication ion-card:hover {

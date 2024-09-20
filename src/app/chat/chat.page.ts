@@ -11,9 +11,7 @@ import { AngularFireStorage } from '@angular/fire/compat/storage';
   templateUrl: './chat.page.html',
   styleUrls: ['./chat.page.scss'],
 })
-
 export class ChatPage implements OnInit {
-
   chatPartnerName?: string;
   messages: any[] = [];
   newMessage = '';
@@ -30,42 +28,53 @@ export class ChatPage implements OnInit {
     private route: ActivatedRoute,
     private storage: AngularFireStorage,
     private changeDetectorRef: ChangeDetectorRef,
-    private router: Router 
+    private router: Router
   ) {}
 
- 
   ngOnInit() {
-  this.authService.getAuth().user.subscribe(user => {
-    if (user) {
-      this.currentUserId = user.uid;
-      this.chatPartnerId = this.route.snapshot.paramMap.get('userId')!;
-      this.chatId = this.createChatId(this.currentUserId, this.chatPartnerId);
-      this.currentUserId = user.uid;
-      
-      this.afs.collection('users').doc(user.uid).get().subscribe(doc => {
-        const data = doc.data() as { userType: string };
-        this.currentUserType = data.userType;
-      });
+    this.authService.getAuth().user.subscribe((user) => {
+      if (user) {
+        this.currentUserId = user.uid;
+        this.chatPartnerId = this.route.snapshot.paramMap.get('userId')!;
+        this.chatId = this.createChatId(this.currentUserId, this.chatPartnerId);
+        this.currentUserId = user.uid;
 
-      this.afs.collection('users').doc(this.chatPartnerId).valueChanges()
-        .subscribe((user: any) => {
-          this.chatPartnerName = user.name;
-        });
-      
-      this.afs.collection('chats').doc(this.chatId).collection('messages', ref => ref.orderBy('timestamp'))
-        .valueChanges()
-        .subscribe(messages => {
-          this.messages = messages.map(message => {
-            return {
-              ...message,
-              timestamp: (message['timestamp'] as firebase.firestore.Timestamp).toDate() 
-            };
+        this.afs
+          .collection('users')
+          .doc(user.uid)
+          .get()
+          .subscribe((doc) => {
+            const data = doc.data() as { userType: string };
+            this.currentUserType = data.userType;
           });
-          this.changeDetectorRef.detectChanges(); 
-        });
-    }
-  });
-}
+
+        this.afs
+          .collection('users')
+          .doc(this.chatPartnerId)
+          .valueChanges()
+          .subscribe((user: any) => {
+            this.chatPartnerName = user.name;
+          });
+
+        this.afs
+          .collection('chats')
+          .doc(this.chatId)
+          .collection('messages', (ref) => ref.orderBy('timestamp'))
+          .valueChanges()
+          .subscribe((messages) => {
+            this.messages = messages.map((message) => {
+              return {
+                ...message,
+                timestamp: (
+                  message['timestamp'] as firebase.firestore.Timestamp
+                ).toDate(),
+              };
+            });
+            this.changeDetectorRef.detectChanges();
+          });
+      }
+    });
+  }
 
   createChatId(uid1: string, uid2: string): string {
     return uid1 < uid2 ? `${uid1}_${uid2}` : `${uid2}_${uid1}`;
@@ -73,14 +82,18 @@ export class ChatPage implements OnInit {
 
   sendMessage() {
     if (this.newMessage.trim().length > 0 || this.selectedFile) {
-      if(this.selectedFile){
+      if (this.selectedFile) {
         this.uploadImageAndSendMessage();
-      }else {
-        this.afs.collection('chats').doc(this.chatId).collection('messages').add({
-          text: this.newMessage,
-          userId: this.currentUserId,
-          timestamp: new Date()
-        });
+      } else {
+        this.afs
+          .collection('chats')
+          .doc(this.chatId)
+          .collection('messages')
+          .add({
+            text: this.newMessage,
+            userId: this.currentUserId,
+            timestamp: new Date(),
+          });
         this.newMessage = '';
       }
     }
@@ -92,11 +105,11 @@ export class ChatPage implements OnInit {
       this.selectedFile = input.files[0];
 
       const reader = new FileReader();
-      reader.onload = (e) => this.selectedFilePreview = e.target!.result as string;
+      reader.onload = (e) =>
+        (this.selectedFilePreview = e.target!.result as string);
       reader.readAsDataURL(this.selectedFile);
     }
   }
-
 
   clearSelectedFile() {
     this.selectedFile = undefined;
@@ -104,34 +117,43 @@ export class ChatPage implements OnInit {
   }
 
   uploadImageAndSendMessage() {
-    const filePath = `chat_images/${this.currentUserId}/${new Date().getTime()}_${this.selectedFile!.name}`;
+    const filePath = `chat_images/${
+      this.currentUserId
+    }/${new Date().getTime()}_${this.selectedFile!.name}`;
     const fileRef = this.storage.ref(filePath);
     const uploadTask = this.storage.upload(filePath, this.selectedFile);
 
-    uploadTask.snapshotChanges().pipe(
-      finalize(() => {
-        fileRef.getDownloadURL().subscribe(url => {
-          const newMessage = {
-            imageUrl: url,
-            userId: this.currentUserId,
-            timestamp: new Date()
-          };
+    uploadTask
+      .snapshotChanges()
+      .pipe(
+        finalize(() => {
+          fileRef.getDownloadURL().subscribe((url) => {
+            const newMessage = {
+              imageUrl: url,
+              userId: this.currentUserId,
+              timestamp: new Date(),
+            };
 
-          this.afs.collection('chats').doc(this.chatId).collection('messages').add(newMessage)
-            .then((docRef) => {
-              this.messages.push({
-                ...newMessage,
-                id: docRef.id
+            this.afs
+              .collection('chats')
+              .doc(this.chatId)
+              .collection('messages')
+              .add(newMessage)
+              .then((docRef) => {
+                this.messages.push({
+                  ...newMessage,
+                  id: docRef.id,
+                });
+
+                this.changeDetectorRef.detectChanges();
               });
 
-              this.changeDetectorRef.detectChanges();
-            });
-
-          this.clearSelectedFile();
-          this.newMessage = '';
-        });
-      })
-    ).subscribe();
+            this.clearSelectedFile();
+            this.newMessage = '';
+          });
+        })
+      )
+      .subscribe();
   }
 
   onBackButtonClick() {

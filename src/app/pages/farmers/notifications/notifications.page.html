@@ -1,24 +1,28 @@
-<ion-content [fullscreen]="true">
-  <div style="display: flex; align-items: center; margin: 16px;">
+<ion-header>
+  <ion-toolbar class="addNotifacationsPage">
     <ion-buttons slot="start">
-      <ion-icon name="arrow-back" routerLink="/farmers-profile"></ion-icon>
+      <ion-icon
+        class="back"
+        name="arrow-back"
+        routerLink="/farmers-profile"
+      ></ion-icon>
     </ion-buttons>
-    <ion-title style="margin-left: 16px;">Notifications</ion-title>
+    <ion-title class="ion-text-center">Notifications</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div *ngIf="notifications.length > 0; else noNotifications">
+    <ion-card *ngFor="let notification of notifications">
+      <ion-card-content>
+          <h2>Vet Doctor: {{ notification.vetDoctorName }}</h2>
+          <p>Consultation Purpose: {{ notification.purpose }}</p>
+          <p>Consultation Status: {{ notification.status }}</p>
+          <p>Time: {{ notification.timestamp | date:'medium' }}</p>
+      </ion-card-content>
+    </ion-card>
   </div>
-
-  <ion-title>New Notifcations</ion-title>
-  <ion-card >
-    <ion-card-header>
-      <ion-card-title>Title</ion-card-title>
-    </ion-card-header>
-    
-    <ion-card-content>
-      <ion-icon slot="start" name="notifications-outline"></ion-icon>
-      <p><strong>Descriptioin</strong> Your Request is Approved</p>
-    </ion-card-content>
-    <ion-item lines="none">
-      <ion-button fill="outline" slot="end" color="danger">Delete</ion-button>
-    </ion-item>
-  </ion-card>
-
+  <ng-template #noNotifications>
+    <p style="color: brown">No Notifications available</p>
+  </ng-template>
 </ion-content>

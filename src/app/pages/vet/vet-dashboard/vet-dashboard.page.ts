@@ -12,33 +12,31 @@ import { UserDetails } from 'src/app/shared/user-details';
   styleUrls: ['./vet-dashboard.page.scss'],
 })
 export class VetDashboardPage implements OnInit {
-
-  userName: string ="";
+  userName: string = '';
   user: Observable<UserDetails | null>;
-  constructor(private navCtrl: NavController, public fireServices: UserDetailsService,
+  constructor(
+    private navCtrl: NavController,
+    public fireServices: UserDetailsService,
     public afAuth: AngularFireAuth,
-    private router: Router,) { 
-      this.user = this.afAuth.authState.pipe(
-        filter(user => user !== null),
-        switchMap((user) => {
-          return this.fireServices.getUserDetails(user);
-        }),
-        map(userDetails => userDetails as UserDetails)
-      );
-  
-      this.user.subscribe((userDetails) => {
-        if (userDetails) {
-          this.userName = userDetails.name;
-        }
-      })
-  
-    }
+  ) {
+    this.user = this.afAuth.authState.pipe(
+      filter((user) => user !== null),
+      switchMap((user) => {
+        return this.fireServices.getUserDetails(user);
+      }),
+      map((userDetails) => userDetails as UserDetails)
+    );
 
-  ngOnInit() {
+    this.user.subscribe((userDetails) => {
+      if (userDetails) {
+        this.userName = userDetails.name;
+      }
+    });
   }
-  
+
+  ngOnInit() {}
+
   openChat() {
     this.navCtrl.navigateForward('/chatlist');
   }
-
 }

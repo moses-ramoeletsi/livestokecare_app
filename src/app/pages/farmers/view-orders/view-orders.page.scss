@@ -66,17 +66,18 @@ ion-content {
 
 .orders ion-card-content {
     padding-top: 0;
-}
-
-.orders ion-card-title {
+    color: #1a1a1acc;
+  }
+  
+  .orders ion-card-title {
     font-size: 1rem;
     font-weight: bold;
-    color: rgba(0, 0, 0, 0.897);
-}
-
-.orders ion-card-subtitle {
+    color: #3e8156;
+  }
+  
+  .orders ion-card-subtitle {
     font-size: 1rem;
-    color: #666;
+    color: #1a1a1acc;
 }
 
 .orders ion-card:hover {

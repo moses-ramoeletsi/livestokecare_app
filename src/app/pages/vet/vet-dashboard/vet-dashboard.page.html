@@ -1,48 +1,54 @@
 <ion-content>
   <div style="display: flex; align-items: center; margin: 16px;">
-  <ion-title class="userName" style="margin-left: 16px;">{{userName}}</ion-title>
-</div>
-<ion-grid>
-  <ion-row>
-    <ion-col size="12" size-md="6">
-      <ion-card color="white" [routerLink]="['/post-basic-knowledge']">
-        <ion-card-header>
-          <ion-img src="../../../../assets/images/knoladge.png"></ion-img>
-        </ion-card-header>
-        <ion-card-content> Basic Knowledge</ion-card-content>
-      </ion-card>
-    </ion-col>
-    <ion-col size="12" size-md="6">
-      <ion-card color="white" [routerLink]="['/post-videos']">
-        <ion-card-header>
-          <ion-img
-          src="../../../../assets/images/addVideo.png"
-          ></ion-img>
-        </ion-card-header>
-        <ion-card-content>Videos</ion-card-content>
-      </ion-card>
-    </ion-col>
-    <ion-col size="12" size-md="6">
-      <ion-card color="white" [routerLink]="['/add-medication']">
-        <ion-card-header>
-          <ion-img
-          src="../../../../assets/images/medicine.png"
-          ></ion-img>
-        </ion-card-header>
-        <ion-card-content>Add Medication</ion-card-content>
-      </ion-card>
-    </ion-col>
-    <ion-col size="12" size-md="6">
-      <ion-card color="white" [routerLink]="['/view-all-orders']">
-        <ion-card-header>
-          <ion-img src="../../../../assets/images/orders.png"></ion-img>
-        </ion-card-header>
-        <ion-card-content>Orders</ion-card-content>
-      </ion-card>
-    </ion-col>
-  </ion-row>
-    </ion-grid>
-    
+    <ion-title class="userName" style="margin-left: 16px;">{{userName}}</ion-title>
+    <ion-button fill="clear" class="forum-text" [routerLink]="['/forum']">
+      <h6 style="color:#2c5434">
+        Forum
+      </h6> 
+      <ion-img class="forum-icon" src="../../../../assets/images/discussion.png"></ion-img>
+    </ion-button>
+  </div>
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12" size-md="6">
+        <ion-card color="white" [routerLink]="['/post-basic-knowledge']">
+          <ion-card-header>
+            <ion-img src="../../../../assets/images/knoladge.png"></ion-img>
+          </ion-card-header>
+          <ion-card-content> Basic Knowledge</ion-card-content>
+        </ion-card>
+      </ion-col>
+      <ion-col size="12" size-md="6">
+        <ion-card color="white" [routerLink]="['/post-videos']">
+          <ion-card-header>
+            <ion-img
+            src="../../../../assets/images/addVideo.png"
+            ></ion-img>
+          </ion-card-header>
+          <ion-card-content>Videos</ion-card-content>
+        </ion-card>
+      </ion-col>
+      <ion-col size="12" size-md="6">
+        <ion-card color="white" [routerLink]="['/add-medication']">
+          <ion-card-header>
+            <ion-img
+            src="../../../../assets/images/medicine.png"
+            ></ion-img>
+          </ion-card-header>
+          <ion-card-content>Add Medication</ion-card-content>
+        </ion-card>
+      </ion-col>
+      <ion-col size="12" size-md="6">
+        <ion-card color="white" [routerLink]="['/view-all-orders']">
+          <ion-card-header>
+            <ion-img src="../../../../assets/images/orders.png"></ion-img>
+          </ion-card-header>
+          <ion-card-content>Orders</ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+      
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
     <ion-fab-button (click)="openChat()">
       <ion-icon name="logo-wechat"></ion-icon>

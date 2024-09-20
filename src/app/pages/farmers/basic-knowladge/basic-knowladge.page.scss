@@ -59,17 +59,18 @@ ion-toolbar {
 
 .post-knowledge ion-card-content {
   padding-top: 0;
+  color: #1a1a1acc;
 }
 
 .post-knowledge ion-card-title {
   font-size: 1.2rem;
   font-weight: bold;
-  color: black;
+  color: #3e8156;
 }
 
 .post-knowledge ion-card-subtitle {
   font-size: 1rem;
-  color: #666;
+  color: #1a1a1acc;
 }
 
 .post-knowledge ion-card:hover {
@@ -101,17 +102,19 @@ ion-toolbar {
 
 .post-diseases ion-card-content {
   padding-top: 0;
+  color: #1a1a1acc;
 }
 
 .post-diseases ion-card-title {
   font-size: 1.2rem;
   font-weight: bold;
-  color: black;
+  color: #3e8156
+  ;
 }
 
 .post-diseases ion-card-subtitle {
   font-size: 1rem;
-  color: #666;
+  color: #1a1a1acc;
 }
 
 .post-diseases ion-card:hover {

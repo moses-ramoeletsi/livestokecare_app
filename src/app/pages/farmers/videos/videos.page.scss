@@ -106,19 +106,19 @@ ion-content {
   
   .post-video ion-card-content {
       padding-top: 0;
+      color: #1a1a1acc;
   }
   
   .post-video ion-card-title {
       font-size: 1.2rem;
       font-weight: bold;
-      color: black;
+      color: #3e8156;
   }
   
   .post-video ion-card-subtitle {
       font-size: 1rem;
-      color: #666;
+      color: #1a1a1acc;
   }
-  
   .post-video ion-card:hover {
       transform: translateY(-5px);
       transition: transform 0.3s ease;

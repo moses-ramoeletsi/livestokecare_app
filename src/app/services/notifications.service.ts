@@ -1,24 +1,26 @@
+
 import { Injectable } from '@angular/core';
-import { AngularFireMessaging } from '@angular/fire/compat/messaging';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { Observable, switchMap, of, } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class NotificationsService {
-
-  constructor(private afMessaging: AngularFireMessaging) { }
-  requestPermission() {
-    return this.afMessaging.requestPermission;
-  }
-
-  getToken() {
-    return this.afMessaging.getToken;
-  }
-
-  sendNotification(userId: string, title: string, body: string) {
-    // Implement the logic to send a notification to a specific user
-    // This might involve calling a backend API that handles FCM
-    // For example:
-    // return this.http.post('your-api-endpoint/send-notification', { userId, title, body });
-  }
+  constructor(private firestore: AngularFirestore, private auth: AngularFireAuth) {}
+  
+    getUserNotifications(): Observable<any[]> {
+      return this.auth.authState.pipe(
+        switchMap(user => {
+          if (user) {
+            return this.firestore
+              .collection('notifications', ref => ref.where('farmerUid', '==', user.uid))
+              .valueChanges({ idField: 'id' });
+          } else {
+            return of([]);
+          }
+        })
+      );
+    }
 }

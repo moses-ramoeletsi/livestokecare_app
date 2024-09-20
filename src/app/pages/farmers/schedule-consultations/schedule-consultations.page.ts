@@ -13,7 +13,6 @@ import { UserDetails } from 'src/app/shared/user-details';
   styleUrls: ['./schedule-consultations.page.scss'],
 })
 export class ScheduleConsultationsPage implements OnInit {
-
   showSchedule: boolean = true;
   consultation: any = {
     farmerName: '',
@@ -25,32 +24,31 @@ export class ScheduleConsultationsPage implements OnInit {
     contactNumber: '',
     farmAddress: '',
     status: 'Pending',
-     farmerUid: ''
+    farmerUid: '',
   };
 
   userName: string = '';
   user: Observable<UserDetails | null>;
   veterinarians: any[] = [];
   farmerUid: string = '';
-  
+
   pendingConsultations: any[] = [];
   approvedConsultations: any[] = [];
   completedConsultations: any[] = [];
-  
 
   constructor(
     private consultationService: ConsultationService,
     private fireStore: AngularFirestore,
     private afAuth: AngularFireAuth,
     private fireServices: UserDetailsService,
-    private alertController: AlertController 
-  ) { 
+    private alertController: AlertController
+  ) {
     this.user = this.afAuth.authState.pipe(
-      filter(user => user !== null),
-      switchMap(user => {
-        return this.fireServices.getUserDetails(user); 
+      filter((user) => user !== null),
+      switchMap((user) => {
+        return this.fireServices.getUserDetails(user);
       }),
-      map(userDetails => userDetails as UserDetails)
+      map((userDetails) => userDetails as UserDetails)
     );
 
     this.user.subscribe((userDetails) => {
@@ -61,11 +59,10 @@ export class ScheduleConsultationsPage implements OnInit {
         this.consultation.farmAddress = userDetails.address || '';
       }
     });
-    
   }
 
   ngOnInit() {
-    this.afAuth.user.subscribe(user => {
+    this.afAuth.user.subscribe((user) => {
       if (user) {
         this.consultation.farmerUid = user.uid;
         this.consultation.farmerName = this.userName;
@@ -76,33 +73,51 @@ export class ScheduleConsultationsPage implements OnInit {
   }
   loadConsultations() {
     console.log('Farmer UID:', this.consultation.farmerUid);
-  
-    this.consultationService.getConsultationsByStatus(this.consultation.farmerUid, 'Pending').subscribe(data => {
-      this.pendingConsultations = data;
-    });
-  
-    this.consultationService.getConsultationsByStatus(this.consultation.farmerUid, 'Approved').subscribe(data => {
-      this.approvedConsultations = data;
-    });
-  
-    this.consultationService.getConsultationsByStatus(this.consultation.farmerUid, 'Completed').subscribe(data => {
-      this.completedConsultations = data;
-    });
-  }
-  
-  getVeterinarians() {
-    this.fireStore.collection('users', ref => ref.where('userType', '==', 'veterinarian')).snapshotChanges().subscribe(res => {
-      this.veterinarians = res.map(e => {
-        return {
-          id: e.payload.doc.id,
-          ...e.payload.doc.data() as any
-        };
-      });
-    });
-  }
-  
 
-  toggleShowSchedule(){
+    this.consultationService
+      .getConsultationsByStatus(this.consultation.farmerUid, 'Pending')
+      .subscribe((data) => {
+        this.pendingConsultations = data;
+      });
+
+    this.consultationService
+      .getConsultationsByStatus(this.consultation.farmerUid, 'Approved')
+      .subscribe((data) => {
+        this.approvedConsultations = data;
+      });
+
+    this.consultationService
+      .getConsultationsByStatus(this.consultation.farmerUid, 'Completed')
+      .subscribe((data) => {
+        this.completedConsultations = data;
+      });
+  }
+
+  getVeterinarians() {
+    this.fireStore
+      .collection('users', (ref) => ref.where('userType', '==', 'veterinarian'))
+      .snapshotChanges()
+      .subscribe((res) => {
+        this.veterinarians = res.map((e) => {
+          return {
+            id: e.payload.doc.id,
+            ...(e.payload.doc.data() as any),
+          };
+        });
+      });
+  }
+
+  setVetDoctorName(event: any) {
+    const selectedVetId = event.detail.value;
+    const selectedVet = this.veterinarians.find(
+      (vet) => vet.id === selectedVetId
+    );
+    if (selectedVet) {
+      this.consultation.vetDoctorName = selectedVet.name; // Store the veterinarian's name
+    }
+  }
+
+  toggleShowSchedule() {
     this.showSchedule = !this.showSchedule;
   }
 
@@ -114,12 +129,11 @@ export class ScheduleConsultationsPage implements OnInit {
       }
       await this.consultationService.addConsultation(this.consultation);
       this.showAlert('Success', 'Consultation Schedule send successfully!');
-     
     } catch (error) {
       this.showAlert('Error', 'Error sending consultation schedule!');
     }
   }
-  
+
   showAlert(title: string, message: string) {
     this.alertController
       .create({
@@ -129,5 +143,4 @@ export class ScheduleConsultationsPage implements OnInit {
       })
       .then((alert) => alert.present());
   }
-
 }

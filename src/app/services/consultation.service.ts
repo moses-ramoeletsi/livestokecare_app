@@ -1,8 +1,14 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { map, Observable } from 'rxjs';
+import { catchError, from, map, Observable, switchMap } from 'rxjs';
 import { NotificationsService } from './notifications.service';
+
+
+interface ConsultationData {
+  farmerUid: string;
+  status: string;
+}
 
 @Injectable({
   providedIn: 'root'
@@ -21,49 +27,45 @@ export class ConsultationService {
     );
   }
 
-
   addConsultation(consultation: any) {
-    return this.firestore.collection('consultations').add(consultation);
+    const docRef = this.firestore.collection('consultations').doc();
+    const id = docRef.ref.id;
+    consultation.id = id;
+    return docRef.set(consultation)
   }
-
   getCurrentUser() {
     return this.auth.currentUser;
   }
-  getAllConsultations(): Observable<any[]> {
-    return this.firestore.collection('consultations').snapshotChanges().pipe(
-      map(actions => actions.map(a => {
-        const data = a.payload.doc.data() as Record<string, any>;
-        const id = a.payload.doc.id;
-        return { id, ...data };
-      }))
-    );
+  
+  updateConsultationStatus(consultationId: string, status: string): Promise<void> {
+    return this.firestore.collection('consultations').doc(consultationId).update({ status });
   }
-
-  updateConsultationStatus(consultationId: string, newStatus: string) {
-    return this.firestore.collection('consultations').doc(consultationId).update({ status: newStatus });
+  addNotification(notificationData: any) {
+    return this.firestore.collection('notifications').add(notificationData);
   }
-  // updateConsultationStatus(consultationId: string, newStatus: string) {
-  //   return this.firestore.collection('consultations').doc(consultationId).update({
-  //     status: newStatus
-  //   }).then(() => {
-  //     // After updating the status, get the consultation document
-  //     return this.firestore.collection('consultations').doc(consultationId).get().toPromise();
-  //   }).then((doc: DocumentSnapshot<unknown> | undefined) => {
-  //     if (doc && doc.exists) {
-  //       const consultation = doc.data() as { userId: string } | undefined;
-  //       if (consultation && consultation.userId) {
-  //         const userId = consultation.userId;
-  //         const title = 'Consultation Status Update';
-  //         const body = `Your consultation status has been updated to ${newStatus}`;
-  //         return this.notificationService.sendNotification(userId, title, body);
-  //       } else {
-  //         console.warn('Consultation data or userId is missing');
-  //         return Promise.resolve();
-  //       }
-  //     } else {
-  //       console.warn('Consultation document not found or undefined');
-  //       return Promise.resolve();
-  //     }
-  //   });
-  // }
+  getAllConsultationsForFarmer(farmerId: string): Observable<any[]> {
+    return this.firestore
+      .collection('consultations', ref => ref.where('farmerId', '==', farmerId))
+      .snapshotChanges()
+      .pipe(
+        map(actions => actions.map(a => {
+          const data = a.payload.doc.data() as any;
+          const id = a.payload.doc.id;
+          return { id, ...data };
+        }))
+      );
+  }
+  getAllConsultationsForVet(vetDoctorId: string): Observable<any[]> {
+    return this.firestore
+      .collection('consultations', ref => ref.where('vetDoctorId', '==', vetDoctorId))
+      .snapshotChanges()
+      .pipe(
+        map(actions => actions.map(a => {
+          const data = a.payload.doc.data() as any;
+          const id = a.payload.doc.id;
+          return { id, ...data };
+        }))
+      );
+  }
+ 
 }

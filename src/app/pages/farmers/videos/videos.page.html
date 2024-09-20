@@ -1,29 +1,33 @@
 <ion-header>
   <ion-toolbar class="videoPage">
     <ion-buttons slot="start">
-      <ion-icon class="back" name="arrow-back"  routerLink="/farmers-dashboard"></ion-icon>
+      <ion-icon
+        class="back"
+        name="arrow-back"
+        routerLink="/farmers-dashboard"
+      ></ion-icon>
     </ion-buttons>
-    <ion-title>Videos</ion-title>
+    <ion-title class="ion-text-center">Videos</ion-title>
   </ion-toolbar>
-  </ion-header>
-<ion-content>
-<div
-*ngIf="videos.length > 0; else noVideos"
-  class="post-video"
-  style="background-color: transparent"
->
-<ion-card *ngFor="let video of videos" style="margin: 10px">
-  <ion-card-header class="ion-text-center">
-    <ion-card-title>{{ video.video_title }}</ion-card-title>
-    <ion-card-subtitle>Posted by: {{video.authorName}}</ion-card-subtitle> 
-  </ion-card-header>
-  <ion-card-content>
-    <p>{{ video.description }}</p>
-    <p><a (click)="openLink(video.videoUrl)">Visit</a></p>
-  </ion-card-content>
-</ion-card>
-</div>
-<ng-template #noVideos>
-  <p style="color: brown">No events available</p>
-</ng-template>
+</ion-header>
+<ion-content class="ion-padding">
+  <div
+    *ngIf="videos.length > 0; else noVideos"
+    class="post-video"
+    style="background-color: transparent"
+  >
+    <ion-card *ngFor="let video of videos" style="margin: 10px">
+      <ion-card-header class="ion-text-center">
+        <ion-card-title>{{ video.video_title }}</ion-card-title>
+        <ion-card-subtitle>Posted by: {{video.authorName}}</ion-card-subtitle>
+      </ion-card-header>
+      <ion-card-content>
+        <p>{{ video.description }}</p>
+        <p><a (click)="openLink(video.videoUrl)">Visit</a></p>
+      </ion-card-content>
+    </ion-card>
+  </div>
+  <ng-template #noVideos>
+    <p style="color: brown">No events available</p>
+  </ng-template>
 </ion-content>

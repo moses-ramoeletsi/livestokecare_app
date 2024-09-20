@@ -3,10 +3,10 @@
     <ion-buttons slot="start">
       <ion-icon class="back" name="arrow-back"  routerLink="/farmers-profile"></ion-icon>
     </ion-buttons>
-    <ion-title >All Orders</ion-title>
+    <ion-title class="ion-text-center">All Orders</ion-title>
   </ion-toolbar>
   </ion-header>
-<ion-content [fullscreen]="true">
+<ion-content [fullscreen]="true" class="ion-padding">
   <div *ngIf="orders.length > 0; else noOrders"
     class="orders"
     >

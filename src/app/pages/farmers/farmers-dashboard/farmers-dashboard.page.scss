@@ -8,6 +8,10 @@ ion-content {
     color: #000000;
     margin-left: 1.5rem;
   }
+
+  ion-title{
+    text-transform: capitalize;
+  }
   
   .myMenu {
     --background: var(--ion-color-menu);
