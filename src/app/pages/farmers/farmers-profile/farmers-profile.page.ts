@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { AlertController } from '@ionic/angular';
 import { Observable, filter, switchMap, map } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
 import { UserDetailsService } from 'src/app/services/user-details.service';
@@ -14,10 +15,12 @@ export class FarmersProfilePage implements OnInit {
   userName: string = '';
   userEmail: string = '';
   user: Observable<UserDetails | null>;
+
   constructor(
     private authService: AuthService,
     public fireServices: UserDetailsService,
-    public afAuth: AngularFireAuth
+    public afAuth: AngularFireAuth,
+    private alertController: AlertController
   ) {
     this.user = this.afAuth.authState.pipe(
       filter((user) => user !== null),
@@ -26,7 +29,6 @@ export class FarmersProfilePage implements OnInit {
       }),
       map((userDetails) => userDetails as UserDetails)
     );
-
     this.user.subscribe((userDetails) => {
       if (userDetails) {
         this.userName = userDetails.name;
@@ -34,11 +36,28 @@ export class FarmersProfilePage implements OnInit {
       }
     });
   }
-  ngOnInit() {
-  }
 
-  onLogout() {
-    this.authService.logout();
+  ngOnInit() {}
+
+  async logout() {
+    const alert = await this.alertController.create({
+      header: 'Logout',
+      message: 'Are you sure you want to logout?',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel'
+        },
+        {
+          text: 'Logout',
+          handler: () => {
+            this.authService.logout();
+          }
+        }
+      ]
+    });
+
+    await alert.present();
   }
   
   

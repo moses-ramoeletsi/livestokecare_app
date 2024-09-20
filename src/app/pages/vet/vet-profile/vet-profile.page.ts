@@ -4,6 +4,7 @@ import { Observable, filter, switchMap, map } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
 import { UserDetailsService } from 'src/app/services/user-details.service';
 import { UserDetails } from 'src/app/shared/user-details';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-vet-profile',
@@ -11,14 +12,15 @@ import { UserDetails } from 'src/app/shared/user-details';
   styleUrls: ['./vet-profile.page.scss'],
 })
 export class VetProfilePage implements OnInit {
-
   userName: string = '';
   userEmail: string = '';
   user: Observable<UserDetails | null>;
+
   constructor(
     private authService: AuthService,
     public fireServices: UserDetailsService,
-    public afAuth: AngularFireAuth
+    public afAuth: AngularFireAuth,
+    private alertController: AlertController
   ) {
     this.user = this.afAuth.authState.pipe(
       filter((user) => user !== null),
@@ -27,7 +29,6 @@ export class VetProfilePage implements OnInit {
       }),
       map((userDetails) => userDetails as UserDetails)
     );
-
     this.user.subscribe((userDetails) => {
       if (userDetails) {
         this.userName = userDetails.name;
@@ -35,7 +36,27 @@ export class VetProfilePage implements OnInit {
       }
     });
   }
-  ngOnInit() {
-  }
 
+  ngOnInit() {}
+
+  async logout() {
+    const alert = await this.alertController.create({
+      header: 'Logout',
+      message: 'Are you sure you want to logout?',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel'
+        },
+        {
+          text: 'Logout',
+          handler: () => {
+            this.authService.logout();
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
 }
