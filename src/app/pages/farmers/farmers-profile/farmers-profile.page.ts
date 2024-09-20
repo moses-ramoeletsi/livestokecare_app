@@ -46,19 +46,17 @@ export class FarmersProfilePage implements OnInit {
       buttons: [
         {
           text: 'Cancel',
-          role: 'cancel'
+          role: 'cancel',
         },
         {
           text: 'Logout',
           handler: () => {
             this.authService.logout();
-          }
-        }
-      ]
+          },
+        },
+      ],
     });
 
     await alert.present();
   }
-  
-  
 }

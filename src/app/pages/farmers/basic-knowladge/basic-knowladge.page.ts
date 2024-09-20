@@ -7,14 +7,12 @@ import { BasicKnowladgeService } from 'src/app/services/basic-knowladge.service'
   styleUrls: ['./basic-knowladge.page.scss'],
 })
 export class BasicKnowladgePage implements OnInit {
-
-  
-  article= {
+  article = {
     article_title: '',
     description: '',
     articleUrl: '',
     authorId: '',
-    authorName: '', 
+    authorName: '',
   };
   userId: string | null = null;
   name: any;
@@ -25,14 +23,14 @@ export class BasicKnowladgePage implements OnInit {
   disease = {
     id: '',
     disease_name: '',
-    animal_type:'',
+    animal_type: '',
     description: '',
     symptoms: '',
     treatment: '',
   };
-  
+
   diseases: any[] = [];
-  constructor(private fireStore: BasicKnowladgeService,) { }
+  constructor(private fireStore: BasicKnowladgeService) {}
 
   ngOnInit() {
     this.getArticles();
@@ -43,18 +41,18 @@ export class BasicKnowladgePage implements OnInit {
       this.articles = articles;
     });
   }
-  
+
   openLink(url: string) {
     window.open(url, '_blank');
   }
-  //Common Diseases 
+  //Common Diseases
   getCommonDiseases() {
     this.fireStore.fetchPostedDiseases().subscribe((diseases) => {
       this.diseases = diseases;
     });
   }
-    
-  toggleToCommonDiseasesPage(){
+
+  toggleToCommonDiseasesPage() {
     this.showCommonDiseases = !this.showCommonDiseases;
   }
 }
