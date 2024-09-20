@@ -104,18 +104,19 @@ ion-content {
   }
   
   .post-medicine ion-card-content {
+      color: #1a1a1acc;
       padding-top: 0;
-  }
-  
-  .post-medicine ion-card-title {
+    }
+    
+    .post-medicine ion-card-title {
       font-size: 1.2rem;
       font-weight: bold;
-      color: black;
-  }
-  
-  .post-medicine ion-card-subtitle {
+      color: #3e8156;
+    }
+    
+    .post-medicine ion-card-subtitle {
       font-size: 1rem;
-      color: #666;
+      color: #1a1a1acc;
   }
   
   .post-medicine ion-card:hover {

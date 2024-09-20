@@ -26,7 +26,10 @@ export class VideosPage implements OnInit {
    })
   }
 
-  openLink(url: string) {
-    window.open(url, '_blank');
+  downloadVideo(videoUrl: string, fileName: string) {
+    const link = document.createElement('a');
+    link.href = videoUrl;
+    link.download = fileName;
+    link.click();
   }
 }

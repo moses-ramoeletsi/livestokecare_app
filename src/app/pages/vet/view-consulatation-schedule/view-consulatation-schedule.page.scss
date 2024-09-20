@@ -106,17 +106,19 @@ ion-content {
   
   .view-consultations ion-card-content {
       padding-top: 0;
-  }
-  
-  .view-consultations ion-card-title {
+      color: #1a1a1acc;
+    }
+    
+    .view-consultations ion-card-title {
       font-size: 1.2rem;
       font-weight: bold;
-      color: black;
-  }
-  
-  .view-consultations ion-card-subtitle {
+      color: #3e8156;
+    }
+    
+    .view-consultations ion-card-subtitle {
       font-size: 1rem;
-      color: #666;
+      color: #1a1a1acc;
+      
   }
   
   .view-consultations ion-card:hover {

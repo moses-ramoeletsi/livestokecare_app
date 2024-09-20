@@ -69,17 +69,19 @@ ion-content {
   
   .view-orders ion-card-content {
     padding-top: 0 !important;
+    color: #1a1a1acc !important;
+    margin-top: 10px;
   }
   
   .view-orders ion-card-title {
     font-size: 1.2rem !important;
     font-weight: bold !important;
-    color: black !important;
+    color: #3e8156 !important;
   }
   
   .view-orders ion-card-subtitle {
     font-size: 1rem !important;
-    color: #666 !important;
+    color: #1a1a1acc !important;
   }
   
   .view-orders ion-card:hover {

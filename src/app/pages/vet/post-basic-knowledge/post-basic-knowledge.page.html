@@ -3,13 +3,13 @@
     <ion-buttons slot="start">
       <ion-icon class="back" name="arrow-back"  routerLink="/vet-dashboard"></ion-icon>
     </ion-buttons>
-    <ion-title>Basic Knowledge</ion-title>
+    <ion-title class="ion-text-center">Basic Knowledge</ion-title>
   </ion-toolbar>
 </ion-header>
 <ion-content [fullscreen]="true" >
   <ion-content class="ion-padding" *ngIf="!showDiseases">
     <div style="display: flex; justify-content: center; margin-top: 20px;">
-      <ion-button (click)="toggleToDiseasesPage()">View Common Diseases</ion-button>
+      <ion-button color="custom" (click)="toggleToDiseasesPage()">View Common Diseases</ion-button>
     </div>
     <ion-fab
       slot="fixed"
@@ -22,7 +22,10 @@
       </ion-fab-button>
     </ion-fab>
   
-    <ion-modal [keepContentsMounted]="true" trigger="open-knowladge-modal" #modal>
+    <ion-modal [keepContentsMounted]="true" trigger="open-knowladge-modal" #modal
+    [initialBreakpoint]="0.55"
+    [breakpoints]="[0, 0.35, 0.5, 0.95]"
+    >
       <ng-template>
         <ion-header>
           <ion-toolbar>

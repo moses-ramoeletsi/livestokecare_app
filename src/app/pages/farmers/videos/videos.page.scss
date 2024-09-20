@@ -118,6 +118,7 @@ ion-content {
   .post-video ion-card-subtitle {
       font-size: 1rem;
       color: #1a1a1acc;
+      text-transform: capitalize;
   }
   .post-video ion-card:hover {
       transform: translateY(-5px);

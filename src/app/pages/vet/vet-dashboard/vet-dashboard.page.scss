@@ -7,7 +7,9 @@ ion-content h3 {
   color: #000000;
   margin-left: 1.5rem;
 }
-
+ion-title {
+  text-transform: capitalize;
+}
 .myMenu {
   --background: var(--ion-color-menu);
   margin-top: 0;

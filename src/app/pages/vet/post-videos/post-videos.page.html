@@ -1,9 +1,13 @@
 <ion-header>
   <ion-toolbar class="postVideoPage">
     <ion-buttons slot="start">
-      <ion-icon class="back" name="arrow-back"  routerLink="/vet-dashboard"></ion-icon>
+      <ion-icon
+        class="back"
+        name="arrow-back"
+        routerLink="/vet-dashboard"
+      ></ion-icon>
     </ion-buttons>
-    <ion-title>Video Guide</ion-title>
+    <ion-title class="ion-text-center">Video Guide</ion-title>
   </ion-toolbar>
 </ion-header>
 <ion-content [fullscreen]="true" class="ion-padding">
@@ -18,13 +22,19 @@
     </ion-fab-button>
   </ion-fab>
 
-  <ion-modal [keepContentsMounted]="true" trigger="open-video-modal" #modal>
+  <ion-modal
+    [keepContentsMounted]="true"
+    trigger="open-video-modal"
+    #modal
+    [initialBreakpoint]="0.50"
+    [breakpoints]="[0, 0.35, 0.5, 0.95]"
+  >
     <ng-template>
       <ion-header>
         <ion-toolbar>
           <ion-title class="ion-text-center">POST VIDEO</ion-title>
           <ion-buttons slot="end">
-            <ion-button (click)="restForm(modal)">Cancel</ion-button>
+            <ion-button (click)="resetForm(modal)">Cancel</ion-button>
           </ion-buttons>
         </ion-toolbar>
       </ion-header>
@@ -53,17 +63,21 @@
             placeholder="Enter video description"
           ></ion-textarea>
 
-          <ion-input
-            [(ngModel)]="video.videoUrl"
-            name="videoUrl"
-            label="Link"
-            labelPlacement="floating"
-            type="text"
-            fill="outline"
-            class="top-margin"
-            placeholder="Enter video Link"
-            style="color: black"
-          ></ion-input>
+          <ion-item lines="none">
+            <ion-label position="stacked">Upload Video</ion-label>
+            <input
+              style="color: #3e8156"
+              type="file"
+              (change)="onFileSelected($event)"
+              accept="video/*"
+            />
+          </ion-item>
+
+          <ion-progress-bar
+            color="custom"
+            *ngIf="uploadProgress > 0"
+            [value]="uploadProgress / 100"
+          ></ion-progress-bar>
 
           <ion-button class="mycolor" type="submit" expand="block"
             >Submit</ion-button
@@ -84,8 +98,21 @@
       </ion-card-header>
       <ion-card-content>
         <p>{{ video.description }}</p>
-        <p><a (click)="openLink(video.videoUrl)">Visit</a></p>
-        <div style="display: flex; justify-content: space-between">
+        <video
+          controls
+          *ngIf="video.videoUrl"
+          style="width: 100%; max-height: 200px"
+        >
+          <source [src]="video.videoUrl" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+        <div
+          style="
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+          "
+        >
           <ion-button
             fill="outline"
             slot="start"
@@ -99,6 +126,13 @@
             color="danger"
             (click)="deletePost(video)"
             >Delete</ion-button
+          >
+          <ion-button
+            fill="outline"
+            slot="end"
+            color="success"
+            (click)="downloadVideo(video.videoUrl, video.video_title + '.mp4')"
+            >Download</ion-button
           >
         </div>
       </ion-card-content>
