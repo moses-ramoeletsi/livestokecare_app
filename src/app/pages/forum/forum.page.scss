@@ -1,0 +1,166 @@
+ion-content {
+    --background: #f0f0f0;
+  }
+  
+  ion-card {
+      background: #f0f0f0;
+      border-radius: 10px;
+  }
+   ion-card-title {
+    color: #3e8156;
+    font-size: 16px;
+    text-transform: capitalize;
+  }
+  ion-card-content p {
+    color: #1a1a1acc;
+  }
+  ion-list {
+      padding: 16px;
+    background: #f0f0f0;
+  }
+  
+  ion-item {
+    --background: #fefefeee;
+    --padding-start: 10px;
+    --inner-padding-end: 0;
+    margin-bottom: 16px;
+    border-radius: 15px;
+  }
+
+  
+  ion-modal {
+    --background: transparent;
+  }
+  
+  ion-modal ion-header ion-toolbar ion-img {
+    width: 300px;
+    display: block;
+    margin: 0 auto;
+  }
+  
+  ion-modal ion-item ion-label {
+    color: black;
+  }
+  
+  ion-modal ion-header ion-toolbar {
+    --background: #2c5434;
+  }
+  
+  ion-modal ion-content {
+    --background: #f0f0f0;
+  }
+  
+  ion-modal ion-content form {
+    padding: 20px;
+  }
+  
+  ion-modal ion-content ion-item {
+    margin-bottom: 15px;
+  }
+  
+  ion-modal ion-content ion-button {
+    margin-top: 10px;
+    --background: #2c5434;
+    --color: #f0f0f0;
+  }
+
+  ion-footer {
+    background-color: #f8f8f8;
+    border-top: 1px solid #e0e0e0;
+  }
+  
+  ion-toolbar {
+    --background: transparent;
+    --border-width: 0;
+    --padding-top: 0;
+    --padding-bottom: 0;
+  }
+  
+  ion-fab-button {
+    --background: #2c5434;
+  }
+
+  h2 {
+    color: #3e8156;
+  }
+  .forum-toolbar {
+    --background: white;
+    color: black;
+  }
+
+ .back {
+    font-size: 24px;
+    padding: 8px;
+    border-radius: 50%;
+    background-color: #3e8156;
+    color: #ffffff;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-right: 8px;
+  }
+  .username{
+    margin-top: 10px;
+    font-size: 16px;
+    font-style: normal;
+    color:#3e8156;
+    text-transform: capitalize;
+}
+.post-descriptions{
+    text-transform: capitalize;
+    margin-top: 15px;
+    color: #1a1a1acc;
+  }
+
+ .top-margin{
+    margin-top: 25px;
+ }
+
+ .message-input-container {
+    display: flex;
+    align-items: center;
+    padding: 8px;
+    max-height: 150px;
+  }
+  
+  .textarea-wrapper {
+    flex: 1;
+    background: #ffffff;
+    border-radius: 24px;
+    margin-right: 8px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    max-height: 120px;
+    overflow-y: auto;
+  }
+  
+  
+  ion-textarea::part(textarea) {
+    margin: 0;
+    padding: 0;
+    line-height: 1.4;
+  }
+  
+  
+.action-buttons {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-left: 8px;
+  }
+  ion-textarea {
+    max-height: 100%;
+    --padding-top: 8px;
+    --padding-bottom: 8px;
+    --padding-start: 16px;
+    --padding-end: 16px;
+    color: #333;
+  }
+  .send-button {
+    font-size: 24px;
+    padding: 8px;
+    border-radius: 50%;
+    background-color: #3e8156;
+    color: #ffffff;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-right: 8px;
+  }

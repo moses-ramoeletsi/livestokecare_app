@@ -1,0 +1,135 @@
+<ion-header>
+  <ion-toolbar class="forum-toolbar">
+    <ion-buttons slot="start">
+      <ion-icon
+        class="back"
+        name="arrow-back"
+        (click)="onBackButtonClick()"
+      ></ion-icon>
+    </ion-buttons>
+    <ion-title class="ion-text-center">LivestockCare Forum</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-fab
+    slot="fixed"
+    vertical="bottom"
+    horizontal="end"
+    class="ion-center-sm-down"
+  >
+    <ion-fab-button id="open-forum-modal">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+  <ion-list>
+    <ion-item lines="none" *ngFor="let post of posts | async">
+      <ion-label (click)="openPost(post)">
+        <p class="username">{{ post.userName }}</p>
+        <p>Posted on: {{ post.createdAt | date:'short' }}</p>
+        <p class="post-descriptions">{{ post.description }}</p>
+      </ion-label>
+      <ion-buttons slot="end" *ngIf="post.uid === currentUser?.uid">
+        <ion-button (click)="editPost(post)">
+          <ion-icon color="custom" name="create-outline"></ion-icon>
+        </ion-button>
+        <ion-button (click)="deletePost(post)">
+          <ion-icon color="danger" name="trash-outline"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-item>
+  </ion-list>
+
+  <ion-modal
+    [keepContentsMounted]="true"
+    trigger="open-forum-modal"
+    #modal
+    [initialBreakpoint]="0.35"
+    [breakpoints]="[0, 0.35, 0.5, 0.95]"
+  >
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-title>{{ isEditing ? 'Edit Post' : 'Create Post' }}</ion-title>
+          <ion-buttons slot="end">
+            <ion-button (click)="modal.dismiss()">Close</ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content class="ion-padding">
+        <ion-textarea
+          [(ngModel)]="newPost.description"
+          name="description"
+          label="Description"
+          fill="outline"
+          labelPlacement="floating"
+          placeholder="Enter event description"
+          class="top-margin"
+          style="color: black"
+          autoGrow="true"
+        >
+        </ion-textarea>
+        <ion-button expand="block" (click)="submitPost()">
+          {{ isEditing ? 'Update' : 'Submit' }}
+        </ion-button>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+
+  <ion-modal [keepContentsMounted]="true" trigger="open-post-modal" #postModal>
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-title>Post Details</ion-title>
+          <ion-buttons slot="end">
+            <ion-button (click)="postModal.dismiss()">Close</ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+
+      <ion-content class="ion-padding">
+        <ion-card *ngIf="selectedPost">
+          <ion-card-header>
+            <ion-card-title>{{ selectedPost.userName }}</ion-card-title>
+            <ion-card-subtitle
+              >Posted on: {{ selectedPost.createdAt | date:'short'
+              }}</ion-card-subtitle
+            >
+          </ion-card-header>
+          <ion-card-content>
+            <p>{{ selectedPost.description }}</p>
+          </ion-card-content>
+        </ion-card>
+
+        <ion-list>
+          <ion-item lines="none" *ngFor="let comment of postComments">
+            <ion-label>
+              <h2>{{ comment.userName }}</h2>
+              <p>{{ comment.text }}</p>
+            </ion-label>
+          </ion-item>
+        </ion-list>
+
+      </ion-content>
+      <ion-footer>
+        <ion-toolbar>
+          <div class="message-input-container">
+            <div class="textarea-wrapper">
+              <ion-textarea
+                [(ngModel)]="newComment.text" 
+                placeholder="Type a message..." 
+                autoGrow="true"
+                rows="1"
+                maxRows="4"
+              ></ion-textarea>
+            </div>
+            
+          
+            <div class="action-buttons">
+              <ion-icon class="send-button" (click)="submitComment()" name="send"></ion-icon>
+            </div>
+          </div>
+        </ion-toolbar>
+      </ion-footer>
+    </ng-template>
+  </ion-modal>
+</ion-content>
