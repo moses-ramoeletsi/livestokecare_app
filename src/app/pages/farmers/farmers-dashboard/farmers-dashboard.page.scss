@@ -79,3 +79,45 @@ ion-content {
   ion-fab-button {
     --background: #2c5434;
   }
+
+  ion-modal {
+    --background: transparent;
+  }
+  
+  ion-modal ion-header ion-toolbar ion-img {
+    width: 300px;
+    display: block;
+    margin: 0 auto;
+  }
+  
+  ion-modal ion-item ion-label {
+    color: black;
+  }
+  
+  ion-modal ion-header ion-toolbar {
+    --background: #2c5434;
+  }
+  
+  ion-modal ion-content h2{
+    color: #2c5434;
+  }
+  
+  ion-modal ion-content  p{
+    color: #14141466;
+    font-size: 1.2rem;
+  }
+  
+  ion-modal ion-content form {
+    padding: 20px;
+  }
+  
+  ion-modal ion-content ion-item {
+    margin-bottom: 15px;
+  }
+  
+  ion-modal ion-content ion-button {
+    margin-top: 10px;
+    --background: #2c5434;
+    --color: #f0f0f0;
+  }
+  
