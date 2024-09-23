@@ -71,7 +71,7 @@
       <h2>{{ tourSteps[currentStep].title }}</h2>
       <p>{{ tourSteps[currentStep].content }}</p>
       
-      <ion-button color="custom" expand="block" (click)="previousStep()" *ngIf="currentStep < tourSteps.length - 1">
+      <ion-button color="custom" expand="block" (click)="previousStep()" *ngIf="currentStep > 0">
         Previous
       </ion-button>
       <ion-button color="custom" expand="block" (click)="nextStep()" *ngIf="currentStep < tourSteps.length - 1">

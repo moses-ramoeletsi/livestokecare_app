@@ -15,14 +15,23 @@ export class FarmersDashboardPage implements OnInit {
   user: Observable<UserDetails | null>;
   tourSteps = [
     {
+      title: 'Consultation',
+      content:
+        'Schedule a consultation with experts for personalized advice on livestock practices and techniques.',
+    },
+    {
       title: 'Knowledge Base',
       content:
         'Access important farming information for better and improved Healthcare and diseases awareness.',
     },
     {
+      title: 'Events',
+      content: 'Stay updated on upcoming farming events and workshops.',
+    },
+    {
       title: 'Videos',
       content:
-        'Watch educational videos related to  livestock farming practices techniques.',
+        'Watch educational videos related to livestock farming practices and techniques.',
     },
     {
       title: 'Medication',
@@ -36,7 +45,7 @@ export class FarmersDashboardPage implements OnInit {
     {
       title: 'Chat',
       content:
-        'Get instant support  from available vets through our chat feature.',
+        'Get instant support from available vets through our chat feature.',
     },
   ];
   currentStep = 0;
@@ -73,7 +82,7 @@ export class FarmersDashboardPage implements OnInit {
     }
   }
   previousStep() {
-    if (this.currentStep < this.tourSteps.length - 1) {
+    if (this.currentStep > 0) {
       this.currentStep--;
     }
   }
