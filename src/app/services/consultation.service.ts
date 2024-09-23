@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { catchError, from, map, Observable, switchMap } from 'rxjs';
-import { NotificationsService } from './notifications.service';
+import { map, Observable, switchMap } from 'rxjs';
 
 interface ConsultationData {
   farmerUid: string;
@@ -93,6 +92,39 @@ export class ConsultationService {
     return this.firestore.collection('consultations').doc(id).delete();
   }
   
-  
+  setReminderTime(consultationId: string, reminderTime: Date): Promise<void> {
+    return this.firestore
+      .collection('consultations')
+      .doc(consultationId)
+      .update({ reminderTime });
+  }
+
+  getReminderTime(consultationId: string): Observable<Date | undefined> {
+    return this.firestore
+      .collection('consultations')
+      .doc(consultationId)
+      .valueChanges()
+      .pipe(
+        map((consultation: any) => consultation?.reminderTime?.toDate())
+      );
+  }
+
+  getApprovedConsultationsWithReminders(farmerId: string): Observable<any[]> {
+    return this.firestore
+      .collection('consultations', (ref) =>
+        ref.where('farmerUid', '==', farmerId)
+           .where('status', '==', 'Approved')
+      )
+      .snapshotChanges()
+      .pipe(
+        map((actions) =>
+          actions.map((a) => {
+            const data = a.payload.doc.data() as ConsultationData;
+            const id = a.payload.doc.id;
+            return { id, ...data };
+          })
+        )
+      );
+  }
   
 }

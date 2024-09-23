@@ -26,8 +26,10 @@
       <ion-card-content>
         <p>
           <strong>Consultation Date:</strong> {{ consultation.consultationDate |
-          date }}
-        </p>
+            date }}
+          </p>
+        <p><strong>Time:</strong> {{ getFormattedDateTime(consultation.consultationDate).time }}</p>
+        <br />
         <p><strong>Animal Type:</strong> {{ consultation.animalType }}</p>
         <p><strong>Age:</strong> {{ consultation.animalAge }}</p>
         <p><strong>Purpose:</strong> {{ consultation.purpose }}</p>
@@ -36,10 +38,10 @@
       </ion-card-content>
       <ion-row>
         <ion-col>
-          <ion-button (click)="editConsultation(consultation)" color="primary">Edit</ion-button>
+          <ion-button color="custom" (click)="editConsultation(consultation)" >Edit</ion-button>
         </ion-col>
         <ion-col>
-          <ion-button (click)="deleteCompletedConsultation(consultation.id)" color="danger">Delete</ion-button>
+          <ion-button fill="outline" (click)="deleteCompletedConsultation(consultation.id)" color="danger">Delete</ion-button>
         </ion-col>
       </ion-row>
     </ion-card>
@@ -62,14 +64,29 @@
       <ion-card-content>
         <p>
           <strong>Consultation Date:</strong> {{ consultation.consultationDate |
-          date }}
-        </p>
+            date }}
+          </p>
+        <p><strong>Time:</strong> {{ getFormattedDateTime(consultation.consultationDate).time }}</p>
+        <br />
         <p><strong>Animal Type:</strong> {{ consultation.animalType }}</p>
         <p><strong>Age:</strong> {{ consultation.animalAge }}</p>
         <p><strong>Purpose:</strong> {{ consultation.purpose }}</p>
         <p><strong>Contacts:</strong> {{ consultation.contactNumber }}</p>
         <p><strong>Farmer's Address:</strong> {{ consultation.farmAddress }}</p>
-      </ion-card-content>
+        <p>
+         <p>
+    <strong>Reminder:</strong>
+    {{ consultation.reminderTime ? (consultation.reminderTime.toDate() | date:'medium') : 'Not set' }}
+  </p>
+</ion-card-content>
+
+<ion-row *ngIf="!isReminderExpired(consultation.reminderTime)">
+  <ion-col>
+    <ion-button (click)="setReminder(consultation)" color="custom">
+      {{ consultation.reminderTime ? 'Update Reminder' : 'Set Reminder' }}
+    </ion-button>
+  </ion-col>
+</ion-row>
     </ion-card>
   </div>
 
@@ -90,8 +107,10 @@
       <ion-card-content>
         <p>
           <strong>Consultation Date:</strong> {{ consultation.consultationDate |
-          date }}
-        </p>
+            date }}
+          </p>
+        <p><strong>Time:</strong> {{ getFormattedDateTime(consultation.consultationDate).time }}</p>
+        <br />
         <p><strong>Animal Type:</strong> {{ consultation.animalType }}</p>
         <p><strong>Age:</strong> {{ consultation.animalAge }}</p>
         <p><strong>Purpose:</strong> {{ consultation.purpose }}</p>
@@ -100,7 +119,7 @@
       </ion-card-content>
       <ion-row>
         <ion-col>
-          <ion-button (click)="deleteCompletedConsultation(consultation.id)" color="danger">Delete</ion-button>
+          <ion-button fill="outline" (click)="deleteCompletedConsultation(consultation.id)" color="danger">Delete</ion-button>
         </ion-col>
       </ion-row>
     </ion-card>
