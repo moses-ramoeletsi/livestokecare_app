@@ -26,6 +26,7 @@ export class ScheduleConsultationsPage implements OnInit {
     status: 'Pending',
     farmerUid: '',
   };
+  
 
   userName: string = '';
   user: Observable<UserDetails | null>;
@@ -71,25 +72,41 @@ export class ScheduleConsultationsPage implements OnInit {
     });
     this.getVeterinarians();
   }
+
   loadConsultations() {
     console.log('Farmer UID:', this.consultation.farmerUid);
-
+  
     this.consultationService
       .getConsultationsByStatus(this.consultation.farmerUid, 'Pending')
       .subscribe((data) => {
-        this.pendingConsultations = data;
+        this.pendingConsultations = data.map((consultation: any) => {
+          return {
+            ...consultation,
+            id: consultation.id
+          };
+        });
       });
-
+  
     this.consultationService
       .getConsultationsByStatus(this.consultation.farmerUid, 'Approved')
       .subscribe((data) => {
-        this.approvedConsultations = data;
+        this.approvedConsultations = data.map((consultation: any) => {
+          return {
+            ...consultation,
+            id: consultation.id
+          };
+        });
       });
-
+  
     this.consultationService
       .getConsultationsByStatus(this.consultation.farmerUid, 'Completed')
       .subscribe((data) => {
-        this.completedConsultations = data;
+        this.completedConsultations = data.map((consultation: any) => {
+          return {
+            ...consultation,
+            id: consultation.id
+          };
+        });
       });
   }
 
@@ -113,22 +130,62 @@ export class ScheduleConsultationsPage implements OnInit {
       (vet) => vet.id === selectedVetId
     );
     if (selectedVet) {
-      this.consultation.vetDoctorName = selectedVet.name; // Store the veterinarian's name
+      this.consultation.vetDoctorName = selectedVet.name; 
     }
   }
 
   toggleShowSchedule() {
     this.showSchedule = !this.showSchedule;
+    if (this.showSchedule) {
+      this.resetConsultationForm();
+    }
   }
 
+  resetConsultationForm() {
+    this.consultation = {
+      farmerName: this.userName,
+      vetDoctorName: '',
+      consultationDate: '',
+      animalAge: '',
+      purpose: '',
+      animalType: '',
+      contactNumber: this.consultation.contactNumber,
+      farmAddress: this.consultation.farmAddress,
+      status: 'Pending',
+      farmerUid: this.consultation.farmerUid,
+    };
+  }
+
+  editConsultation(consultation: any) {
+    this.consultation = { ...consultation };
+    this.toggleShowSchedule();
+  }
+
+  deleteCompletedConsultation(id: string) {
+    this.consultationService.deleteConsultation(id).then(() => {
+      this.showAlert('Success', 'Consultation deleted successfully!');
+      this.loadConsultations();
+    }).catch(() => {
+      this.showAlert('Error', 'Failed to delete consultation.');
+    });
+  }
+  
   async submitConsultation() {
     try {
       const user = await this.afAuth.currentUser;
       if (user) {
         this.consultation.farmerUid = user.uid;
       }
-      await this.consultationService.addConsultation(this.consultation);
-      this.showAlert('Success', 'Consultation Schedule send successfully!');
+  
+      if (this.consultation.id) {
+        await this.consultationService.updateConsultation(this.consultation.id, this.consultation);
+        this.showAlert('Success', 'Consultation updated successfully!');
+      } else {
+        await this.consultationService.addConsultation(this.consultation);
+        this.showAlert('Success', 'Consultation added successfully!');
+      }
+  
+      this.toggleShowSchedule();
     } catch (error) {
       this.showAlert('Error', 'Error sending consultation schedule!');
     }

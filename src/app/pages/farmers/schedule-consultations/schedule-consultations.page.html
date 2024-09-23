@@ -34,6 +34,14 @@
         <p><strong>Contacts:</strong> {{ consultation.contactNumber }}</p>
         <p><strong>Farmer's Address:</strong> {{ consultation.farmAddress }}</p>
       </ion-card-content>
+      <ion-row>
+        <ion-col>
+          <ion-button (click)="editConsultation(consultation)" color="primary">Edit</ion-button>
+        </ion-col>
+        <ion-col>
+          <ion-button (click)="deleteCompletedConsultation(consultation.id)" color="danger">Delete</ion-button>
+        </ion-col>
+      </ion-row>
     </ion-card>
   </div>
 
@@ -90,6 +98,11 @@
         <p><strong>Contacts:</strong> {{ consultation.contactNumber }}</p>
         <p><strong>Farmer's Address:</strong> {{ consultation.farmAddress }}</p>
       </ion-card-content>
+      <ion-row>
+        <ion-col>
+          <ion-button (click)="deleteCompletedConsultation(consultation.id)" color="danger">Delete</ion-button>
+        </ion-col>
+      </ion-row>
     </ion-card>
   </div>
 

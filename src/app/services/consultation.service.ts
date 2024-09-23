@@ -85,4 +85,14 @@ export class ConsultationService {
         )
       );
   }
+  updateConsultation(id: string, consultation: any): Promise<void> {
+    return this.firestore.collection('consultations').doc(id).update(consultation);
+  }
+  
+  deleteConsultation(id: string): Promise<void> {
+    return this.firestore.collection('consultations').doc(id).delete();
+  }
+  
+  
+  
 }
