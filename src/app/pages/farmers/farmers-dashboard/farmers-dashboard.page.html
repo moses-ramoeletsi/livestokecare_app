@@ -1,55 +1,87 @@
 <ion-content>
   <div style="display: flex; align-items: center; margin: 16px;">
     <ion-title class="userName" style="margin-left: 16px;">{{userName}}</ion-title>
-  </div>
-    <ion-grid>
-      <ion-row>
-        <ion-col size="12" size-md="6">
-          <ion-card color="white" [routerLink]="['/basic-knowladge']">
-            <ion-card-header>
-              <ion-img src="../../../../assets/images/knoladge.png"></ion-img>
-            </ion-card-header>
-            <ion-card-content>Knowledge Base</ion-card-content>
-          </ion-card>
-        </ion-col>
-      </ion-row>
+    <ion-button  id="open-tour-modal" color="custom" expand="block">Take a Tour</ion-button>  </div>
+  <ion-grid>
     <ion-row>
       <ion-col size="12" size-md="6">
-        <ion-card color="white" [routerLink]="['/videos']">
+        <ion-card color="white" [routerLink]="['/basic-knowladge']" #knowledgeBase>
           <ion-card-header>
-            <ion-img
-              src="../../../../assets/images/video.png"
-            ></ion-img>
+            <ion-img src="../../../../assets/images/knoladge.png"></ion-img>
+          </ion-card-header>
+          <ion-card-content>Knowledge Base</ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="12" size-md="6">
+        <ion-card color="white" [routerLink]="['/videos']" #videos>
+          <ion-card-header>
+            <ion-img src="../../../../assets/images/video.png"></ion-img>
           </ion-card-header>
           <ion-card-content>Videos</ion-card-content>
         </ion-card>
       </ion-col>
     </ion-row>
     <ion-row>
-       <ion-col size="12" size-md="6">
-          <ion-card color="white" [routerLink]="['/medication']">
-            <ion-card-header>
-              <ion-img src="../../../../assets/images/medicine.png"></ion-img>
-            </ion-card-header>
-            <ion-card-content>Medication</ion-card-content>
-          </ion-card>
-        </ion-col> 
-      </ion-row>
+      <ion-col size="12" size-md="6">
+        <ion-card color="white" [routerLink]="['/medication']" #medication>
+          <ion-card-header>
+            <ion-img src="../../../../assets/images/medicine.png"></ion-img>
+          </ion-card-header>
+          <ion-card-content>Medication</ion-card-content>
+        </ion-card>
+      </ion-col> 
+    </ion-row>
     <ion-row>
-       <ion-col size="12" size-md="6">
-          <ion-card color="white" [routerLink]="['/forum']">
-            <ion-card-header>
-              <ion-img src="../../../../assets/images/discussion.png"></ion-img>
-            </ion-card-header>
-            <ion-card-content>Forum</ion-card-content>
-          </ion-card>
-        </ion-col> 
-      </ion-row>
-    </ion-grid>
-    
-  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+      <ion-col size="12" size-md="6">
+        <ion-card color="white" [routerLink]="['/forum']" #forum>
+          <ion-card-header>
+            <ion-img src="../../../../assets/images/discussion.png"></ion-img>
+          </ion-card-header>
+          <ion-card-content>Forum</ion-card-content>
+        </ion-card>
+      </ion-col> 
+    </ion-row>
+  </ion-grid>
+  
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed" #chatButton>
     <ion-fab-button (click)="openChat()">
       <ion-icon name="logo-wechat"></ion-icon>
     </ion-fab-button>
   </ion-fab>
+
+  <ion-modal 
+    [keepContentsMounted]="true"
+    trigger="open-tour-modal"
+    #modal
+    [initialBreakpoint]="0.70"
+    [breakpoints]="[0, 0.35, 0.5, 0.95]"
+    >
+  <ng-template>
+    <ion-header>
+      <ion-toolbar>
+        <ion-title>App Tour</ion-title>
+        <ion-buttons slot="end">
+          <ion-button (click)="dismissModal()">Close</ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content class="ion-padding">
+      <h2>{{ tourSteps[currentStep].title }}</h2>
+      <p>{{ tourSteps[currentStep].content }}</p>
+      
+      <ion-button color="custom" expand="block" (click)="previousStep()" *ngIf="currentStep < tourSteps.length - 1">
+        Previous
+      </ion-button>
+      <ion-button color="custom" expand="block" (click)="nextStep()" *ngIf="currentStep < tourSteps.length - 1">
+        Next
+      </ion-button>
+      <ion-button colo="custom" expand="block" (click)="dismissModal()" *ngIf="currentStep === tourSteps.length - 1">
+        Finish Tour
+      </ion-button>
+    </ion-content>
+  </ng-template>
+</ion-modal>
+
 </ion-content>
