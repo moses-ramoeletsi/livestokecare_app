@@ -1,0 +1,27 @@
+<ion-header [translucent]="true">
+    <ion-toolbar class="allUserFeedback">
+      <ion-buttons slot="start">
+        <ion-icon class="back" name="arrow-back"  routerLink="/vet-dashboard"></ion-icon>
+      </ion-buttons>
+    <ion-title style="color: black;" class="ion-text-center">View User Feedback</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+  <div class="feedback" *ngIf="feedback.length > 0; else noFeedback">
+  <ion-card *ngFor="let userFeedback of feedback">
+    <ion-card-header>
+      <ion-card-title>{{userFeedback.name}}</ion-card-title>
+      <ion-card-subtitle>{{userFeedback.email}}</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      <p>Feedback Type: {{userFeedback.feedBackType}}</p>
+      <p>Message: {{userFeedback.message}} </p>
+    </ion-card-content>
+  </ion-card>
+</div>
+<ng-template #noFeedback>
+  <p style="color: brown">No feedback available</p>
+</ng-template>
+
+</ion-content>
