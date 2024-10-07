@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { BasicKnowladgePage } from './basic-knowladge.page';
+import { BasicKnowladgePage } from './basic-knowledge.page';
 
 describe('BasicKnowladgePage', () => {
   let component: BasicKnowladgePage;

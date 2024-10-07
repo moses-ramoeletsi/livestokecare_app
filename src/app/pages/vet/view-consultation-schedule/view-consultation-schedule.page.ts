@@ -1,19 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-import {
-  LocalNotifications,
-  ScheduleOptions,
-} from '@capacitor/local-notifications';
+import {LocalNotifications} from '@capacitor/local-notifications';
 import { ToastController } from '@ionic/angular';
 import { ConsultationService } from 'src/app/services/consultation.service';
-import { NotificationsService } from 'src/app/services/notifications.service';
 
 @Component({
-  selector: 'app-view-consulatation-schedule',
-  templateUrl: './view-consulatation-schedule.page.html',
-  styleUrls: ['./view-consulatation-schedule.page.scss'],
+  selector: 'app-view-consultation-schedule',
+  templateUrl: './view-consultation-schedule.page.html',
+  styleUrls: ['./view-consultation-schedule.page.scss'],
 })
-export class ViewConsulatationSchedulePage implements OnInit {
+export class ViewConsultationSchedulePage implements OnInit {
   consultation: any = {
     farmerName: '',
     vetDoctorName: '',
@@ -79,7 +75,7 @@ export class ViewConsulatationSchedulePage implements OnInit {
         this.showSuccessToast('Consultation status updated successfully');
       })
       .catch((error) => {
-        this.showErrorToast('Error updating consltation status');
+        this.showErrorToast('Error updating consultation status');
         console.error('Error updating consultation status:', error);
       });
   }

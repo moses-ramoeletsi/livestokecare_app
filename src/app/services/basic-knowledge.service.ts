@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root',
 })
-export class BasicKnowladgeService {
+export class BasicKnowledgeService {
   constructor(private fireStore: AngularFirestore) {}
 
   async getCurrentUserById(userId: string): Promise<any> {

@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { BasicKnowladgeService } from 'src/app/services/basic-knowladge.service';
+import { BasicKnowledgeService } from 'src/app/services/basic-knowledge.service';
 
 @Component({
-  selector: 'app-basic-knowladge',
-  templateUrl: './basic-knowladge.page.html',
-  styleUrls: ['./basic-knowladge.page.scss'],
+  selector: 'app-basic-Knowledge',
+  templateUrl: './basic-Knowledge.page.html',
+  styleUrls: ['./basic-Knowledge.page.scss'],
 })
-export class BasicKnowladgePage implements OnInit {
+export class BasicKnowledgePage implements OnInit {
   article = {
     article_title: '',
     description: '',
@@ -30,7 +30,7 @@ export class BasicKnowladgePage implements OnInit {
   };
 
   diseases: any[] = [];
-  constructor(private fireStore: BasicKnowladgeService) {}
+  constructor(private fireStore: BasicKnowledgeService) {}
 
   ngOnInit() {
     this.getArticles();

@@ -4,17 +4,17 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { BasicKnowladgePageRoutingModule } from './basic-knowladge-routing.module';
+import { BasicKnowledgePageRoutingModule } from './basic-knowledge-routing.module';
 
-import { BasicKnowladgePage } from './basic-knowladge.page';
+import { BasicKnowledgePage } from './basic-knowledge.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    BasicKnowladgePageRoutingModule
+    BasicKnowledgePageRoutingModule
   ],
-  declarations: [BasicKnowladgePage]
+  declarations: [BasicKnowledgePage]
 })
-export class BasicKnowladgePageModule {}
+export class BasicKnowledgePageModule {}

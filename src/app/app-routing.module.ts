@@ -35,8 +35,8 @@ const routes: Routes = [
         loadChildren: () => import('./pages/vet/vet-events/vet-events.module').then( m => m.VetEventsPageModule)
       },
       {
-        path: 'view-consulatation-schedule',
-        loadChildren: () => import('./pages/vet/view-consulatation-schedule/view-consulatation-schedule.module').then( m => m.ViewConsulatationSchedulePageModule)
+        path: 'view-consultation-schedule',
+        loadChildren: () => import('./pages/vet/view-consultation-schedule/view-consultation-schedule.module').then( m => m.ViewConsultationSchedulePageModule)
       },
       {
         path: 'vet-profile',
@@ -91,8 +91,8 @@ const routes: Routes = [
     loadChildren: () => import('./pages/farmers/videos/videos.module').then( m => m.VideosPageModule)
   },
   {
-    path: 'basic-knowladge',
-    loadChildren: () => import('./pages/farmers/basic-knowladge/basic-knowladge.module').then( m => m.BasicKnowladgePageModule)
+    path: 'basic-knowledge',
+    loadChildren: () => import('./pages/farmers/basic-knowledge/basic-knowledge.module').then( m => m.BasicKnowledgePageModule)
   },
   {
     path: 'post-videos',
@@ -133,6 +133,14 @@ const routes: Routes = [
   {
     path: 'forum',
     loadChildren: () => import('./pages/forum/forum.module').then( m => m.ForumPageModule)
+  },
+  {
+    path: 'view-user-feedback',
+    loadChildren: () => import('./pages/Vet/view-user-feedback/view-user-feedback.module').then( m => m.ViewUserFeedbackPageModule)
+  },
+  {
+    path: 'user-feedback',
+    loadChildren: () => import('./pages/Farmers/user-feedback/user-feedback.module').then( m => m.UserFeedbackPageModule)
   },
  
 ];

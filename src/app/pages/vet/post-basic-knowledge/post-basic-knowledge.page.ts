@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AlertController, IonModal } from '@ionic/angular';
-import { BasicKnowladgeService } from 'src/app/services/basic-knowladge.service';
+import { BasicKnowledgeService } from 'src/app/services/basic-knowledge.service';
 
 @Component({
   selector: 'app-post-basic-knowledge',
@@ -35,7 +35,7 @@ export class PostBasicKnowledgePage implements OnInit {
   diseases: any[] = [];
   constructor(
     private userAuth: AngularFireAuth,
-    private fireStore: BasicKnowladgeService,
+    private fireStore: BasicKnowledgeService,
     private alertController: AlertController
   ) {}
 

@@ -58,7 +58,6 @@ export class LoginPage implements OnInit, OnDestroy {
       const userLogin = this.loginForm.value;
       this.authService.login(userLogin).then(
         (userCredential) => {
-          // Handle successful login
           this.fireServices.getUserDetails(userCredential.user).subscribe((userData: any) => {
             if (userData && Object.keys(userData).length !== 0) {
               if (userData.userType === 'veterinarian') {

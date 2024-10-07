@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
-import { BasicKnowladgeService } from './basic-knowladge.service';
+import { BasicKnowladgeService } from './basic-knowledge.service';
 
 describe('BasicKnowladgeService', () => {
   let service: BasicKnowladgeService;
