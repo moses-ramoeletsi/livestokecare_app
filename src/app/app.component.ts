@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,16 @@ import { Component } from '@angular/core';
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent {
-  constructor() {}
+  constructor(private router: Router) {}
+
+  ngOnInit() {
+    const userRole = localStorage.getItem('userRole');
+    if (userRole === 'veterinarian') {
+      this.router.navigate(['/vet-dashboard']);
+    } else if (userRole === 'farmer') {
+      this.router.navigate(['/farmers-dashboard']);
+    } else {
+      this.router.navigate(['/login']);
+    }
+  }
 }

@@ -46,17 +46,17 @@ export class VetProfilePage implements OnInit {
       buttons: [
         {
           text: 'Cancel',
-          role: 'cancel'
+          role: 'cancel',
         },
         {
           text: 'Logout',
-          handler: () => {
-            this.authService.logout();
-          }
-        }
-      ]
+          handler: async () => {
+            await this.authService.logout();
+            localStorage.removeItem('userRole');
+            localStorage.clear();         },
+        },
+      ],
     });
-
     await alert.present();
   }
 }
