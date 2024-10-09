@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { Observable, of } from 'rxjs';
-import { catchError, tap } from 'rxjs/operators';
 import { NotificationsService } from 'src/app/services/notifications.service';
 
 interface NotificationData {
@@ -29,11 +27,17 @@ export class NotificationsPage implements OnInit {
   loadNotifications() {
     this.notificationsService.getUserNotifications().subscribe(
       (notifications) => {
-        this.notifications = notifications;
+        this.notifications = notifications.map((notification) => {
+          if (notification.timestamp && notification.timestamp.toDate) {
+            notification.timestamp = notification.timestamp.toDate();
+          }
+          return notification;
+        });
       },
       (error) => {
         console.error('Error loading notifications:', error);
       }
     );
   }
+  
 }
