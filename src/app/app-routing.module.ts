@@ -136,11 +136,11 @@ const routes: Routes = [
   },
   {
     path: 'view-user-feedback',
-    loadChildren: () => import('./pages/Vet/view-user-feedback/view-user-feedback.module').then( m => m.ViewUserFeedbackPageModule)
+    loadChildren: () => import('./pages/vet/view-user-feedback/view-user-feedback.module').then( m => m.ViewUserFeedbackPageModule)
   },
   {
     path: 'user-feedback',
-    loadChildren: () => import('./pages/Farmers/user-feedback/user-feedback.module').then( m => m.UserFeedbackPageModule)
+    loadChildren: () => import('./pages/farmers/user-feedback/user-feedback.module').then( m => m.UserFeedbackPageModule)
   },
  
 ];
