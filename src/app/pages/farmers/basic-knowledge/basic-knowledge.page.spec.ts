@@ -1,12 +1,12 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { BasicKnowladgePage } from './basic-knowledge.page';
+import { BasicKnowledgePage } from './basic-knowledge.page';
 
-describe('BasicKnowladgePage', () => {
-  let component: BasicKnowladgePage;
-  let fixture: ComponentFixture<BasicKnowladgePage>;
+describe('BasicKnowledgePage', () => {
+  let component: BasicKnowledgePage;
+  let fixture: ComponentFixture<BasicKnowledgePage>;
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(BasicKnowladgePage);
+    fixture = TestBed.createComponent(BasicKnowledgePage);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
