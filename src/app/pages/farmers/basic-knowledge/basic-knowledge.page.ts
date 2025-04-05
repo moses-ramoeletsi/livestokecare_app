@@ -4,7 +4,7 @@ import { BasicKnowledgeService } from 'src/app/services/basic-knowledge.service'
 @Component({
   selector: 'app-basic-Knowledge',
   templateUrl: './basic-knowledge.page.html',
-  styleUrls: ['./basic-Knowledge.page.scss'],
+  styleUrls: ['./basic-knowledge.page.scss'],
 })
 export class BasicKnowledgePage implements OnInit {
   article = {
